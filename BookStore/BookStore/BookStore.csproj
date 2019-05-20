@@ -55,6 +55,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DTO\CBook.cs" />
+    <Compile Include="DTO\CBookTransaction.cs" />
+    <Compile Include="DTO\CEmployee.cs" />
+    <Compile Include="DTO\CEmployeeRole.cs" />
+    <Compile Include="DTO\CPeople.cs" />
     <Compile Include="VIEW\ViewModels\BaseViewModel.cs" />
     <Page Include="VIEW\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -102,7 +107,6 @@
   <ItemGroup>
     <Folder Include="BUS\" />
     <Folder Include="DAO\" />
-    <Folder Include="DTO\" />
     <Folder Include="images\" />
     <Folder Include="VIEW\UserControls\" />
   </ItemGroup>
