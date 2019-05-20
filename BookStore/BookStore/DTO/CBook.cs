@@ -31,23 +31,23 @@ namespace BookStore.DTO
             set { _name = value; }
         }
 
-        private string _category;
+        private CCategory _category;
 
         /// <summary>
         /// Danh mục sách
         /// </summary>
-        public string Category
+        public CCategory Category
         {
             get { return _category; }
             set { _category = value; }
         }
 
-        private string _subCategory;
+        private CSubCategory _subCategory;
 
         /// <summary>
         /// Loại sách
         /// </summary>
-        public string SubCategory
+        public CSubCategory SubCategory
         {
             get { return _subCategory; }
             set { _subCategory = value; }
