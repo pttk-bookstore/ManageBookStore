@@ -85,12 +85,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DTO\CAccount.cs" />
+    <Compile Include="DTO\CBaseReceipt.cs" />
+    <Compile Include="DTO\CBill.cs" />
     <Compile Include="DTO\CBook.cs" />
+    <Compile Include="DTO\CBookReipt.cs" />
     <Compile Include="DTO\CBookTransaction.cs" />
+    <Compile Include="DTO\CCart.cs" />
     <Compile Include="DTO\CCategory.cs" />
+    <Compile Include="DTO\CCustomer.cs" />
+    <Compile Include="DTO\CDiscountCode.cs" />
     <Compile Include="DTO\CEmployee.cs" />
     <Compile Include="DTO\CEmployeeRole.cs" />
     <Compile Include="DTO\CPeople.cs" />
+    <Compile Include="DTO\CReportDate.cs" />
+    <Compile Include="DTO\CReportMonth.cs" />
     <Compile Include="DTO\CSubCategory.cs" />
     <Compile Include="VIEW\ViewModels\BaseViewModel.cs" />
     <Page Include="VIEW\MainWindow.xaml">
