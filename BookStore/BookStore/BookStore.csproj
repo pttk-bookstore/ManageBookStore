@@ -85,6 +85,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BUS\AccountBUS.cs" />
+    <Compile Include="BUS\BillBUS.cs" />
+    <Compile Include="BUS\BookBUS.cs" />
+    <Compile Include="BUS\CategoryBUS.cs" />
+    <Compile Include="BUS\CustomerBUS.cs" />
+    <Compile Include="BUS\DiscountCodeBUS.cs" />
+    <Compile Include="BUS\EmployeeBUS.cs" />
+    <Compile Include="BUS\RegulationBUS.cs" />
+    <Compile Include="BUS\SubCategoryBUS.cs" />
+    <Compile Include="BUS\WareHouseBUS.cs" />
+    <Compile Include="DAO\AccountDAO.cs" />
+    <Compile Include="DAO\BillDAO.cs" />
+    <Compile Include="DAO\BookDAO.cs" />
+    <Compile Include="DAO\CategoryDAO.cs" />
+    <Compile Include="DAO\CustomerDAO.cs" />
+    <Compile Include="DAO\DiscountCodeDAO.cs" />
+    <Compile Include="DAO\EmployeeDAO.cs" />
+    <Compile Include="DAO\RegulationDAO.cs" />
+    <Compile Include="DAO\SubCategoryDAO.cs" />
+    <Compile Include="DAO\WareHouseDAO.cs" />
     <Compile Include="DTO\CAccount.cs" />
     <Compile Include="DTO\CBaseReceipt.cs" />
     <Compile Include="DTO\CBill.cs" />
@@ -147,8 +167,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="BUS\" />
-    <Folder Include="DAO\" />
     <Folder Include="images\" />
     <Folder Include="VIEW\UserControls\" />
   </ItemGroup>
