@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\PTTK_QuanLyNhaSach\ManageBookStore\BookStore\BookStore\obj\Debug\
+E:\HK6\PTTK\Products\new_clone_1\ManageBookStore\BookStore\BookStore\obj\Debug\
 BookStore
 none
 false
 DEBUG;TRACE
-D:\PTTK_QuanLyNhaSach\ManageBookStore\BookStore\BookStore\App.xaml
-2-1805064648
+E:\HK6\PTTK\Products\new_clone_1\ManageBookStore\BookStore\BookStore\App.xaml
+121778667508
 
-17-623883886
-151273378359
-VIEW\MainWindow.xaml;VIEW\ResourceXAML\MainResource.xaml;
+23922132875
+23-1451889416
+VIEW\AddNewBookWindow.xaml;VIEW\BookInfoPage.xaml;VIEW\BookMenuPage.xaml;VIEW\ChangePasswordWindow.xaml;VIEW\ChartReportDatePage.xaml;VIEW\CodePromotionPage.xaml;VIEW\CustomerInfoPage.xaml;VIEW\CustomerMenuPage.xaml;VIEW\DashboardWindow.xaml;VIEW\MainWindow.xaml;VIEW\ResourceXAML\MainResource.xaml;VIEW\UserControls\ControlBar.xaml;
 
 True
 
