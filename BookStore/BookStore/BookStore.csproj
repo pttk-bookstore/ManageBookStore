@@ -86,12 +86,41 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BUS\AccountBUS.cs" />
+    <Compile Include="BUS\BillBUS.cs" />
+    <Compile Include="BUS\BookBUS.cs" />
+    <Compile Include="BUS\CategoryBUS.cs" />
+    <Compile Include="BUS\CustomerBUS.cs" />
+    <Compile Include="BUS\DiscountCodeBUS.cs" />
+    <Compile Include="BUS\EmployeeBUS.cs" />
+    <Compile Include="BUS\RegulationBUS.cs" />
+    <Compile Include="BUS\SubCategoryBUS.cs" />
+    <Compile Include="BUS\WareHouseBUS.cs" />
+    <Compile Include="DAO\AccountDAO.cs" />
+    <Compile Include="DAO\BillDAO.cs" />
+    <Compile Include="DAO\BookDAO.cs" />
+    <Compile Include="DAO\CategoryDAO.cs" />
+    <Compile Include="DAO\CustomerDAO.cs" />
+    <Compile Include="DAO\DiscountCodeDAO.cs" />
+    <Compile Include="DAO\EmployeeDAO.cs" />
+    <Compile Include="DAO\RegulationDAO.cs" />
+    <Compile Include="DAO\SubCategoryDAO.cs" />
+    <Compile Include="DAO\WareHouseDAO.cs" />
+    <Compile Include="DTO\CAccount.cs" />
+    <Compile Include="DTO\CBaseReceipt.cs" />
+    <Compile Include="DTO\CBill.cs" />
     <Compile Include="DTO\CBook.cs" />
+    <Compile Include="DTO\CBookReipt.cs" />
     <Compile Include="DTO\CBookTransaction.cs" />
+    <Compile Include="DTO\CCart.cs" />
     <Compile Include="DTO\CCategory.cs" />
+    <Compile Include="DTO\CCustomer.cs" />
+    <Compile Include="DTO\CDiscountCode.cs" />
     <Compile Include="DTO\CEmployee.cs" />
     <Compile Include="DTO\CEmployeeRole.cs" />
     <Compile Include="DTO\CPeople.cs" />
+    <Compile Include="DTO\CReportDate.cs" />
+    <Compile Include="DTO\CReportMonth.cs" />
     <Compile Include="DTO\CSubCategory.cs" />
     <Compile Include="VIEW\AddNewBookWindow.xaml.cs">
       <DependentUpon>AddNewBookWindow.xaml</DependentUpon>
@@ -218,12 +247,11 @@
     <Resource Include="Images\harry.jpg" />
     <Resource Include="Images\icon.png" />
     <Resource Include="Images\WindowBackground.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\image-1.png" />
+    <Resource Include="Images\epi_x.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\epi_x.png" />
+    <Folder Include="VIEW\UserControls\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
