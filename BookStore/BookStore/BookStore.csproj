@@ -155,6 +155,51 @@
     <Compile Include="VIEW\DashboardWindow.xaml.cs">
       <DependentUpon>DashboardWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VIEW\DetailBookWindow.xaml.cs">
+      <DependentUpon>DetailBookWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VIEW\EmployeeInfoPage.xaml.cs">
+      <DependentUpon>EmployeeInfoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VIEW\HistoryBillPage.xaml.cs">
+      <DependentUpon>HistoryBillPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VIEW\HistoryWareHousePage.xaml.cs">
+      <DependentUpon>HistoryWareHousePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VIEW\IncreaseBookWindow.xaml.cs">
+      <DependentUpon>IncreaseBookWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VIEW\LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VIEW\MakeBill.xaml.cs">
+      <DependentUpon>MakeBill.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VIEW\ProductPage.xaml.cs">
+      <DependentUpon>ProductPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VIEW\PromotionMenuPage.xaml.cs">
+      <DependentUpon>PromotionMenuPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VIEW\ReportDatePage.xaml.cs">
+      <DependentUpon>ReportDatePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VIEW\ReportMenuPage.xaml.cs">
+      <DependentUpon>ReportMenuPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VIEW\ReportMonthPage.xaml.cs">
+      <DependentUpon>ReportMonthPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VIEW\SellMenuPage.xaml.cs">
+      <DependentUpon>SellMenuPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VIEW\TypeAndThemsePage.xaml.cs">
+      <DependentUpon>TypeAndThemsePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VIEW\TypePromotionPage.xaml.cs">
+      <DependentUpon>TypePromotionPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VIEW\UserControls\ControlBar.xaml.cs">
       <DependentUpon>ControlBar.xaml</DependentUpon>
     </Compile>
@@ -195,6 +240,30 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="VIEW\DetailBookWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VIEW\EmployeeInfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VIEW\HistoryBillPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VIEW\HistoryWareHousePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VIEW\IncreaseBookWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VIEW\LoginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="VIEW\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -207,7 +276,43 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="VIEW\MakeBill.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VIEW\ProductPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VIEW\PromotionMenuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VIEW\ReportDatePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VIEW\ReportMenuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VIEW\ReportMonthPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="VIEW\ResourceXAML\MainResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VIEW\SellMenuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VIEW\TypeAndThemsePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VIEW\TypePromotionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
