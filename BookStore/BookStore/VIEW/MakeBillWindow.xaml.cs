@@ -1,5 +1,4 @@
-﻿using BookStore.VIEW.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,22 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BookStore.VIEW.UserControls
+namespace BookStore.VIEW
 {
     /// <summary>
-    /// Interaction logic for ControlBar.xaml
+    /// Interaction logic for MakeBill.xaml
     /// </summary>
-    public partial class ControlBar : UserControl
+    public partial class MakeBillWindow : Window
     {
-        public ControlBarVM viewmodel { get; set; }
-
-        public ControlBar()
+        public MakeBillWindow()
         {
             InitializeComponent();
-            this.DataContext = viewmodel = new ControlBarVM();
         }
     }
 }

@@ -131,6 +131,7 @@
     <Compile Include="VIEW\AddNewBookWindow.xaml.cs">
       <DependentUpon>AddNewBookWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VIEW\BindingProxy.cs" />
     <Compile Include="VIEW\BookInfoPage.xaml.cs">
       <DependentUpon>BookInfoPage.xaml</DependentUpon>
     </Compile>
@@ -146,6 +147,8 @@
     <Compile Include="VIEW\CodePromotionPage.xaml.cs">
       <DependentUpon>CodePromotionPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VIEW\Converter\BoolToVisibilityConverter.cs" />
+    <Compile Include="VIEW\Converter\RestoreBoolToVisibilityConverter.cs" />
     <Compile Include="VIEW\CustomerInfoPage.xaml.cs">
       <DependentUpon>CustomerInfoPage.xaml</DependentUpon>
     </Compile>
@@ -173,8 +176,8 @@
     <Compile Include="VIEW\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="VIEW\MakeBill.xaml.cs">
-      <DependentUpon>MakeBill.xaml</DependentUpon>
+    <Compile Include="VIEW\MakeBillWindow.xaml.cs">
+      <DependentUpon>MakeBillWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="VIEW\ProductPage.xaml.cs">
       <DependentUpon>ProductPage.xaml</DependentUpon>
@@ -204,6 +207,14 @@
       <DependentUpon>ControlBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="VIEW\ViewModels\BaseViewModel.cs" />
+    <Compile Include="VIEW\ViewModels\BookInfoPageVM.cs" />
+    <Compile Include="VIEW\ViewModels\BookMenuPageVM.cs" />
+    <Compile Include="VIEW\ViewModels\ControlBarVM.cs" />
+    <Compile Include="VIEW\ViewModels\DashboardWindowVM.cs" />
+    <Compile Include="VIEW\ViewModels\LoginWindowVM.cs" />
+    <Compile Include="VIEW\ViewModels\ProductPageVM.cs" />
+    <Compile Include="VIEW\ViewModels\SellMenuPageVM.cs" />
+    <Compile Include="VIEW\ViewModels\TypeAndThemsePageVM.cs" />
     <Page Include="VIEW\AddNewBookWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -276,7 +287,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="VIEW\MakeBill.xaml">
+    <Page Include="VIEW\MakeBillWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

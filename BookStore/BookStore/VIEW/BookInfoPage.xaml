@@ -13,7 +13,8 @@
       TextOptions.TextFormattingMode="Ideal"
       TextOptions.TextRenderingMode="Auto"       
       FontFamily="{DynamicResource MaterialDesignFont}"
-      Background="{DynamicResource MaterialDesignPaper}"     
+      Background="{DynamicResource MaterialDesignPaper}"  
+      DataContext="{StaticResource BookInfoPageVM}"
       d:DesignHeight="700" d:DesignWidth="1175"
       Title="BookInfoPage">
     <Page.Resources>

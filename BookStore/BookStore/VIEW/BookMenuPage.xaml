@@ -14,7 +14,7 @@
       TextOptions.TextRenderingMode="Auto"       
       FontFamily="{DynamicResource MaterialDesignFont}"
       Background="{DynamicResource MaterialDesignPaper}"     
-      
+      DataContext="{StaticResource BookMenuPageVM}"
       d:DesignHeight="758" d:DesignWidth="1175"
       Title="BookMenuPage">
 

@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BookStore.VIEW"
+      xmlns:myConverter="clr-namespace:BookStore.VIEW.Converter"
       mc:Ignorable="d" 
        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -14,7 +15,7 @@
       TextOptions.TextRenderingMode="Auto"       
       FontFamily="{DynamicResource MaterialDesignFont}"
       Background="{DynamicResource MaterialDesignPaper}"     
-      
+      DataContext="{StaticResource TypeAndThemsePageVM}"
       d:DesignHeight="700" d:DesignWidth="1175"
       
       Title="TypeAndThemePage">
@@ -37,6 +38,9 @@
             <Setter Property="MinWidth" Value="330"/>
             <Setter Property="Margin" Value="0,0,10,0"/>
         </Style>
+
+        <myConverter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <myConverter:RestoreBoolToVisibilityConverter x:Key="RestoreBoolToVisibilityConverter"/>
     </Page.Resources>
 
     <i:Interaction.Triggers>
@@ -114,7 +118,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                             <DataGrid.Resources>
-                              
+                                <local:BindingProxy x:Key="proxy" Data="{Binding}"/>
                             </DataGrid.Resources>
                             <DataGrid.Columns>
                                 <DataGridTextColumn
@@ -246,6 +250,9 @@
                         materialDesign:DataGridAssist.CellPadding="13 8 8 8"
                         materialDesign:DataGridAssist.ColumnHeaderPadding="8"
                         SelectedItem="{Binding ThemeSelectedItem}">
+                            <DataGrid.Resources>
+                                <local:BindingProxy x:Key="proxy" Data="{Binding}"/>
+                            </DataGrid.Resources>
                           
                             <DataGrid.Columns>
                                 <DataGridTextColumn

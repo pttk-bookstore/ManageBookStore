@@ -1,5 +1,14 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:viewmodel="clr-namespace:BookStore.VIEW.ViewModels"
                     xmlns:local="clr-namespace:BookStore.VIEW.ResourceXAML">
-    
+
+    <viewmodel:LoginWindowVM x:Key="LoginWindowVM"></viewmodel:LoginWindowVM>
+    <viewmodel:DashboardWindowVM x:Key="DashboardWindowVM"></viewmodel:DashboardWindowVM>
+    <viewmodel:SellMenuPageVM x:Key="SellMenuPageVM"></viewmodel:SellMenuPageVM>
+    <viewmodel:ProductPageVM x:Key="ProductPageVM"></viewmodel:ProductPageVM>
+    <viewmodel:BookMenuPageVM x:Key="BookMenuPageVM"></viewmodel:BookMenuPageVM>
+    <viewmodel:BookInfoPageVM x:Key="BookInfoPageVM"></viewmodel:BookInfoPageVM>
+    <viewmodel:TypeAndThemsePageVM x:Key="TypeAndThemsePageVM"></viewmodel:TypeAndThemsePageVM>
+
 </ResourceDictionary>

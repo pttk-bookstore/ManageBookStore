@@ -14,7 +14,7 @@
       TextOptions.TextRenderingMode="Auto"       
       FontFamily="{DynamicResource MaterialDesignFont}"
       Background="{DynamicResource MaterialDesignPaper}"     
-      
+      DataContext="{StaticResource ProductPageVM}"
       d:DesignHeight="700" d:DesignWidth="1175"
       Title="ProductPage">
     <Page.Resources>
