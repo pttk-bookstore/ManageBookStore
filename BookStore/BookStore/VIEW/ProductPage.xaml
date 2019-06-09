@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BookStore.VIEW"
+      xmlns:converter="clr-namespace:BookStore.VIEW.Converter"
       mc:Ignorable="d" 
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -22,6 +23,7 @@
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="Foreground" Value="White"/>
         </Style>
+        <converter:PromotionToVisibilityConverter x:Key="PromotionToVisibilityConverter"/>
     </Page.Resources>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -96,15 +98,17 @@
                                 <Label  VerticalAlignment="Center">
                                     <TextBlock Text="Thể loại" Style="{StaticResource labelStyle}"/>
                                 </Label>
-                                <ComboBox ItemsSource="{Binding ListType}"
-                                          SelectedItem="{Binding SelectedItemType}"   
-                                          Text="{Binding TextType,UpdateSourceTrigger=PropertyChanged}"
-                                          IsEditable="True"
-                                          materialDesign:HintAssist.Hint="Tất cả" VerticalAlignment="Center" 
-                                >
+                                <ComboBox ItemsSource="{Binding ListCategory}"
+                                          SelectedItem="{Binding SelectedItemCategory}"                                         
+                                          materialDesign:HintAssist.Hint="Tất cả" VerticalAlignment="Center">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Name}"/>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="SelectionChanged">
-                                            <i:InvokeCommandAction Command="{Binding TypeSelectionChanged}"/>
+                                            <i:InvokeCommandAction Command="{Binding CategorySelectionChanged}"/>
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </ComboBox>
@@ -114,15 +118,18 @@
                                 <Label  VerticalAlignment="Center">
                                     <TextBlock Text="Chủ đề" Style="{StaticResource labelStyle}"/>
                                 </Label>
-                                <ComboBox ItemsSource="{Binding ListTheme}"
-                                          SelectedItem="{Binding SelectedItemTheme}"  
-                                          Text="{Binding TextTheme,UpdateSourceTrigger=PropertyChanged}"
-                                          IsEditable="True"
+                                <ComboBox ItemsSource="{Binding ListSubCategory}"
+                                          SelectedItem="{Binding SelectedItemSubCategory}"                             
                                           materialDesign:HintAssist.Hint="Tất cả" VerticalAlignment="Center" 
                                 >
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Name}"/>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="SelectionChanged">
-                                            <i:InvokeCommandAction Command="{Binding ThemeSelectionChanged}"/>
+                                            <i:InvokeCommandAction Command="{Binding SubCategorySelectionChanged}"/>
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </ComboBox>
@@ -132,8 +139,7 @@
                                 <Label  VerticalAlignment="Center">
                                     <TextBlock Text="Tác giả" Style="{StaticResource labelStyle}"/>
                                 </Label>
-                                <ComboBox ItemsSource="{Binding ListAuthor}"
-                                          Text="{Binding TextAuthor,UpdateSourceTrigger=PropertyChanged}"
+                                <ComboBox ItemsSource="{Binding ListAuthor}"                                        
                                           SelectedItem="{Binding SelectedItemAuthor}"
                                           IsEditable="True"
                                           materialDesign:HintAssist.Hint="Tất cả" VerticalAlignment="Center" 
@@ -150,12 +156,15 @@
                                 <Label  VerticalAlignment="Center">
                                     <TextBlock Text="Nhà xuất bản" Style="{StaticResource labelStyle}"/>
                                 </Label>
-                                <ComboBox ItemsSource="{Binding ListCompany}"
-                                          Text="{Binding TextCompany,UpdateSourceTrigger=PropertyChanged}"
-                                          SelectedItem="{Binding SelectedItemCompany}"
-                                          IsEditable="True"
+                                <ComboBox ItemsSource="{Binding ListCompany}"                                          
+                                          SelectedItem="{Binding SelectedItemCompany}"                    
                                           materialDesign:HintAssist.Hint="Tất cả" VerticalAlignment="Center" 
                                 >
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Name}"/>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="SelectionChanged">
                                             <i:InvokeCommandAction Command="{Binding CompanySelectionChanged}"/>
@@ -168,8 +177,7 @@
                                 <Label  VerticalAlignment="Center">
                                     <TextBlock Text="Giá tiền" Style="{StaticResource labelStyle}"/>
                                 </Label>
-                                <ComboBox ItemsSource="{Binding ListPrice}"
-                                          Text="{Binding TextPrice,UpdateSourceTrigger=PropertyChanged}"
+                                <ComboBox ItemsSource="{Binding ListPrice}"                                          
                                           SelectedItem="{Binding SelectedItemPrice}"
                                           materialDesign:HintAssist.Hint="Tất cả" VerticalAlignment="Center" 
                                 >
@@ -228,12 +236,12 @@
                                             </TextBlock>
                                             <TextBlock Text="{Binding Author}" FontWeight="Light" Margin="0,4,0,0" FontSize="13" />
                                             <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="{Binding OutPrice,StringFormat='0,0đ'}" Visibility="{Binding Promotion,Converter={StaticResource PromotionToVisibilityConverter}}" TextDecorations="Strikethrough" FontWeight="Black" Margin="0,4,0,0"/>
-                                                <TextBlock Text="{Binding OutPricePromotion,StringFormat='0,0đ' }" FontWeight="Black" Margin="5,4,0,0"/>
+                                                <TextBlock Text="{Binding Price,StringFormat='0,0đ'}" Visibility="{Binding Promotion,Converter={StaticResource PromotionToVisibilityConverter}}" TextDecorations="Strikethrough" FontWeight="Black" Margin="0,4,0,0"/>
+                                                <TextBlock Text="{Binding PricePromotion,StringFormat='0,0đ' }" FontWeight="Black" Margin="5,4,0,0"/>
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="Lượt mua: " Margin="0,4,0,0"/>
-                                                <TextBlock Text="{Binding Sold,StringFormat='0,0'}" Margin="0,4,0,0"/>
+                                                <TextBlock Text="{Binding Sole,StringFormat='0,0'}" Margin="0,4,0,0"/>
                                             </StackPanel>
 
                                             <StackPanel Orientation="Horizontal">

@@ -36,6 +36,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
       <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
     </Reference>
@@ -70,7 +76,10 @@
       <HintPath>..\packages\Microsoft.SDK.Expression.Blend.1.0.0\lib\net45\Microsoft.SDK.Expression.Blend.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.SDK.Expression.Blend.1.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -96,6 +105,7 @@
     <Compile Include="BUS\BillBUS.cs" />
     <Compile Include="BUS\BookBUS.cs" />
     <Compile Include="BUS\CategoryBUS.cs" />
+    <Compile Include="BUS\CompanyBUS.cs" />
     <Compile Include="BUS\CustomerBUS.cs" />
     <Compile Include="BUS\DiscountCodeBUS.cs" />
     <Compile Include="BUS\EmployeeBUS.cs" />
@@ -103,15 +113,88 @@
     <Compile Include="BUS\SubCategoryBUS.cs" />
     <Compile Include="BUS\WareHouseBUS.cs" />
     <Compile Include="DAO\AccountDAO.cs" />
+    <Compile Include="DAO\Bill.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAO\BillDAO.cs" />
+    <Compile Include="DAO\Bill_Detail.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAO\Bill_Type.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAO\Book.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAO\BookDAO.cs" />
+    <Compile Include="DAO\Book_Inventory.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAO\Category.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAO\CategoryDAO.cs" />
+    <Compile Include="DAO\Company.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAO\CompanyDAO.cs" />
+    <Compile Include="DAO\Customer.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAO\CustomerDAO.cs" />
     <Compile Include="DAO\DiscountCodeDAO.cs" />
+    <Compile Include="DAO\Discount_Code.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAO\Discount_Type.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAO\Employee.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAO\EmployeeDAO.cs" />
+    <Compile Include="DAO\Employee_Account.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAO\Model.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAO\Model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAO\Model.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DAO\Page_Wage.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAO\Regulation.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAO\RegulationDAO.cs" />
+    <Compile Include="DAO\Role.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAO\SubCategory.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAO\SubCategoryDAO.cs" />
+    <Compile Include="DAO\sysdiagram.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAO\WareHouse.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAO\WareHouseDAO.cs" />
+    <Compile Include="DAO\WareHouse_Detail.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DTO\CAccount.cs" />
     <Compile Include="DTO\CBaseReceipt.cs" />
     <Compile Include="DTO\CBill.cs" />
@@ -120,6 +203,7 @@
     <Compile Include="DTO\CBookTransaction.cs" />
     <Compile Include="DTO\CCart.cs" />
     <Compile Include="DTO\CCategory.cs" />
+    <Compile Include="DTO\CCompany.cs" />
     <Compile Include="DTO\CCustomer.cs" />
     <Compile Include="DTO\CDiscountCode.cs" />
     <Compile Include="DTO\CEmployee.cs" />
@@ -128,6 +212,7 @@
     <Compile Include="DTO\CReportDate.cs" />
     <Compile Include="DTO\CReportMonth.cs" />
     <Compile Include="DTO\CSubCategory.cs" />
+    <Compile Include="DTO\Help.cs" />
     <Compile Include="VIEW\AddNewBookWindow.xaml.cs">
       <DependentUpon>AddNewBookWindow.xaml</DependentUpon>
     </Compile>
@@ -148,6 +233,7 @@
       <DependentUpon>CodePromotionPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="VIEW\Converter\BoolToVisibilityConverter.cs" />
+    <Compile Include="VIEW\Converter\PromotionToVisibilityConverter.cs" />
     <Compile Include="VIEW\Converter\RestoreBoolToVisibilityConverter.cs" />
     <Compile Include="VIEW\CustomerInfoPage.xaml.cs">
       <DependentUpon>CustomerInfoPage.xaml</DependentUpon>
@@ -211,6 +297,7 @@
     <Compile Include="VIEW\ViewModels\BookMenuPageVM.cs" />
     <Compile Include="VIEW\ViewModels\ControlBarVM.cs" />
     <Compile Include="VIEW\ViewModels\DashboardWindowVM.cs" />
+    <Compile Include="VIEW\ViewModels\DetailsBookWindowVM.cs" />
     <Compile Include="VIEW\ViewModels\LoginWindowVM.cs" />
     <Compile Include="VIEW\ViewModels\ProductPageVM.cs" />
     <Compile Include="VIEW\ViewModels\SellMenuPageVM.cs" />
@@ -350,6 +437,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="DAO\Model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DAO\Model.edmx.diagram">
+      <DependentUpon>Model.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -359,7 +453,18 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="DAO\Model.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Model.Context.cs</LastGenOutput>
+      <DependentUpon>Model.edmx</DependentUpon>
+    </Content>
+    <Content Include="DAO\Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Avatar.png" />
     <Resource Include="Images\Blue.jpg" />
@@ -369,6 +474,8 @@
     <Resource Include="Images\image-1.png" />
     <Resource Include="Images\epi_x.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

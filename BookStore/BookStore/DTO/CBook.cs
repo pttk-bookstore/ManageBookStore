@@ -65,12 +65,12 @@ namespace BookStore.DTO
             set { _author = value; }
         }
 
-        private string  _company;
+        private CCompany _company;
 
         /// <summary>
         /// Nhà xuất bản
         /// </summary>
-        public string  Company
+        public CCompany Company
         {
             get { return _company; }
             set { _company = value; }

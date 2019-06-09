@@ -1,4 +1,5 @@
-﻿using BookStore.DTO;
+﻿using BookStore.BUS;
+using BookStore.DTO;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,11 +15,16 @@ namespace BookStore.VIEW.ViewModels
     {
         #region Global
 
+        BookBUS bookBUS = new BookBUS();
+        CategoryBUS categoryBUS = new CategoryBUS();
+        SubCategoryBUS subcategoryBUS = new SubCategoryBUS();
+        CompanyBUS companyBUS = new CompanyBUS();
+        WareHouseBUS wareHouseBUS = new WareHouseBUS();
+
         private int _currentPage;
         public int CurrentPage { get => _currentPage; set { if (value == _currentPage) return; _currentPage = value; OnPropertyChanged(); } }
 
         int NumberPage = 12;
-
 
         #endregion
 
@@ -50,14 +56,14 @@ namespace BookStore.VIEW.ViewModels
         private ObservableCollection<string> _listAuthor;
         public ObservableCollection<string> ListAuthor { get => _listAuthor; set { if (value == _listAuthor) return; _listAuthor = value; OnPropertyChanged(); } }
 
-        private ObservableCollection<string> _listType;
-        public ObservableCollection<string> ListType { get => _listType; set { if (value == _listType) return; _listType = value; OnPropertyChanged(); } }
+        private ObservableCollection<CCategory> _listCategory;
+        public ObservableCollection<CCategory> ListCategory { get => _listCategory; set { if (value == _listCategory) return; _listCategory = value; OnPropertyChanged(); } }
 
-        private ObservableCollection<string> _listTheme;
-        public ObservableCollection<string> ListTheme { get => _listTheme; set { if (value == _listTheme) return; _listTheme = value; OnPropertyChanged(); } }
+        private ObservableCollection<CSubCategory> _listSubCategory;
+        public ObservableCollection<CSubCategory> ListSubCategory { get => _listSubCategory; set { if (value == _listSubCategory) return; _listSubCategory = value; OnPropertyChanged(); } }
 
-        private ObservableCollection<string> _listCompany;
-        public ObservableCollection<string> ListCompany { get => _listCompany; set { if (value == _listCompany) return; _listCompany = value; OnPropertyChanged(); } }
+        private ObservableCollection<CCompany> _listCompany;
+        public ObservableCollection<CCompany> ListCompany { get => _listCompany; set { if (value == _listCompany) return; _listCompany = value; OnPropertyChanged(); } }
 
         private ObservableCollection<string> _listSortBy;
         public ObservableCollection<string> ListSortBy { get => _listSortBy; set { if (value == _listSortBy) return; _listSortBy = value; OnPropertyChanged(); } }
@@ -69,17 +75,17 @@ namespace BookStore.VIEW.ViewModels
         private string _selectedItemAuthor;
         public string SelectedItemAuthor { get => _selectedItemAuthor; set { if (value == _selectedItemAuthor) return; _selectedItemAuthor = value; OnPropertyChanged(); } }
 
-        private string _selectedItemTheme;
-        public string SelectedItemTheme { get => _selectedItemTheme; set { if (value == _selectedItemTheme) return; _selectedItemTheme = value; OnPropertyChanged(); } }
+        private CSubCategory _selectedItemSubCategory;
+        public CSubCategory SelectedItemSubCategory { get => _selectedItemSubCategory; set { if (value == _selectedItemSubCategory) return; _selectedItemSubCategory = value; OnPropertyChanged(); } }
 
-        private string _selectedItemType;
-        public string SelectedItemType { get => _selectedItemType; set { if (value == _selectedItemType) return; _selectedItemType = value; OnPropertyChanged(); } }
+        private CCategory _selectedItemCategory;
+        public CCategory SelectedItemCategory { get => _selectedItemCategory; set { if (value == _selectedItemCategory) return; _selectedItemCategory = value; OnPropertyChanged(); } }
 
         private string _filterString;
         public string FilterString { get => _filterString; set { if (value == _filterString) return; _filterString = value; OnPropertyChanged(); } }
 
-        private string _selectedItemCompany;
-        public string SelectedItemCompany { get => _selectedItemCompany; set { if (value == _selectedItemCompany) return; _selectedItemCompany = value; OnPropertyChanged(); } }
+        private CCompany _selectedItemCompany;
+        public CCompany SelectedItemCompany { get => _selectedItemCompany; set { if (value == _selectedItemCompany) return; _selectedItemCompany = value; OnPropertyChanged(); } }
 
         private string _selectedItemSortBy;
         public string SelectedItemSortBy { get => _selectedItemSortBy; set { if (value == _selectedItemSortBy) return; _selectedItemSortBy = value; OnPropertyChanged(); } }
@@ -108,8 +114,8 @@ namespace BookStore.VIEW.ViewModels
         public ICommand PreviousPageCommand { get; set; }
         public ICommand NextPageCommand { get; set; }
 
-        public ICommand TypeSelectionChanged { get; set; }
-        public ICommand ThemeSelectionChanged { get; set; }
+        public ICommand CategorySelectionChanged { get; set; }
+        public ICommand SubCategorySelectionChanged { get; set; }
         public ICommand AuthorSelectionChanged { get; set; }
         public ICommand CompanySelectionChanged { get; set; }
         public ICommand SortBySelectionChanged { get; set; }
@@ -122,7 +128,7 @@ namespace BookStore.VIEW.ViewModels
         {
             searchCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                LoadBookWithSort();
+                LoadBook();
             }
                );
 
@@ -131,7 +137,7 @@ namespace BookStore.VIEW.ViewModels
                 if (CurrentPage > 1)
                 {
                     CurrentPage = CurrentPage - 1;
-                    LoadBookWithSort();
+                    LoadBook();
                 }
             }
               );
@@ -139,36 +145,32 @@ namespace BookStore.VIEW.ViewModels
             NextPageCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 CurrentPage = CurrentPage + 1;
-                LoadBookWithSort();
+                LoadBook();
             }
               );
 
-            TypeSelectionChanged = new RelayCommand<object>((p) => { return true; }, (p) =>
+            CategorySelectionChanged = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                if (SelectedItemType != null)
-                {
-                    
-
-                    LoadBookWithSort();
-                }
+                //Đổ lại subcategory
+                loadSubCategory();
             }
                );
 
-            ThemeSelectionChanged = new RelayCommand<object>((p) => { return true; }, (p) =>
+            SubCategorySelectionChanged = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                LoadBookWithSort();
+                LoadBook();
             }
                );
 
             AuthorSelectionChanged = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                LoadBookWithSort();
+                LoadBook();
             }
                );
 
             CompanySelectionChanged = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                LoadBookWithSort();
+                LoadBook();
             }
                );
 
@@ -178,8 +180,8 @@ namespace BookStore.VIEW.ViewModels
                 AddNewBookWindow wd = new AddNewBookWindow();
                 wd.ShowDialog();
                 //Load lại List
-                LoadBookWithSort();
-                
+                LoadBook();
+
             }
                );
 
@@ -189,8 +191,8 @@ namespace BookStore.VIEW.ViewModels
                 IncreaseBookWindow wd = new IncreaseBookWindow();
                 wd.ShowDialog();
                 //Load lại List
-                LoadBookWithSort();
-                
+                LoadBook();
+
             }
                );
 
@@ -205,17 +207,19 @@ namespace BookStore.VIEW.ViewModels
 
             editBookCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                
+                if (ListSelectedItem != null)
+                {
+                    DetailBookWindow wd = new DetailBookWindow(ListSelectedItem);
+                    wd.ShowDialog();
+                    LoadBook();
+                }
             }
                );
 
             LoadCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                CurrentPage = 1;
-                FilterString = "";
-
-                
-                
+                firtLoad();
+                LoadBook();
             }
                );
 
@@ -230,29 +234,49 @@ namespace BookStore.VIEW.ViewModels
 
             SortBySelectionChanged = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                LoadBookWithSort();
+                LoadBook();
             }
                );
         }
 
+        /// <summary>
+        /// Load danh sách sách theo tiêu chí
+        /// </summary>
         private void LoadBook()
         {
-            if (SelectedItemCompany != null && SelectedItemTheme != null && SelectedItemType != null && SelectedItemAuthor != null)
+            if (isAllSelected())
             {
-                
+                ListBook = new ObservableCollection<CBook>(bookBUS.ListBook(FilterString, SelectedItemAuthor, SelectedItemCategory.ID,
+                    SelectedItemSubCategory.ID, SelectedItemCompany.ID, SelectedItemSortBy, CurrentPage, NumberPage));
+            }   
+        }
+
+        /// <summary>
+        /// Đổ lại dữ liệu ở cột subcategory khi thay đổi ở cột category
+        /// </summary>
+        private void loadSubCategory()
+        {
+            if (SelectedItemCategory != null)
+            {
+                ListSubCategory = new ObservableCollection<CSubCategory>(subcategoryBUS.ListSubCategory(SelectedItemCategory.ID));
+                CSubCategory allSubCategory = new CSubCategory { ID = 0, Name = "Tất cả" };
+                ListSubCategory.Add(allSubCategory);
+                SelectedItemSubCategory = allSubCategory;
             }
         }
 
-        private void LoadBookWithSort()
+        /// <summary>
+        /// Khởi tạo màn hình trong lần đầu tiên chạy
+        /// </summary>
+        private void firtLoad()
         {
-            if (SelectedItemCompany != null && SelectedItemTheme != null && SelectedItemType != null && SelectedItemAuthor != null && SelectedItemSortBy != null)
-            {
-                
-            }
-        }
-
-        private void CreateSortBy()
-        {
+            CurrentPage = 1;
+            FilterString = "";
+            
+            ListCategory = new ObservableCollection<CCategory>(categoryBUS.ListCategory());
+            ListSubCategory = new ObservableCollection<CSubCategory>();
+            ListCompany = new ObservableCollection<CCompany>(companyBUS.ListCompany());
+            ListAuthor = new ObservableCollection<string>(bookBUS.ListAuthor());
             ListSortBy = new ObservableCollection<string>();
             ListSortBy.Add("Tên");
             ListSortBy.Add("Mã");
@@ -260,6 +284,51 @@ namespace BookStore.VIEW.ViewModels
             ListSortBy.Add("Tồn kho tăng dần");
             ListSortBy.Add("Lượt mua giảm dần");
             ListSortBy.Add("Lượt mua tăng dần");
+
+            CCategory allCategory = new CCategory { ID = 0, Name = "Tất cả" };
+            ListCategory.Add(allCategory);
+            CSubCategory allSubCategory = new CSubCategory { ID = 0, Name = "Tất cả" };
+            ListSubCategory.Add(allSubCategory);
+            CCompany allCompany = new CCompany { ID = 0, Name = "Tất cả" };
+            ListCompany.Add(allCompany);
+            ListAuthor.Add("Tất cả");
+
+            SelectedItemAuthor = "Tất cả";
+            SelectedItemCompany = allCompany;
+            SelectedItemCategory = allCategory;
+            SelectedItemSubCategory = allSubCategory;
+            SelectedItemSortBy = "Tên";
+
+            SumNumber = bookBUS.InventoryBook();
+
+            loadLastWareHouse();
         }
+
+        /// <summary>
+        /// Kiểm tra tất cả đã được chọn
+        /// </summary>
+        /// <returns></returns>
+        private bool isAllSelected()
+        {
+            if (SelectedItemAuthor != null && SelectedItemCategory != null && SelectedItemSubCategory != null
+                && SelectedItemSortBy != null && SelectedItemCompany != null)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Hiển thị thông tin chi tiết lần nhập cuối
+        /// </summary>
+        private void loadLastWareHouse()
+        {
+            CBaseReceipt cBookReipt = wareHouseBUS.LastWarehouse();
+
+            LastDate = cBookReipt.Date;
+            LastNumberBook = cBookReipt.TotalCount;
+            LastTotalMoney = cBookReipt.TotalMoney;
+        }
+
     }
 }

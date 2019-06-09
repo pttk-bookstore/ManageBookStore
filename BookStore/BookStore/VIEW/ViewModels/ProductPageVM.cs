@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BookStore.BUS;
+using BookStore.DTO;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -13,6 +15,11 @@ namespace BookStore.VIEW.ViewModels
     {
         #region Global
 
+        BookBUS bookBUS = new BookBUS();
+        CategoryBUS categoryBUS = new CategoryBUS();
+        SubCategoryBUS subcategoryBUS = new SubCategoryBUS();
+        CompanyBUS companyBUS = new CompanyBUS();
+
         private int _currentPage;
         public int CurrentPage { get => _currentPage; set { if (value == _currentPage) return; _currentPage = value; OnPropertyChanged(); } }
 
@@ -26,45 +33,26 @@ namespace BookStore.VIEW.ViewModels
 
         #region data binding
 
-        //private ObservableCollection<CBook> _listBook;
-        //public ObservableCollection<CBook> ListBook { get => _listBook; set { if (value == _listBook) return; _listBook = value; OnPropertyChanged(); } }
+        private ObservableCollection<CBook> _listBook;
+        public ObservableCollection<CBook> ListBook { get => _listBook; set { if (value == _listBook) return; _listBook = value; OnPropertyChanged(); } }
 
-        //private CBook _listSelectedItem;
-        //public CBook ListSelectedItem { get => _listSelectedItem; set { if (value == _listSelectedItem) return; _listSelectedItem = value; OnPropertyChanged(); } }
+        private CBook _listSelectedItem;
+        public CBook ListSelectedItem { get => _listSelectedItem; set { if (value == _listSelectedItem) return; _listSelectedItem = value; OnPropertyChanged(); } }
 
         private ObservableCollection<string> _listAuthor;
         public ObservableCollection<string> ListAuthor { get => _listAuthor; set { if (value == _listAuthor) return; _listAuthor = value; OnPropertyChanged(); } }
 
-        private ObservableCollection<string> _listType;
-        public ObservableCollection<string> ListType { get => _listType; set { if (value == _listType) return; _listType = value; OnPropertyChanged(); } }
+        private ObservableCollection<CCategory> _listCategory;
+        public ObservableCollection<CCategory> ListCategory { get => _listCategory; set { if (value == _listCategory) return; _listCategory = value; OnPropertyChanged(); } }
 
-        private ObservableCollection<string> _listTheme;
-        public ObservableCollection<string> ListTheme { get => _listTheme; set { if (value == _listTheme) return; _listTheme = value; OnPropertyChanged(); } }
+        private ObservableCollection<CSubCategory> _listSubCategory;
+        public ObservableCollection<CSubCategory> ListSubCategory { get => _listSubCategory; set { if (value == _listSubCategory) return; _listSubCategory = value; OnPropertyChanged(); } }
 
-        private ObservableCollection<string> _listCompany;
-        public ObservableCollection<string> ListCompany { get => _listCompany; set { if (value == _listCompany) return; _listCompany = value; OnPropertyChanged(); } }
+        private ObservableCollection<CCompany> _listCompany;
+        public ObservableCollection<CCompany> ListCompany { get => _listCompany; set { if (value == _listCompany) return; _listCompany = value; OnPropertyChanged(); } }
 
         private ObservableCollection<string> _listPrice;
         public ObservableCollection<string> ListPrice { get => _listPrice; set { if (value == _listPrice) return; _listPrice = value; OnPropertyChanged(); } }
-
-        /// <summary>
-        /// Binding text combobox
-        /// </summary>
-
-        private string _textType;
-        public string TextType { get => _textType; set { if (value == _textType) return; _textType = value; OnPropertyChanged(); } }
-
-        private string _textTheme;
-        public string TextTheme { get => _textTheme; set { if (value == _textTheme) return; _textTheme = value; OnPropertyChanged(); } }
-
-        private string _textAuthor;
-        public string TextAuthor { get => _textAuthor; set { if (value == _textAuthor) return; _textAuthor = value; OnPropertyChanged(); } }
-
-        private string _textCompany;
-        public string TextCompany { get => _textCompany; set { if (value == _textCompany) return; _textCompany = value; OnPropertyChanged(); } }
-
-        private string _textPrice;
-        public string TextPrice { get => _textPrice; set { if (value == _textPrice) return; _textPrice = value; OnPropertyChanged(); } }
 
         /// <summary>
         /// Binding selected item combobox
@@ -76,17 +64,17 @@ namespace BookStore.VIEW.ViewModels
         private string _selectedItemPrice;
         public string SelectedItemPrice { get => _selectedItemPrice; set { if (value == _selectedItemPrice) return; _selectedItemPrice = value; OnPropertyChanged(); } }
 
-        private string _selectedItemTheme;
-        public string SelectedItemTheme { get => _selectedItemTheme; set { if (value == _selectedItemTheme) return; _selectedItemTheme = value; OnPropertyChanged(); } }
+        private CSubCategory _selectedItemSubCategory;
+        public CSubCategory SelectedItemSubCategory { get => _selectedItemSubCategory; set { if (value == _selectedItemSubCategory) return; _selectedItemSubCategory = value; OnPropertyChanged(); } }
 
-        private string _selectedItemType;
-        public string SelectedItemType { get => _selectedItemType; set { if (value == _selectedItemType) return; _selectedItemType = value; OnPropertyChanged(); } }
+        private CCategory _selectedItemCategory;
+        public CCategory SelectedItemCategory { get => _selectedItemCategory; set { if (value == _selectedItemCategory) return; _selectedItemCategory = value; OnPropertyChanged(); } }
 
         private string _filterString;
         public string FilterString { get => _filterString; set { if (value == _filterString) return; _filterString = value; OnPropertyChanged(); } }
 
-        private string _selectedItemCompany;
-        public string SelectedItemCompany { get => _selectedItemCompany; set { if (value == _selectedItemCompany) return; _selectedItemCompany = value; OnPropertyChanged(); } }
+        private CCompany _selectedItemCompany;
+        public CCompany SelectedItemCompany { get => _selectedItemCompany; set { if (value == _selectedItemCompany) return; _selectedItemCompany = value; OnPropertyChanged(); } }
 
         #endregion
 
@@ -95,26 +83,20 @@ namespace BookStore.VIEW.ViewModels
         private Visibility _messTextVisibility;
         public Visibility MessTextVisibility { get => _messTextVisibility; set { if (value == _messTextVisibility) return; _messTextVisibility = value; OnPropertyChanged(); } }
 
-
-
         #endregion
 
         #region command binding
 
         public ICommand LoadCommand { get; set; }
-
         public ICommand PreviousPageCommand { get; set; }
         public ICommand NextPageCommand { get; set; }
-
-        public ICommand TypeSelectionChanged { get; set; }
-        public ICommand ThemeSelectionChanged { get; set; }
+        public ICommand CategorySelectionChanged { get; set; }
+        public ICommand SubCategorySelectionChanged { get; set; }
         public ICommand AuthorSelectionChanged { get; set; }
         public ICommand CompanySelectionChanged { get; set; }
         public ICommand PriceSelectionChanged { get; set; }
-
         public ICommand searchCommand { get; set; }
         public ICommand addProductCommand { get; set; }
-
         public ICommand makeBillCommand { get; set; }
 
         #endregion
@@ -140,13 +122,14 @@ namespace BookStore.VIEW.ViewModels
             }
                );
 
-            TypeSelectionChanged = new RelayCommand<object>((p) => { return true; }, (p) =>
+            CategorySelectionChanged = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                
+                //Đổ lại dữ liệu của subcategory
+                loadSubCategory();
             }
                );
 
-            ThemeSelectionChanged = new RelayCommand<object>((p) => { return true; }, (p) =>
+            SubCategorySelectionChanged = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 LoadBook();
             }
@@ -189,55 +172,101 @@ namespace BookStore.VIEW.ViewModels
 
             LoadCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                
-
-                NumberProduct = 0;
-
-                CurrentPage = 1;
-                FilterString = "";
-                
-
-                //ListPrice = new ObservableCollection<string> { "Tất cả", "Giảm giá" };
-
-                //ListTheme = new ObservableCollection<string>();
-                //ListTheme.Add("Tất cả");
-
-                
-                //ListType.Add("Tất cả");
-
-                
-                //ListAuthor.Add("Tất cả");
-
-                
-                //ListCompany.Add("Tất cả");
-
-                //MessTextVisibility = Visibility.Hidden;
-
-                //SelectedItemAuthor = "Tất cả";
-                //SelectedItemCompany = "Tất cả";
-                //SelectedItemPrice = "Tất cả";
-                //SelectedItemType = "Tất cả";
-                //SelectedItemTheme = "Tất cả";
-
+                firtLoad();
+                LoadBook();
             }
                );
         }
 
+        /// <summary>
+        /// Khởi tạo màn hình trong lần đầu tiên chạy
+        /// </summary>
+        private void firtLoad()
+        {
+            isSale = false;
+            NumberProduct = 0;
+
+            CurrentPage = 1;
+            FilterString = "";
+            MessTextVisibility = Visibility.Hidden;
+
+            ListCategory = new ObservableCollection<CCategory>(categoryBUS.ListCategory());
+            ListSubCategory = new ObservableCollection<CSubCategory>();
+            ListCompany = new ObservableCollection<CCompany>(companyBUS.ListCompany());
+            ListAuthor = new ObservableCollection<string>(bookBUS.ListAuthor());
+            ListPrice = new ObservableCollection<string> { "Tất cả", "Giảm giá" };
+
+            CCategory allCategory = new CCategory { ID = 0, Name = "Tất cả" };
+            ListCategory.Add(allCategory);
+            CSubCategory allSubCategory = new CSubCategory { ID = 0, Name = "Tất cả" };
+            ListSubCategory.Add(allSubCategory);
+            CCompany allCompany = new CCompany { ID = 0, Name = "Tất cả" };
+            ListCompany.Add(allCompany);
+            ListAuthor.Add("Tất cả");
+
+            SelectedItemAuthor = "Tất cả";
+            SelectedItemPrice = "Tất cả";
+            SelectedItemCompany = allCompany;
+            SelectedItemCategory = allCategory;
+            SelectedItemSubCategory = allSubCategory;
+        }
+
+        /// <summary>
+        /// Đổ lại dữ liệu ở cột subcategory khi thay đổi ở cột category
+        /// </summary>
+        private void loadSubCategory()
+        {
+            if (SelectedItemCategory != null)
+            {
+                ListSubCategory = new ObservableCollection<CSubCategory>(subcategoryBUS.ListSubCategory(SelectedItemCategory.ID));
+                CSubCategory allSubCategory = new CSubCategory { ID = 0, Name = "Tất cả" };
+                ListSubCategory.Add(allSubCategory);
+                SelectedItemSubCategory = allSubCategory;
+            }
+        }
+
+        /// <summary>
+        /// Hàm load sách theo trang
+        /// </summary>
         private void LoadBook()
         {
-            if (SelectedItemPrice != null)
+            if (isAllSelected())
             {
-                
-            }
+                if(SelectedItemPrice=="Tất cả")
+                {
+                    isSale = false;
+                }
+                else
+                {
+                    isSale = true;
+                }
 
-            //if (ListBook.Count() == 0)
-            //{
-            //    MessTextVisibility = Visibility.Visible;
-            //}
-            //else
-            //{
-            //    MessTextVisibility = Visibility.Hidden;
-            //}
+                ListBook = new ObservableCollection<CBook>(bookBUS.ListBook(FilterString, SelectedItemAuthor, _selectedItemCategory.ID,
+                    SelectedItemSubCategory.ID, SelectedItemCompany.ID, isSale, CurrentPage, NumberPage));
+
+                if (ListBook.Count() == 0)
+                {
+                    MessTextVisibility = Visibility.Visible;
+                }
+                else
+                {
+                    MessTextVisibility = Visibility.Hidden;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Kiểm tra tất cả đã được chọn
+        /// </summary>
+        /// <returns></returns>
+        private bool isAllSelected()
+        {
+            if (SelectedItemAuthor != null && SelectedItemCategory != null&&SelectedItemSubCategory!=null
+                && SelectedItemPrice != null && SelectedItemCompany != null)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

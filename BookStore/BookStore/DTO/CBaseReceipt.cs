@@ -59,6 +59,15 @@ namespace BookStore.DTO
         }
 
 
+        private int _totalCount;
+        /// <summary>
+        /// Tổng sách trong đợt giao dịch
+        /// </summary>
+        public int TotalCount
+        {
+            get { return _totalCount; }
+            set { _totalCount = value; }
+        }
 
 
 

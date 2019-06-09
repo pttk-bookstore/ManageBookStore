@@ -8,6 +8,38 @@ namespace BookStore.DTO
 {
     public class CBookTransaction:CBook
     {
+        private int _transactionID;
+        /// <summary>
+        /// ID giao dịch nếu có
+        /// </summary>
+        public int TransactionID
+        {
+            get { return _transactionID; }
+            set { _transactionID = value; }
+        }
+
+        private string _typeTransaction;
+        /// <summary>
+        /// Loại giao dịch nếu có
+        /// </summary>
+        public string TypeTransaction
+        {
+            get { return _typeTransaction; }
+            set { _typeTransaction = value; }
+        }
+
+        private DateTime _dateTransaction;
+        /// <summary>
+        /// Ngày giao dịch nếu có
+        /// </summary>
+        public DateTime DateTransaction
+        {
+            get { return _dateTransaction; }
+            set { _dateTransaction = value; }
+        }
+
+
+
         private int _count;
         /// <summary>
         /// Số lượng sách giao dịch
