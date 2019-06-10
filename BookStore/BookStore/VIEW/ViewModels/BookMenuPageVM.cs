@@ -72,7 +72,7 @@ namespace BookStore.VIEW.ViewModels
                 //Khởi tạo
 
                 GridCursorMargin = new Thickness(10 + 150 * 2, 0, 0, 0);
-                //FramePage = new structureBookPage();
+                FramePage = new StructureBookPage();
             }
               );
 

@@ -111,14 +111,22 @@ namespace BookStore.VIEW.ViewModels
 
             makeBillCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                MakeBillWindow wd = new MakeBillWindow();
-                wd.ShowDialog();
+                if (CCart.Instance.NumberBook() == 0)
+                {
+                    MessageBox.Show("Vui lòng chọn sách để thanh toán","Thông báo", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                }
+                else
+                {
+                    MakeBillWindow wd = new MakeBillWindow();
+                    wd.ShowDialog();
+                    updateNumberBook();
+                }            
             }
                );
 
             addProductCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                
+                addBookToCart();
             }
                );
 
@@ -176,6 +184,49 @@ namespace BookStore.VIEW.ViewModels
                 LoadBook();
             }
                );
+        }
+
+        /// <summary>
+        /// Thêm sách vào giỏ hàng
+        /// </summary>
+        private void addBookToCart()
+        {
+            if (ListSelectedItem != null)
+            {
+                CBookTransaction Book = new CBookTransaction
+                {
+                    ID = ListSelectedItem.ID,
+                    Name = ListSelectedItem.Name,
+                    Author = ListSelectedItem.Author,
+                    Category = ListSelectedItem.Category,
+                    SubCategory = ListSelectedItem.SubCategory,                    
+                    Inventory = ListSelectedItem.Inventory - 1,
+                    Image = ListSelectedItem.Image,
+                    Price = ListSelectedItem.Price,
+                    Promotion = ListSelectedItem.Promotion,
+                    PricePromotion = ListSelectedItem.PricePromotion,
+                    Count = 1,
+                    TotalMoney = ListSelectedItem.PricePromotion,
+                    IsTrueValue = true
+                };
+               
+                if (CCart.Instance.Add(Book))
+                {
+                    updateNumberBook();
+                }
+                else
+                {
+                    MessageBox.Show("Sách này đã có trong giỏ hàng", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }           
+        }
+
+        /// <summary>
+        /// Cập nhật lại số lượng sách trong giỏ hàng
+        /// </summary>
+        public void updateNumberBook()
+        {
+            NumberProduct = CCart.Instance.NumberBook();
         }
 
         /// <summary>

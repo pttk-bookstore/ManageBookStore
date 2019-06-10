@@ -47,7 +47,7 @@ namespace BookStore.DTO
         public int Count
         {
             get { return _count; }
-            set { _count = value; }
+            set { _count = value; OnPropertyChanged(); }
         }
 
         private float _totalMoney;
@@ -57,9 +57,28 @@ namespace BookStore.DTO
         public float TotalMoney
         {
             get { return _totalMoney; }
-            set { _totalMoney = value; }
+            set { _totalMoney = value; OnPropertyChanged(); }
         }
 
+        private bool _isTrueValue;
+        /// <summary>
+        /// Trường kiểm tra thông tin nhập là đúng
+        /// </summary>
+        public bool IsTrueValue
+        {
+            get { return _isTrueValue; }
+            set { _isTrueValue = value;OnPropertyChanged(); }
+        }
+
+        private float _inPrice;
+        /// <summary>
+        /// Giá nhập sách tương ứng
+        /// </summary>
+        public float InPrice
+        {
+            get { return _inPrice; }
+            set { _inPrice = value; }
+        }
 
     }
 }

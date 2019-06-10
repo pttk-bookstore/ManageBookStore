@@ -8,6 +8,25 @@ namespace BookStore.DTO
 {
     public class CBill:CBaseReceipt
     {
+        private int _status;
+
+        public int Status
+        {
+            get { return _status; }
+            set { _status = value; }
+        }
+
+
+        private DateTime _billDate;
+        /// <summary>
+        /// Thời gian thanh toán
+        /// </summary>
+        public DateTime BillDate
+        {
+            get { return _billDate; }
+            set { _billDate = value; }
+        }
+
         private CCustomer _bCustomer;
         /// <summary>
         /// Khách mua hàng
@@ -28,11 +47,11 @@ namespace BookStore.DTO
             set { _bSalesman = value; }
         }
 
-        private string _typeBill;
+        private CBillType _typeBill;
         /// <summary>
         /// Loại hóa đơn
         /// </summary>
-        public string TypeBill
+        public CBillType TypeBill
         {
             get { return _typeBill; }
             set { _typeBill = value; }
@@ -78,12 +97,15 @@ namespace BookStore.DTO
             set { _excessCash = value; }
         }
 
-
-
-
-
-
-
+        private float _promotion;
+        /// <summary>
+        /// Khuyến mãi nếu có
+        /// </summary>
+        public float Promotion
+        {
+            get { return _promotion; }
+            set { _promotion = value; }
+        }
 
 
     }

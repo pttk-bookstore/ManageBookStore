@@ -441,5 +441,104 @@ namespace BookStore.DAO
             }
             return 0;
         }
+
+
+        /// <summary>
+        /// Trả về Id của sách vừa thêm thành công
+        /// </summary>
+        /// <param name="Book"></param>
+        /// <returns></returns>
+        public int addNewBook(CBookTransaction Book)
+        {
+            try
+            {
+                using (var DB = new MiniBookStoreEntities())
+                {
+                    //Tạo mới sách
+                    var bookdata = new Book
+                    {
+                        Book_Name = Book.Name,
+                        Book_Author = Book.Author,
+                        Book_Company = Book.Company.ID,
+                        Book_Category = Book.Category.ID,
+                        Book_SubCategory = Book.SubCategory.ID,
+                        Book_Price = Book.Price * 1.3,
+                        Book_Promotion = 0,
+                        Book_Inventory = Book.Count,
+                        Book_Image = Help.ImageToByte(Book.Image),
+                        Book_Status = 1
+                    };
+
+                    //Thêm sách
+                    DB.Books.Add(bookdata);
+
+                    //Lưu thay đổi
+                    DB.SaveChanges();
+
+                    //Trả về ID sách vừa thêm
+                    return bookdata.Book_ID;
+                }
+
+            }
+            catch
+            {
+
+            }
+            return 0;
+        }
+
+        /// <summary>
+        /// Hàm trả về số lượng sách tồn trong kho của sách có ID
+        /// </summary>
+        /// <param name="BookID"></param>
+        /// <returns></returns>
+        public int InventoryOfBook(int BookID)
+        {
+            try
+            {
+                using(var DB = new MiniBookStoreEntities())
+                {
+                    var find = DB.Books.Find(BookID);
+                    if (find != null)
+                    {
+                        return find.Book_Inventory;
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+            return 0;
+        }
+
+        /// <summary>
+        /// Trừ số lượng sách, trả về số lượng sách còn tồn trong kho
+        /// </summary>
+        /// <param name="bookID"></param>
+        /// <param name="bookCount"></param>
+        public int decreaseBook(int bookID,int bookCount)
+        {
+            try
+            {
+                using(var DB = new MiniBookStoreEntities())
+                {
+                    var find = DB.Books.Find(bookID);
+                    if (find != null)
+                    {
+                        find.Book_Inventory = find.Book_Inventory - bookCount;
+                        DB.SaveChanges();
+                        
+                        return find.Book_Inventory;
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+
+            return 0;
+        }
     }
 }

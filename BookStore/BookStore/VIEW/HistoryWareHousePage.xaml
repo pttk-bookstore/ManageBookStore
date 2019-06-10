@@ -15,7 +15,7 @@
       TextOptions.TextRenderingMode="Auto"       
       FontFamily="{DynamicResource MaterialDesignFont}"
       Background="{DynamicResource MaterialDesignPaper}"     
-      
+      DataContext="{StaticResource HistoryWareHousePageVM}"
       d:DesignHeight="700" d:DesignWidth="1175"
       
       Title="HistoryWareHousePage">
@@ -184,7 +184,7 @@
                         Header="Tổng tiền">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <TextBlock Text="{Binding ToltalMoney,StringFormat='0,0.0'}" VerticalAlignment="Center"/>
+                                                    <TextBlock Text="{Binding TotalMoney,StringFormat='0,0.0'}" VerticalAlignment="Center"/>
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>
@@ -193,7 +193,7 @@
                         Header="Nhân viên nhập">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <TextBlock Text="{Binding EmployeeInfo.Name}" VerticalAlignment="Center"/>
+                                                    <TextBlock Text="{Binding BManager.Name}" VerticalAlignment="Center"/>
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>
@@ -285,7 +285,7 @@
                         Header="Giá nhập">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding InPrice,StringFormat='0,0.0'}" VerticalAlignment="Center"/>
+                                                <TextBlock Text="{Binding Price,StringFormat='0,0.0'}" VerticalAlignment="Center"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -294,7 +294,7 @@
                         Header="Số lượng">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding WarehouseInventory,StringFormat='0,0'}" VerticalAlignment="Center"/>
+                                                <TextBlock Text="{Binding Count,StringFormat='0,0'}" VerticalAlignment="Center"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -303,7 +303,7 @@
                         Header="Tổng tiền">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding TotalPrice,StringFormat='0,0.0'}" VerticalAlignment="Center"/>
+                                                <TextBlock Text="{Binding TotalMoney,StringFormat='0,0.0'}" VerticalAlignment="Center"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>

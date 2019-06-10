@@ -198,6 +198,7 @@
     <Compile Include="DTO\CAccount.cs" />
     <Compile Include="DTO\CBaseReceipt.cs" />
     <Compile Include="DTO\CBill.cs" />
+    <Compile Include="DTO\CBillType.cs" />
     <Compile Include="DTO\CBook.cs" />
     <Compile Include="DTO\CBookReipt.cs" />
     <Compile Include="DTO\CBookTransaction.cs" />
@@ -206,6 +207,7 @@
     <Compile Include="DTO\CCompany.cs" />
     <Compile Include="DTO\CCustomer.cs" />
     <Compile Include="DTO\CDiscountCode.cs" />
+    <Compile Include="DTO\CDiscountType.cs" />
     <Compile Include="DTO\CEmployee.cs" />
     <Compile Include="DTO\CEmployeeRole.cs" />
     <Compile Include="DTO\CPeople.cs" />
@@ -283,6 +285,9 @@
     <Compile Include="VIEW\SellMenuPage.xaml.cs">
       <DependentUpon>SellMenuPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VIEW\StructureBookPage.xaml.cs">
+      <DependentUpon>StructureBookPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VIEW\TypeAndThemsePage.xaml.cs">
       <DependentUpon>TypeAndThemsePage.xaml</DependentUpon>
     </Compile>
@@ -292,15 +297,22 @@
     <Compile Include="VIEW\UserControls\ControlBar.xaml.cs">
       <DependentUpon>ControlBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VIEW\ViewClass\StructBook.cs" />
+    <Compile Include="VIEW\ViewModels\AddNewBookWindowVM.cs" />
     <Compile Include="VIEW\ViewModels\BaseViewModel.cs" />
     <Compile Include="VIEW\ViewModels\BookInfoPageVM.cs" />
     <Compile Include="VIEW\ViewModels\BookMenuPageVM.cs" />
     <Compile Include="VIEW\ViewModels\ControlBarVM.cs" />
     <Compile Include="VIEW\ViewModels\DashboardWindowVM.cs" />
+    <Compile Include="VIEW\ViewModels\DataTransfer.cs" />
     <Compile Include="VIEW\ViewModels\DetailsBookWindowVM.cs" />
+    <Compile Include="VIEW\ViewModels\HistoryWareHousePageVM.cs" />
     <Compile Include="VIEW\ViewModels\LoginWindowVM.cs" />
+    <Compile Include="VIEW\ViewModels\MakeBillWindowVM.cs" />
     <Compile Include="VIEW\ViewModels\ProductPageVM.cs" />
     <Compile Include="VIEW\ViewModels\SellMenuPageVM.cs" />
+    <Compile Include="VIEW\ViewModels\StructureBookPageVM.cs" />
+    <Compile Include="VIEW\ViewModels\TypeAndThemePageVM.cs" />
     <Compile Include="VIEW\ViewModels\TypeAndThemsePageVM.cs" />
     <Page Include="VIEW\AddNewBookWindow.xaml">
       <SubType>Designer</SubType>
@@ -403,6 +415,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="VIEW\SellMenuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VIEW\StructureBookPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

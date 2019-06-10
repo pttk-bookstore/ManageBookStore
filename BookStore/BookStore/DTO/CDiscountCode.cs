@@ -28,16 +28,6 @@ namespace BookStore.DTO
             set { _name = value; }
         }
 
-        private float _percent;
-        /// <summary>
-        /// Phần trăm khuyến mãi
-        /// </summary>
-        public float Percent
-        {
-            get { return _percent; }
-            set { _percent = value; }
-        }
-
         private DateTime _dateStart;
         /// <summary>
         /// Ngày bắt đầu áp dụng
@@ -58,20 +48,14 @@ namespace BookStore.DTO
             set { _dateEnd = value; }
         }
 
-        private int _numberBook;
+        private CDiscountType _type;
         /// <summary>
-        /// Số lượng sách tối thiểu cần phải mua để áp dụng khuyến mãi
+        /// Loại mã khuyến mãi
         /// </summary>
-        public int NumberBook
+        public CDiscountType Type
         {
-            get { return _numberBook; }
-            set { _numberBook = value; }
+            get { return _type; }
+            set { _type = value; }
         }
-
-
-
-
-
-
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BookStore.DAO;
+using BookStore.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +13,12 @@ namespace BookStore.VIEW.ViewModels
 {
     public class LoginWindowVM : BaseViewModel
     {
+        #region global
+
+        AccountDAO accountDAO = new AccountDAO();
+
+        #endregion
+
         #region data binding
 
         private string _UserName;
@@ -49,7 +57,7 @@ namespace BookStore.VIEW.ViewModels
         public ICommand PasswordChangedCommand { get; set; }
         public ICommand LoadedCommand { get; set; }
         public ICommand UserTextChanged { get; set; }
-
+        
         #endregion
 
         public LoginWindowVM()
@@ -68,11 +76,13 @@ namespace BookStore.VIEW.ViewModels
 
             LoginCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                checkLogin();
-                DashboardWindow wd = new DashboardWindow();
-                (p as Window)?.Hide();
-                wd.ShowDialog();
-                (p as Window)?.Show();
+                if (checkLogin())
+                {
+                    DashboardWindow wd = new DashboardWindow();
+                    (p as Window)?.Hide();
+                    wd.ShowDialog();
+                    (p as Window)?.Show();
+                }    
             }
                );
 
@@ -94,8 +104,20 @@ namespace BookStore.VIEW.ViewModels
             }
             else
             {
-                return true;
-
+                CAccount account = new CAccount { UserName = UserName, PassWord = Help.Base64Encode(PassWord) };
+                int ID = accountDAO.IDEmployee(account);
+                if(ID != 0)
+                {
+                    //Truyền ID nhân viên qua
+                    DataTransfer.EmployeeID = ID;
+                    return true;
+                }
+                else
+                {
+                    ErrorMess = "Mật hoặc tài khoản không đúng";
+                    ErrorVisibility = Visibility.Visible;
+                    return false;
+                }
             }
         }
     }

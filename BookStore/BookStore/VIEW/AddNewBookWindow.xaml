@@ -16,6 +16,7 @@
         TextOptions.TextRenderingMode="Auto"       
         FontFamily="{DynamicResource MaterialDesignFont}"
         Background="{DynamicResource MaterialDesignPaper}"
+        DataContext="{StaticResource AddNewBookWindowVM}"
         WindowStyle="None" WindowStartupLocation="CenterScreen"
         Title="AddNewBookWindow" Height="700" Width="1000">
     <Window.Resources>
@@ -37,7 +38,7 @@
         </Style>
 
         <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource MaterialDesignComboBox}" x:Key="comboboxStyle">
-            <Setter Property="IsEditable" Value="True"/>
+            <Setter Property="IsEditable" Value="False"/>
             <Setter  Property="materialDesign:HintAssist.HintOpacity" Value=".26"/>
             <Setter Property="MinWidth" Value="180"/>
             <Setter Property="FontSize" Value="14"/>
@@ -128,14 +129,19 @@
 
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock VerticalAlignment="Bottom" Text="Thể loại: " Style="{StaticResource nameBoldStyle}" FontWeight="Medium" FontSize="14"/>
-                                <ComboBox Style="{StaticResource comboboxStyle}" materialDesign:HintAssist.Hint="Chọn thể loại"
-                                          Text="{Binding Type,UpdateSourceTrigger=PropertyChanged}"
-                                          ItemsSource="{Binding listType}"
-                                          SelectedItem="{Binding TypeSelectedItem}"
-                                          >
+                                <ComboBox Style="{StaticResource comboboxStyle}" 
+                                          materialDesign:HintAssist.Hint="Chọn thể loại"
+                                          ItemsSource="{Binding ListCategory}"
+                                          SelectedItem="{Binding SelectedItemCategory}"                                         
+                                          VerticalAlignment="Center">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Name}"/>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="SelectionChanged">
-                                            <i:InvokeCommandAction Command="{Binding TypeSelectionChanged}"/>
+                                            <i:InvokeCommandAction Command="{Binding CategorySelectionChanged}"/>
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </ComboBox>
@@ -143,16 +149,32 @@
 
                             <StackPanel Orientation="Horizontal" Margin="60,0,0,0">
                                 <TextBlock VerticalAlignment="Bottom" Text="Chủ đề: " Style="{StaticResource nameBoldStyle}" FontWeight="Medium" FontSize="14"/>
-                                <ComboBox Style="{StaticResource comboboxStyle}" materialDesign:HintAssist.Hint="Chọn chủ đề"
-                                          Text="{Binding Theme,UpdateSourceTrigger=PropertyChanged}"
-                                          ItemsSource="{Binding ListTheme}"/>
+                                <ComboBox Style="{StaticResource comboboxStyle}" 
+                                          ItemsSource="{Binding ListSubCategory}"
+                                          SelectedItem="{Binding SelectedItemSubCategory}"                             
+                                          materialDesign:HintAssist.Hint="Chọn chủ đề" 
+                                          VerticalAlignment="Center" >
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Name}"/>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock VerticalAlignment="Bottom" Text="Nhà xuất bản: " Style="{StaticResource nameBoldStyle}" FontWeight="Medium" FontSize="14"/>
-                                <ComboBox Style="{StaticResource comboboxStyle}" materialDesign:HintAssist.Hint="Chọn nhà xuất bản"
-                                          Text="{Binding Company,UpdateSourceTrigger=PropertyChanged}"
-                                          ItemsSource="{Binding ListCompany}"/>
+                                <ComboBox Style="{StaticResource comboboxStyle}" 
+                                          materialDesign:HintAssist.Hint="Chọn nhà xuất bản"
+                                          ItemsSource="{Binding ListCompany}"                                          
+                                          SelectedItem="{Binding SelectedItemCompany}"                    
+                                          VerticalAlignment="Center">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Name}"/>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
                             </StackPanel>
                         </WrapPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
@@ -164,7 +186,7 @@
                             </StackPanel.Resources>
 
                             <TextBlock VerticalAlignment="Bottom" Text="Giá nhập: " Style="{StaticResource nameBoldStyle}" FontWeight="Medium" FontSize="14" Margin="5,0,0,0"/>
-                            <TextBox materialDesign:HintAssist.Hint="50000" Text="{Binding InPrice,UpdateSourceTrigger=PropertyChanged}">
+                            <TextBox PreviewTextInput="TextBox_PreviewTextInput" materialDesign:HintAssist.Hint="50000" Text="{Binding InPrice,UpdateSourceTrigger=PropertyChanged}">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="TextChanged">
                                         <i:InvokeCommandAction Command="{Binding InPriceTextChange}"/>
@@ -173,7 +195,7 @@
                             </TextBox>
 
                             <TextBlock Text="Số lượng: " VerticalAlignment="Bottom" Style="{StaticResource nameBoldStyle}" FontWeight="Medium" FontSize="14"/>
-                            <TextBox materialDesign:HintAssist.Hint="50000" MinWidth="80" Text="{Binding WarehouseInventory,UpdateSourceTrigger=PropertyChanged}">
+                            <TextBox PreviewTextInput="TextBox_PreviewTextInput" materialDesign:HintAssist.Hint="50000" MinWidth="80" Text="{Binding WarehouseInventory,UpdateSourceTrigger=PropertyChanged}">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="TextChanged">
                                         <i:InvokeCommandAction Command="{Binding CountTextChange}"/>
@@ -225,7 +247,7 @@
                     <materialDesign:Card Height="328" Grid.Row="1" Margin="0,10,10,-62">
                         <ListView ItemsSource="{Binding ListBook}" 
                                   SelectedIndex="{Binding ListSelectedIndex}"
-                                  SelectedItem="{Binding ListSelectedItem}" SelectionChanged="ListView_SelectionChanged" Margin="0,0,0,10">
+                                  SelectedItem="{Binding ListSelectedItem}" Margin="0,0,0,10">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
                                     <i:InvokeCommandAction Command="{Binding ListSelectionChanged}"/>
@@ -255,7 +277,7 @@
                                         Header="Thể loại">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Type}"/>
+                                                <TextBlock Text="{Binding Category.Name}"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -264,7 +286,7 @@
                                         Header="Chủ đề">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Theme}"/>
+                                                <TextBlock Text="{Binding SubCategory.Name}"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -273,7 +295,7 @@
                                         Header="NXB">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Company}"/>
+                                                <TextBlock Text="{Binding Company.Name}"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -282,7 +304,7 @@
                                         Header="Số lượng">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding WarehouseInventory,StringFormat='0,0'}"/>
+                                                <TextBlock Text="{Binding Count,StringFormat='0,0'}"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -291,7 +313,7 @@
                                         Header="Giá nhập">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding InPrice,StringFormat='0,0.0'}"/>
+                                                <TextBlock Text="{Binding Price,StringFormat='0,0.0'}"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -300,7 +322,7 @@
                                         Header="Tổng tiền">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding TotalPrice,StringFormat='0,0.0'}"/>
+                                                <TextBlock Text="{Binding TotalMoney,StringFormat='0,0.0'}"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>

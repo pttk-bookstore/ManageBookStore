@@ -16,8 +16,8 @@ namespace BookStore.DAO
     {
         public int Employee_ID { get; set; }
         public string Account_UserName { get; set; }
-        public string Account_Password { get; set; }
-        public Nullable<System.DateTime> Acccount_LastLogin { get; set; }
+        public string Account_Passwork { get; set; }
+        public Nullable<System.DateTime> Account_LastLogin { get; set; }
     
         public virtual Employee Employee { get; set; }
     }

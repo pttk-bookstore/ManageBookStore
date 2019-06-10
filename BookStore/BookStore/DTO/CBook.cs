@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookStore.VIEW.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,7 @@ using System.Windows.Media.Imaging;
 
 namespace BookStore.DTO
 {
-    public class CBook
+    public class CBook:BaseViewModel
     {
         private int _iD;
 
@@ -93,7 +94,7 @@ namespace BookStore.DTO
         public int Inventory
         {
             get { return _inventory; }
-            set { _inventory = value; }
+            set { _inventory = value;OnPropertyChanged(); }
         }
 
         private float _promotion;

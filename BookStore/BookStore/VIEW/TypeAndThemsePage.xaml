@@ -15,7 +15,7 @@
       TextOptions.TextRenderingMode="Auto"       
       FontFamily="{DynamicResource MaterialDesignFont}"
       Background="{DynamicResource MaterialDesignPaper}"     
-      DataContext="{StaticResource TypeAndThemsePageVM}"
+      DataContext="{StaticResource TypeAndThemePageVM}"
       d:DesignHeight="700" d:DesignWidth="1175"
       
       Title="TypeAndThemePage">
@@ -83,7 +83,7 @@
                     <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10,10,0,5" HorizontalAlignment="Left" VerticalAlignment="Center">
                         <!-- Text box tìm kiếm-->
                         <TextBox Width="300" FontSize="15" Height="35" Padding="10,0,0,0"                                 
-                                    materialDesign:HintAssist.Hint="Tên thể loại" Text="{Binding TypeName,UpdateSourceTrigger=PropertyChanged}"/>
+                                    materialDesign:HintAssist.Hint="Tên thể loại" Text="{Binding CategoryName,UpdateSourceTrigger=PropertyChanged}"/>
 
                         <!-- Nút tìm kiếm-->
                         <Button Background="#00BFFF" Content="Thêm"
@@ -91,12 +91,7 @@
 
                         </Button>
 
-                        <CheckBox
-                                    Style="{StaticResource MaterialDesignCheckBox}" 
-                                    FontSize="14" Margin="40,0,0,0" 
-                                    Content="Hiển thị tất cả" IsChecked="{Binding TypeIsChecked,UpdateSourceTrigger=PropertyChanged}" Command="{Binding TypeCheckedCommand}">
-
-                        </CheckBox>
+                        
                     </StackPanel>
 
                     <!-- List danh sách-->
@@ -104,17 +99,17 @@
                         <DataGrid HorizontalAlignment="Left"
                         Margin="0 0 0 0"
                         Height="500"                   
-                        ItemsSource="{Binding ListType}"
+                        ItemsSource="{Binding ListCategory}"
                         CanUserSortColumns="True"
                         CanUserAddRows="False"
                         AutoGenerateColumns="False"
                         Width="550" 
                         materialDesign:DataGridAssist.CellPadding="13 8 8 8"
                         materialDesign:DataGridAssist.ColumnHeaderPadding="8"
-                        SelectedItem="{Binding TypeSelectedItem}">
+                        SelectedItem="{Binding SelectedItemCategory}">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
-                                    <i:InvokeCommandAction Command="{Binding TypeSelectionChanged}"/>
+                                    <i:InvokeCommandAction Command="{Binding CategorySelectionChanged}"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                             <DataGrid.Resources>
@@ -144,7 +139,7 @@
 
                                 <materialDesign:MaterialDataGridTextColumn
                                 Binding="{Binding Count,StringFormat='0,0'}"     
-                                Header="Tổng sách"
+                                Header="Đầu sách"
                                 Width="100"
                                 MinWidth="100"
                                 IsReadOnly="True">
@@ -179,19 +174,7 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <DataGridTemplateColumn Visibility="{Binding Data.EditColumnVisibility,Source={StaticResource proxy}}">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Button x:Name="ButtonRestore" Visibility="{Binding IsExist,Converter={StaticResource RestoreBoolToVisibilityConverter}}"
-                                                        Background="#c0392b" BorderBrush="#c0392b" Width="45"
-                                                        ToolTip="Khôi phục"
-                                            Command="{Binding Path=DataContext.restoreTypeCommand,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"
-                                            CommandParameter="{Binding}">
-                                                <materialDesign:PackIcon Kind="DeleteRestore" Foreground="White" Height="15" Width="15"/>
-                                            </Button>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
+                                
                             </DataGrid.Columns>
                         </DataGrid>
 
@@ -221,7 +204,7 @@
                     <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10,10,0,5" HorizontalAlignment="Left" VerticalAlignment="Center">
                         <!-- Text box tìm kiếm-->
                         <TextBox Width="300" FontSize="15" Height="35" Padding="10,0,0,0"                                 
-                                    materialDesign:HintAssist.Hint="Tên thể loại" Text="{Binding ThemeName,UpdateSourceTrigger=PropertyChanged}"/>
+                                    materialDesign:HintAssist.Hint="Tên thể loại" Text="{Binding SubCategoryName,UpdateSourceTrigger=PropertyChanged}"/>
 
                         <!-- Nút tìm kiếm-->
                         <Button Background="#00BFFF" Content="Thêm"
@@ -229,12 +212,6 @@
 
                         </Button>
 
-                        <CheckBox
-                                    Style="{StaticResource MaterialDesignCheckBox}" 
-                                    FontSize="14" Margin="40,0,0,0" 
-                                    Content="Hiển thị tất cả" IsChecked="{Binding ThemeIsChecked,UpdateSourceTrigger=PropertyChanged}" Command="{Binding ThemeCheckedCommand}">
-
-                        </CheckBox>
                     </StackPanel>
 
                     <!-- List danh sách-->
@@ -242,14 +219,14 @@
                         <DataGrid HorizontalAlignment="Left"
                         Margin="0 0 0 0"
                         Height="500"                   
-                        ItemsSource="{Binding ListTheme}"
+                        ItemsSource="{Binding ListSubCategory}"
                         CanUserSortColumns="True"
                         CanUserAddRows="False"
                         AutoGenerateColumns="False"
                         Width="550"
                         materialDesign:DataGridAssist.CellPadding="13 8 8 8"
                         materialDesign:DataGridAssist.ColumnHeaderPadding="8"
-                        SelectedItem="{Binding ThemeSelectedItem}">
+                        SelectedItem="{Binding SelectedItemSubCategory}">
                             <DataGrid.Resources>
                                 <local:BindingProxy x:Key="proxy" Data="{Binding}"/>
                             </DataGrid.Resources>
@@ -278,7 +255,7 @@
 
                                 <materialDesign:MaterialDataGridTextColumn
                                 Binding="{Binding Count,StringFormat='0,0'}"     
-                                Header="Tổng sách"
+                                Header="Đầu sách"
                                 Width="100"
                                 MinWidth="100"
                                 IsReadOnly="True">
@@ -312,19 +289,7 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <DataGridTemplateColumn Visibility="{Binding Data.EditColumnVisibility,Source={StaticResource proxy}}">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Button x:Name="ButtonRestore" Visibility="{Binding IsExist,Converter={StaticResource RestoreBoolToVisibilityConverter}}"
-                                                        Background="#c0392b" BorderBrush="#c0392b" Width="45"
-                                                        ToolTip="Khôi phục"
-                                            Command="{Binding Path=DataContext.restoreThemeCommand,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"
-                                            CommandParameter="{Binding}">
-                                                <materialDesign:PackIcon Kind="DeleteRestore" Foreground="White" Height="15" Width="15"/>
-                                            </Button>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
+                                
                             </DataGrid.Columns>
                         </DataGrid>
 

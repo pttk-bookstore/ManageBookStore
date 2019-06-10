@@ -31,6 +31,7 @@
           <Property Name="Book_Count" Type="int" Nullable="false" />
           <Property Name="Book_Price" Type="float" Nullable="false" />
           <Property Name="Book_Promotion" Type="float" Nullable="false" />
+          <Property Name="Book_InPrice" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="Bill_Type">
           <Key>
@@ -83,7 +84,7 @@
             <PropertyRef Name="Customer_ID" />
           </Key>
           <Property Name="Customer_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Customer_Name" Type="int" Nullable="false" />
+          <Property Name="Customer_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Customer_Phone" Type="nvarchar" MaxLength="20" />
           <Property Name="Customer_Email" Type="nvarchar" MaxLength="50" />
           <Property Name="Customer_Address" Type="nvarchar" MaxLength="50" />
@@ -128,10 +129,10 @@
           <Key>
             <PropertyRef Name="Employee_ID" />
           </Key>
-          <Property Name="Employee_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Account_UserName" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="Account_Password" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="Acccount_LastLogin" Type="datetime" />
+          <Property Name="Employee_ID" Type="int" Nullable="false" />
+          <Property Name="Account_UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Account_Passwork" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Account_LastLogin" Type="datetime" />
         </EntityType>
         <EntityType Name="Page_Wage">
           <Key>
@@ -415,6 +416,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_WareHouse_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="WareHouse" Type="Self.WareHouse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Employee_ID" />
+            </Principal>
+            <Dependent Role="WareHouse">
+              <PropertyRef Name="Employee_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="MiniBookStoreModelStoreContainer">
           <EntitySet Name="Bill" EntityType="Self.Bill" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Bill_Detail" EntityType="Self.Bill_Detail" Schema="dbo" store:Type="Tables" />
@@ -506,6 +519,10 @@
           <AssociationSet Name="FK_WareHouse_Detail_WareHouse" Association="Self.FK_WareHouse_Detail_WareHouse">
             <End Role="WareHouse" EntitySet="WareHouse" />
             <End Role="WareHouse_Detail" EntitySet="WareHouse_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WareHouse_Employee" Association="Self.FK_WareHouse_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="WareHouse" EntitySet="WareHouse" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -600,6 +617,10 @@
             <End Role="Employee" EntitySet="Employees" />
             <End Role="Page_Wage" EntitySet="Page_Wage" />
           </AssociationSet>
+          <AssociationSet Name="FK_WareHouse_Employee" Association="MiniBookStoreModel.FK_WareHouse_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="WareHouse" EntitySet="WareHouses" />
+          </AssociationSet>
           <AssociationSet Name="FK_WareHouse_Detail_WareHouse" Association="MiniBookStoreModel.FK_WareHouse_Detail_WareHouse">
             <End Role="WareHouse" EntitySet="WareHouses" />
             <End Role="WareHouse_Detail" EntitySet="WareHouse_Detail" />
@@ -636,6 +657,7 @@
           <Property Name="Book_Count" Type="Int32" Nullable="false" />
           <Property Name="Book_Price" Type="Double" Nullable="false" />
           <Property Name="Book_Promotion" Type="Double" Nullable="false" />
+          <Property Name="Book_InPrice" Type="Double" Nullable="false" />
           <NavigationProperty Name="Bill" Relationship="MiniBookStoreModel.FK_Bill_Detail_Bill" FromRole="Bill_Detail" ToRole="Bill" />
           <NavigationProperty Name="Book" Relationship="MiniBookStoreModel.FK_Bill_Detail_Book" FromRole="Bill_Detail" ToRole="Book" />
         </EntityType>
@@ -702,7 +724,7 @@
             <PropertyRef Name="Customer_ID" />
           </Key>
           <Property Name="Customer_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Customer_Name" Type="Int32" Nullable="false" />
+          <Property Name="Customer_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Customer_Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Customer_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Customer_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -750,15 +772,16 @@
           <NavigationProperty Name="Employee_Account" Relationship="MiniBookStoreModel.FK_Account_Employee" FromRole="Employee" ToRole="Employee_Account" />
           <NavigationProperty Name="Role" Relationship="MiniBookStoreModel.FK_Employee_Role" FromRole="Employee" ToRole="Role" />
           <NavigationProperty Name="Page_Wage" Relationship="MiniBookStoreModel.FK_Page_Wage_Employee" FromRole="Employee" ToRole="Page_Wage" />
+          <NavigationProperty Name="WareHouses" Relationship="MiniBookStoreModel.FK_WareHouse_Employee" FromRole="Employee" ToRole="WareHouse" />
         </EntityType>
         <EntityType Name="Employee_Account">
           <Key>
             <PropertyRef Name="Employee_ID" />
           </Key>
-          <Property Name="Employee_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Account_UserName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Account_Password" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Acccount_LastLogin" Type="DateTime" Precision="3" />
+          <Property Name="Employee_ID" Type="Int32" Nullable="false" />
+          <Property Name="Account_UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Account_Passwork" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Account_LastLogin" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Employee" Relationship="MiniBookStoreModel.FK_Account_Employee" FromRole="Employee_Account" ToRole="Employee" />
         </EntityType>
         <EntityType Name="Page_Wage">
@@ -821,6 +844,7 @@
           <Property Name="WareHouse_Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Employee_ID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Book_Inventory" Relationship="MiniBookStoreModel.FK_Book_Invetory_WareHouse" FromRole="WareHouse" ToRole="Book_Inventory" />
+          <NavigationProperty Name="Employee" Relationship="MiniBookStoreModel.FK_WareHouse_Employee" FromRole="WareHouse" ToRole="Employee" />
           <NavigationProperty Name="WareHouse_Detail" Relationship="MiniBookStoreModel.FK_WareHouse_Detail_WareHouse" FromRole="WareHouse" ToRole="WareHouse_Detail" />
         </EntityType>
         <EntityType Name="WareHouse_Detail">
@@ -1039,6 +1063,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_WareHouse_Employee">
+          <End Type="MiniBookStoreModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="MiniBookStoreModel.WareHouse" Role="WareHouse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Employee_ID" />
+            </Principal>
+            <Dependent Role="WareHouse">
+              <PropertyRef Name="Employee_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_WareHouse_Detail_WareHouse">
           <End Type="MiniBookStoreModel.WareHouse" Role="WareHouse" Multiplicity="1" />
           <End Type="MiniBookStoreModel.WareHouse_Detail" Role="WareHouse_Detail" Multiplicity="*" />
@@ -1077,6 +1113,7 @@
           <EntitySetMapping Name="Bill_Detail">
             <EntityTypeMapping TypeName="MiniBookStoreModel.Bill_Detail">
               <MappingFragment StoreEntitySet="Bill_Detail">
+                <ScalarProperty Name="Book_InPrice" ColumnName="Book_InPrice" />
                 <ScalarProperty Name="Book_Promotion" ColumnName="Book_Promotion" />
                 <ScalarProperty Name="Book_Price" ColumnName="Book_Price" />
                 <ScalarProperty Name="Book_Count" ColumnName="Book_Count" />
@@ -1189,8 +1226,8 @@
           <EntitySetMapping Name="Employee_Account">
             <EntityTypeMapping TypeName="MiniBookStoreModel.Employee_Account">
               <MappingFragment StoreEntitySet="Employee_Account">
-                <ScalarProperty Name="Acccount_LastLogin" ColumnName="Acccount_LastLogin" />
-                <ScalarProperty Name="Account_Password" ColumnName="Account_Password" />
+                <ScalarProperty Name="Account_LastLogin" ColumnName="Account_LastLogin" />
+                <ScalarProperty Name="Account_Passwork" ColumnName="Account_Passwork" />
                 <ScalarProperty Name="Account_UserName" ColumnName="Account_UserName" />
                 <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
               </MappingFragment>

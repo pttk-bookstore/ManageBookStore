@@ -20,6 +20,7 @@ namespace BookStore.DAO
         public int Book_Count { get; set; }
         public double Book_Price { get; set; }
         public double Book_Promotion { get; set; }
+        public double Book_InPrice { get; set; }
     
         public virtual Bill Bill { get; set; }
         public virtual Book Book { get; set; }

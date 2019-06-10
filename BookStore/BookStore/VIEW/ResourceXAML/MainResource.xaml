@@ -10,5 +10,10 @@
     <viewmodel:BookMenuPageVM x:Key="BookMenuPageVM"></viewmodel:BookMenuPageVM>
     <viewmodel:BookInfoPageVM x:Key="BookInfoPageVM"></viewmodel:BookInfoPageVM>
     <viewmodel:TypeAndThemsePageVM x:Key="TypeAndThemsePageVM"></viewmodel:TypeAndThemsePageVM>
+    <viewmodel:AddNewBookWindowVM x:Key="AddNewBookWindowVM"></viewmodel:AddNewBookWindowVM>
+    <viewmodel:TypeAndThemePageVM x:Key="TypeAndThemePageVM"></viewmodel:TypeAndThemePageVM>
+    <viewmodel:HistoryWareHousePageVM x:Key="HistoryWareHousePageVM"></viewmodel:HistoryWareHousePageVM>
+    <viewmodel:StructureBookPageVM x:Key="StructureBookPageVM"></viewmodel:StructureBookPageVM>
+    <viewmodel:MakeBillWindowVM x:Key="MakeBillWindowVM"></viewmodel:MakeBillWindowVM>
 
 </ResourceDictionary>

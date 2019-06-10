@@ -19,6 +19,7 @@ namespace BookStore.DAO
         {
             this.Bills = new HashSet<Bill>();
             this.Page_Wage = new HashSet<Page_Wage>();
+            this.WareHouses = new HashSet<WareHouse>();
         }
     
         public int Employee_ID { get; set; }
@@ -39,5 +40,7 @@ namespace BookStore.DAO
         public virtual Role Role { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Page_Wage> Page_Wage { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WareHouse> WareHouses { get; set; }
     }
 }

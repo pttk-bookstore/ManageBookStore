@@ -58,6 +58,15 @@ namespace BookStore.DTO
             set { _type = value; }
         }
 
+        private int _typeID;
+        /// <summary>
+        /// Mã loại giao dịch
+        /// </summary>
+        public int TypeID
+        {
+            get { return _typeID; }
+            set { _typeID = value; }
+        }
 
         private int _totalCount;
         /// <summary>
@@ -68,8 +77,5 @@ namespace BookStore.DTO
             get { return _totalCount; }
             set { _totalCount = value; }
         }
-
-
-
     }
 }

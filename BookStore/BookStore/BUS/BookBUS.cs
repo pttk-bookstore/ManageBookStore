@@ -73,6 +73,16 @@ namespace BookStore.BUS
             return DAO.updateBookInfo(BookInfo);
         }
 
+        /// <summary>
+        /// Trả về ID của sách có thông tin
+        /// </summary>
+        /// <param name="BookInfo"></param>
+        /// <returns></returns>
+        public int IdOfBookInfo(CBook BookInfo)
+        {
+            return DAO.IdOfBookInfo(BookInfo);
+        }
+
 
         /// <summary>
         /// Hàm trả về tổng số lượng sách tồn trong kho
@@ -82,5 +92,16 @@ namespace BookStore.BUS
         {
             return DAO.InventoryBook();
         }
+
+        /// <summary>
+        /// Hàm trả về số lượng sách tồn trong kho của sách có ID
+        /// </summary>
+        /// <param name="BookID"></param>
+        /// <returns></returns>
+        public int InventoryOfBook(int BookID)
+        {
+            return DAO.InventoryOfBook(BookID);
+        }
+
     }
 }

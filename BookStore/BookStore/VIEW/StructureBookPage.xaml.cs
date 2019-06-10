@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,24 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace BookStore.VIEW
 {
     /// <summary>
-    /// Interaction logic for AddNewBookWindow.xaml
+    /// Interaction logic for StructureBookPage.xaml
     /// </summary>
-    public partial class AddNewBookWindow : Window
+    public partial class StructureBookPage : Page
     {
-        public AddNewBookWindow()
+        public StructureBookPage()
         {
             InitializeComponent();
-        }
-
-        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            Regex regex = new Regex("[^0-9.]+");
-            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

@@ -5,25 +5,25 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="e4dc69d69fb84c928a4b867bf50dee26" Name="Diagram1">
-        <EntityTypeShape EntityType="MiniBookStoreModel.Bill" Width="1.5" PointX="8.25" PointY="18.5" />
-        <EntityTypeShape EntityType="MiniBookStoreModel.Bill_Detail" Width="1.5" PointX="10.5" PointY="8.25" />
-        <EntityTypeShape EntityType="MiniBookStoreModel.Bill_Type" Width="1.5" PointX="6" PointY="14.25" />
-        <EntityTypeShape EntityType="MiniBookStoreModel.Book" Width="1.5" PointX="5.25" PointY="7.375" />
-        <EntityTypeShape EntityType="MiniBookStoreModel.Book_Inventory" Width="1.5" PointX="7.5" PointY="5.5" />
-        <EntityTypeShape EntityType="MiniBookStoreModel.Category" Width="1.5" PointX="0.75" PointY="6" />
-        <EntityTypeShape EntityType="MiniBookStoreModel.Company" Width="1.5" PointX="3" PointY="7.75" />
-        <EntityTypeShape EntityType="MiniBookStoreModel.Customer" Width="1.5" PointX="6" PointY="19.875" />
-        <EntityTypeShape EntityType="MiniBookStoreModel.Discount_Code" Width="1.5" PointX="6" PointY="16.625" />
-        <EntityTypeShape EntityType="MiniBookStoreModel.Discount_Type" Width="1.5" PointX="3.75" PointY="16.875" />
-        <EntityTypeShape EntityType="MiniBookStoreModel.Employee" Width="1.5" PointX="6" PointY="22.875" />
-        <EntityTypeShape EntityType="MiniBookStoreModel.Employee_Account" Width="1.5" PointX="8.25" PointY="23.375" />
-        <EntityTypeShape EntityType="MiniBookStoreModel.Page_Wage" Width="1.5" PointX="8.25" PointY="26.125" />
-        <EntityTypeShape EntityType="MiniBookStoreModel.Regulation" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="MiniBookStoreModel.Role" Width="1.5" PointX="3.75" PointY="23.875" />
-        <EntityTypeShape EntityType="MiniBookStoreModel.SubCategory" Width="1.5" PointX="3" PointY="11" />
-        <EntityTypeShape EntityType="MiniBookStoreModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" />
-        <EntityTypeShape EntityType="MiniBookStoreModel.WareHouse" Width="1.5" PointX="5.25" PointY="3.375" />
-        <EntityTypeShape EntityType="MiniBookStoreModel.WareHouse_Detail" Width="1.5" PointX="7.5" PointY="8.375" />
+        <EntityTypeShape EntityType="MiniBookStoreModel.Bill" Width="1.5" PointX="8.25" PointY="16.875" />
+        <EntityTypeShape EntityType="MiniBookStoreModel.Bill_Detail" Width="1.5" PointX="10.5" PointY="8.5" />
+        <EntityTypeShape EntityType="MiniBookStoreModel.Bill_Type" Width="1.5" PointX="6" PointY="15" />
+        <EntityTypeShape EntityType="MiniBookStoreModel.Book" Width="1.5" PointX="5.25" PointY="7.75" />
+        <EntityTypeShape EntityType="MiniBookStoreModel.Book_Inventory" Width="1.5" PointX="7.5" PointY="8.875" />
+        <EntityTypeShape EntityType="MiniBookStoreModel.Category" Width="1.5" PointX="0.75" PointY="6.5" />
+        <EntityTypeShape EntityType="MiniBookStoreModel.Company" Width="1.5" PointX="3" PointY="8.125" />
+        <EntityTypeShape EntityType="MiniBookStoreModel.Customer" Width="1.5" PointX="6" PointY="17.375" />
+        <EntityTypeShape EntityType="MiniBookStoreModel.Discount_Code" Width="1.5" PointX="6" PointY="20.25" />
+        <EntityTypeShape EntityType="MiniBookStoreModel.Discount_Type" Width="1.5" PointX="3.75" PointY="20.5" />
+        <EntityTypeShape EntityType="MiniBookStoreModel.Employee" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="MiniBookStoreModel.Employee_Account" Width="1.5" PointX="5.25" PointY="24.125" />
+        <EntityTypeShape EntityType="MiniBookStoreModel.Page_Wage" Width="1.5" PointX="5.25" PointY="26.875" />
+        <EntityTypeShape EntityType="MiniBookStoreModel.Regulation" Width="1.5" PointX="7.75" PointY="1" />
+        <EntityTypeShape EntityType="MiniBookStoreModel.Role" Width="1.5" PointX="0.75" PointY="1.875" />
+        <EntityTypeShape EntityType="MiniBookStoreModel.SubCategory" Width="1.5" PointX="3" PointY="11.375" />
+        <EntityTypeShape EntityType="MiniBookStoreModel.sysdiagram" Width="1.5" PointX="9.75" PointY="1" />
+        <EntityTypeShape EntityType="MiniBookStoreModel.WareHouse" Width="1.5" PointX="5.25" PointY="1.625" />
+        <EntityTypeShape EntityType="MiniBookStoreModel.WareHouse_Detail" Width="1.5" PointX="7.5" PointY="5.75" />
         <AssociationConnector Association="MiniBookStoreModel.FK_Bill_Bill_Type" />
         <AssociationConnector Association="MiniBookStoreModel.FK_Bill_Customer" />
         <AssociationConnector Association="MiniBookStoreModel.FK_Bill_Detail_Bill" />
@@ -41,6 +41,7 @@
         <AssociationConnector Association="MiniBookStoreModel.FK_Account_Employee" />
         <AssociationConnector Association="MiniBookStoreModel.FK_Employee_Role" />
         <AssociationConnector Association="MiniBookStoreModel.FK_Page_Wage_Employee" />
+        <AssociationConnector Association="MiniBookStoreModel.FK_WareHouse_Employee" />
         <AssociationConnector Association="MiniBookStoreModel.FK_WareHouse_Detail_WareHouse" />
       </Diagram>
     </edmx:Diagrams>
