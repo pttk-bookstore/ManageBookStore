@@ -1,6 +1,8 @@
 ﻿using BookStore.DTO;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.SqlServer;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -112,6 +114,179 @@ namespace BookStore.DAO
 
             }
             return 0;
+        }
+
+        /// <summary>
+        /// Hàm trả về danh sách hóa đơn tương ứng với tháng năm
+        /// </summary>
+        /// <param name="Month"></param>
+        /// <param name="Year"></param>
+        /// <param name="currentPage"></param>
+        /// <param name="NumberPage"></param>
+        /// <returns></returns>
+        public List<CBill> Bill_History(int Month, int Year, int currentPage, int NumberPage)
+        {
+            List<CBill> List = new List<CBill>();
+            try
+            {
+                using (var DB = new MiniBookStoreEntities())
+                {
+                    var data = DB.Bills.Where(x => SqlFunctions.DatePart("year",
+                        x.Bill_Date) == Year && SqlFunctions.DatePart("month", x.Bill_Date) == Month).OrderByDescending(x => x.Bill_Date).ToList().
+                        Skip((currentPage - 1) * NumberPage).Take(NumberPage);
+
+                    if (data.Count() > 0)
+                    {
+                        foreach (var item in data)
+                        {
+                            //Tạo mới hóa đơn
+                            CBill myBill = new CBill
+                            {
+                                ID = item.Bill_ID,
+                                Date = item.Bill_Date,
+                                TotalMoney = (float)item.Total_Money,
+                                BCustomer = new CCustomer { Name = item.Customer.Customer_Name },
+                                BSalesman = new CEmployee { Name = item.Employee.Employee_Name },
+                                Promotion = item.Discount_Code == null ? 0 : (float)item.Discount_Code.Discount_Type.DiscountType_Promotion,
+                                TotalCount = item.Bill_Detail.Sum(x => x.Book_Count),
+                                TypeBill = new CBillType { ID = item.Bill_Type, Name = item.Bill_Type1.BillType_Name },
+                                Status = item.Bill_Status
+                            };
+
+                            //Thêm
+                            List.Add(myBill);
+                        }
+                    }
+                }
+
+            }
+            catch
+            {
+
+            }
+            return List;
+        }
+
+        /// <summary>
+        /// Hàm trả về danh sách hóa đơn từ ngày đến ngày
+        /// </summary>
+        /// <param name="DateBegin"></param>
+        /// <param name="DateEnd"></param>
+        /// <param name="currentPage"></param>
+        /// <param name="NumberPage"></param>
+        /// <returns></returns>
+        public List<CBill> Bill_History(DateTime DateBegin, DateTime DateEnd, int currentPage, int NumberPage)
+        {
+            List<CBill> List = new List<CBill>();
+            try
+            {
+                using (var DB = new MiniBookStoreEntities())
+                {
+                    var data = DB.Bills.Where(x => DbFunctions.TruncateTime(x.Bill_Date) >= DbFunctions.TruncateTime(DateBegin)
+                    && DbFunctions.TruncateTime(x.Bill_Date) <= DbFunctions.TruncateTime(DateEnd)).OrderByDescending(x => x.Bill_Date).ToList().
+                        Skip((currentPage - 1) * NumberPage).Take(NumberPage);
+
+                    if (data.Count() > 0)
+                    {
+                        foreach (var item in data)
+                        {
+                            //Tạo mới hóa đơn
+                            CBill myBill = new CBill
+                            {
+                                ID = item.Bill_ID,
+                                Date = item.Bill_Date,
+                                TotalMoney = (float)item.Total_Money,
+                                BCustomer = new CCustomer { Name = item.Customer.Customer_Name },
+                                BSalesman = new CEmployee { Name = item.Employee.Employee_Name },
+                                Promotion = item.Discount_Code == null ? 0 : (float)item.Discount_Code.Discount_Type.DiscountType_Promotion,
+                                TotalCount = item.Bill_Detail.Sum(x => x.Book_Count),
+                                TypeBill = new CBillType { ID = item.Bill_Type, Name = item.Bill_Type1.BillType_Name },
+                                Status = item.Bill_Status
+                            };
+
+                            //Thêm
+                            List.Add(myBill);
+                        }
+                    }
+                }
+
+            }
+            catch
+            {
+
+            }
+            return List;
+        }
+
+
+        /// <summary>
+        /// Hàm trả về list sách chi tiết của billID
+        /// </summary>
+        /// <param name="BillID"></param>
+        /// <returns></returns>
+        public List<CBookTransaction> DetailOfBill(int BillID)
+        {
+            List<CBookTransaction> List = new List<CBookTransaction>();
+            try
+            {
+                using (var DB = new MiniBookStoreEntities())
+                {
+                    var data = DB.Bill_Detail.Where(x => x.Bill_ID == BillID);
+                    if (data.Count() > 0)
+                    {
+                        foreach (var item in data)
+                        {
+                            //Tạo mới
+                            CBookTransaction Detailt = new CBookTransaction
+                            {
+                                ID = item.Bill_ID,
+                                Name = item.Book.Book_Name,
+                                Price = (float)item.Book_Price,
+                                Promotion = (float)item.Book_Promotion,
+                                PricePromotion = (float)(item.Book_Price - item.Book_Price * item.Book_Promotion),
+                                Count = item.Book_Count,
+                                TotalMoney = item.Book_Count * (float)(item.Book_Price - item.Book_Price * item.Book_Promotion)
+                            };
+
+                            //Thêm vào
+                            List.Add(Detailt);
+                        }
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+            return List;
+        }
+
+        /// <summary>
+        /// Cập nhật trạng thái của đơn hàng thành đã thanh toán
+        /// </summary>
+        /// <param name="billID"></param>
+        /// <returns></returns>
+        public int VerifyBill(int billID)
+        {
+            try
+            {
+                using(var DB = new MiniBookStoreEntities())
+                {
+                    var find = DB.Bills.Find(billID);
+                    if (find != null)
+                    {
+                        find.Bill_Status = 1;
+                        DB.SaveChanges();
+                        return 1;
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+
+            return -1;
         }
     }
 }

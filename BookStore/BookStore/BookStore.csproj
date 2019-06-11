@@ -237,6 +237,8 @@
     <Compile Include="VIEW\Converter\BoolToVisibilityConverter.cs" />
     <Compile Include="VIEW\Converter\PromotionToVisibilityConverter.cs" />
     <Compile Include="VIEW\Converter\RestoreBoolToVisibilityConverter.cs" />
+    <Compile Include="VIEW\Converter\StatusIntToStringConverter.cs" />
+    <Compile Include="VIEW\Converter\StatusIntToVisibilityConverter.cs" />
     <Compile Include="VIEW\CustomerInfoPage.xaml.cs">
       <DependentUpon>CustomerInfoPage.xaml</DependentUpon>
     </Compile>
@@ -306,6 +308,7 @@
     <Compile Include="VIEW\ViewModels\DashboardWindowVM.cs" />
     <Compile Include="VIEW\ViewModels\DataTransfer.cs" />
     <Compile Include="VIEW\ViewModels\DetailsBookWindowVM.cs" />
+    <Compile Include="VIEW\ViewModels\HistoryBillPageVM.cs" />
     <Compile Include="VIEW\ViewModels\HistoryWareHousePageVM.cs" />
     <Compile Include="VIEW\ViewModels\LoginWindowVM.cs" />
     <Compile Include="VIEW\ViewModels\MakeBillWindowVM.cs" />

@@ -20,6 +20,7 @@ namespace BookStore.VIEW.ViewModels
         BillBUS billBUS = new BillBUS();
         DiscountCodeBUS discountCodeBUS = new DiscountCodeBUS();
         CustomerBUS customerBUS = new CustomerBUS();
+        EmployeeBUS employeeBUS = new EmployeeBUS();
 
         #endregion
 
@@ -141,15 +142,7 @@ namespace BookStore.VIEW.ViewModels
                 return true;
             }, (p) =>
             {
-                //if (Help.isInt(FilterString) == true)
-                //{
-                //    ListCustomer = new ObservableCollection<CCustomer>(CCustomer.Ins.ListCustomerFilterPhone(FilterString));
-                //}
-                //else
-                //{
-                //    ListCustomer = new ObservableCollection<CCustomer>(CCustomer.Ins.ListCustomerFilterName(FilterString));
-                //}
-
+                searchCustomer();
             }
               );
 
@@ -221,6 +214,22 @@ namespace BookStore.VIEW.ViewModels
         }
 
         /// <summary>
+        /// Tìm kiếm khách hàng
+        /// </summary>
+        private void searchCustomer()
+        {
+            ListCustomer.Clear();
+            if (Help.isInt(FilterString) == true)
+            {
+                ListCustomer = new ObservableCollection<CCustomer>(customerBUS.ListCustomerPhone(FilterString));
+            }
+            else
+            {
+                ListCustomer = new ObservableCollection<CCustomer>(customerBUS.ListCustomerName(FilterString));
+            }
+        }
+
+        /// <summary>
         /// Tạo mới một hóa đơn
         /// </summary>
         private void createBill()
@@ -233,6 +242,11 @@ namespace BookStore.VIEW.ViewModels
                 Email = Email,
                 Address = Address,
             };
+
+            //1 thanh toán trức tiếp,2 chuyển khoảng,3 giao hàng
+            int billTypeID = ListTypePaymentSelectedItem.ID;
+            //status 1 đã thanh toán, 2 chưa thanh toán, 3 đang giao
+
             ////Tạo mới một Bill
             CBill Bill = new CBill
             {
@@ -249,7 +263,7 @@ namespace BookStore.VIEW.ViewModels
                 ExcessCash = ExcessCash,
                 Promotion = Promotion / 100,
                 Date = DateTime.Now,
-                Status = 1,
+                Status = billTypeID,
                 ListBook = ListBook.ToList()
             };
 
@@ -391,8 +405,9 @@ namespace BookStore.VIEW.ViewModels
 
         private void firtLoad()
         {
+            ListCustomer = new ObservableCollection<CCustomer>();
             ListBook = new ObservableCollection<CBookTransaction>(CCart.Instance.ListBookTransaction());
-            //EmployeeName = DataTransfer.EmployeeInfo.Name;
+            EmployeeName = employeeBUS.EmployeeName(DataTransfer.EmployeeID);
             DateNow = DateTime.Now.ToShortDateString();
             if (ListBook.Count == 1)
             {
@@ -405,13 +420,10 @@ namespace BookStore.VIEW.ViewModels
             updateSumMoney();
 
             MessVisibility = Visibility.Collapsed;
-
+            Code = "";
             ErrorMess = "Mã code không hợp lệ";
-
             Promotion = 0;
-            ExcessCash = 0;
-
-            
+            ExcessCash = 0;        
 
             //ListCustomer = new ObservableCollection<CCustomer>(CCustomer.Ins.ListCustomerFilterPhone(""));
         }
@@ -513,18 +525,20 @@ namespace BookStore.VIEW.ViewModels
             {
                 return false;
             }
-
             if (Help.isInt(Phone) == false)
             {
                 return false;
             }
-
             if (!string.IsNullOrEmpty(Email))
             {
                 if (Help.isEmail(Email) == false)
                 {
                     return false;
                 }
+            }
+            if (ListTypePaymentSelectedItem == null)
+            {
+                return false;
             }
             return true;
         }

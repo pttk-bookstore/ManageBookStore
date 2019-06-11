@@ -41,5 +41,25 @@ namespace BookStore.BUS
         {
             return DAO.addCustomer(customer);
         }
+
+        /// <summary>
+        /// Hàm trả về danh sách tất cả các khách hàng lọc theo tên
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public List<CCustomer> ListCustomerName(string name)
+        {
+            return DAO.ListCustomerName(name);
+        }
+
+        /// <summary>
+        /// Hàm trả về danh sách tất cả các khách hàng lọc theo phone
+        /// </summary>
+        /// <param name="phone"></param>
+        /// <returns></returns>
+        public List<CCustomer> ListCustomerPhone(string phone)
+        {
+            return DAO.ListCustomerPhone(phone);
+        }
     }
 }

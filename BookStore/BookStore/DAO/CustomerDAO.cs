@@ -100,5 +100,83 @@ namespace BookStore.DAO
             }
             return null;
         }
+
+        /// <summary>
+        /// Hàm trả về danh sách khách hàng lọc theo tên
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public List<CCustomer> ListCustomerName(string name)
+        {
+            List<CCustomer> List = new List<CCustomer>();
+            try
+            {
+                using(var DB = new MiniBookStoreEntities())
+                {
+                    var data = DB.Customers.Where(x => x.Customer_Name.ToLower().Contains(name.ToLower()));
+                    if (data.Count() > 0)
+                    {
+                        foreach(var item in data)
+                        {
+                            CCustomer customer = new CCustomer
+                            {
+                                ID = item.Customer_ID,
+                                Name = item.Customer_Name,
+                                Phone = item.Customer_Phone,
+                                Address = item.Customer_Address,
+                                Email = item.Customer_Email
+                            };
+
+                            List.Add(customer);
+                        }
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+
+            return List;
+        }
+
+        /// <summary>
+        /// Hàm trả về danh sách khách hàng lọc theo sdt
+        /// </summary>
+        /// <param name="phone"></param>
+        /// <returns></returns>
+        public List<CCustomer> ListCustomerPhone(string phone)
+        {
+            List<CCustomer> List = new List<CCustomer>();
+            try
+            {
+                using (var DB = new MiniBookStoreEntities())
+                {
+                    var data = DB.Customers.Where(x => x.Customer_Phone.ToLower().Contains(phone.ToLower()));
+                    if (data.Count() > 0)
+                    {
+                        foreach (var item in data)
+                        {
+                            CCustomer customer = new CCustomer
+                            {
+                                ID = item.Customer_ID,
+                                Name = item.Customer_Name,
+                                Phone = item.Customer_Phone,
+                                Address = item.Customer_Address,
+                                Email = item.Customer_Email
+                            };
+
+                            List.Add(customer);
+                        }
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+
+            return List;
+        }
     }
 }

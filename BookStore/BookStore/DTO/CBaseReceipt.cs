@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookStore.VIEW.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookStore.DTO
 {
-    public class CBaseReceipt
+    public class CBaseReceipt:BaseViewModel
     {
         private int _iD;
         /// <summary>

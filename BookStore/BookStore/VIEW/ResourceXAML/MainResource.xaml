@@ -15,5 +15,6 @@
     <viewmodel:HistoryWareHousePageVM x:Key="HistoryWareHousePageVM"></viewmodel:HistoryWareHousePageVM>
     <viewmodel:StructureBookPageVM x:Key="StructureBookPageVM"></viewmodel:StructureBookPageVM>
     <viewmodel:MakeBillWindowVM x:Key="MakeBillWindowVM"></viewmodel:MakeBillWindowVM>
+    <viewmodel:HistoryBillPageVM x:Key="HistoryBillPageVM"></viewmodel:HistoryBillPageVM>
 
 </ResourceDictionary>

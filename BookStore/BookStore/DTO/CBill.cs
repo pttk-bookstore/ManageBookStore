@@ -13,18 +13,7 @@ namespace BookStore.DTO
         public int Status
         {
             get { return _status; }
-            set { _status = value; }
-        }
-
-
-        private DateTime _billDate;
-        /// <summary>
-        /// Thời gian thanh toán
-        /// </summary>
-        public DateTime BillDate
-        {
-            get { return _billDate; }
-            set { _billDate = value; }
+            set { _status = value;OnPropertyChanged(); }
         }
 
         private CCustomer _bCustomer;
@@ -106,7 +95,5 @@ namespace BookStore.DTO
             get { return _promotion; }
             set { _promotion = value; }
         }
-
-
     }
 }

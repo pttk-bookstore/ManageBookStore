@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BookStore.VIEW"
       mc:Ignorable="d" 
+      xmlns:converter="clr-namespace:BookStore.VIEW.Converter"
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -14,10 +15,14 @@
       TextOptions.TextRenderingMode="Auto"       
       FontFamily="{DynamicResource MaterialDesignFont}"
       Background="{DynamicResource MaterialDesignPaper}"     
-      
+      DataContext="{StaticResource HistoryBillPageVM}"
       d:DesignHeight="700" d:DesignWidth="1175"
       
       Title="HistoryBillPage">
+    <Page.Resources>
+        <converter:StatusIntToStringConverter x:Key="StatusIntToStringConverter"/>
+        <converter:StatusIntToVisibilityConverter x:Key="StatusIntToVisibilityConverter"/>
+    </Page.Resources>
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -38,7 +43,7 @@
         <StackPanel Orientation="Horizontal" Grid.Row="1">
 
         </StackPanel>
-        <materialDesign:Card Grid.Row="1" Width="1000" Margin="10,0,0,0"
+        <materialDesign:Card Grid.Row="1" Width="1100" Margin="10,0,0,0"
                              HorizontalAlignment="Left">
             <Grid>
                 <Grid.RowDefinitions>
@@ -162,16 +167,16 @@
                         Header="Khách hàng">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding CustomerInfo.Name}" VerticalAlignment="Center"/>
+                                                <TextBlock Text="{Binding BCustomer.Name}" VerticalAlignment="Center"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
 
                                     <GridViewColumn                    
-                        Header="Hình thức thanh toán">
+                        Header="Hình thức">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Type}" VerticalAlignment="Center"/>
+                                                <TextBlock Text="{Binding TypeBill.Name}" VerticalAlignment="Center"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -180,7 +185,7 @@
                         Header="Tổng sách" >
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding BookCount,StringFormat='0,0'}" VerticalAlignment="Center"/>
+                                                <TextBlock Text="{Binding TotalCount,StringFormat='0,0'}" VerticalAlignment="Center"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -204,10 +209,10 @@
                                     </GridViewColumn>
 
                                     <GridViewColumn
-                        Header="Nhân viên thanh toán">
+                        Header="Nhân viên">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding EmployeeInfo.Name}" VerticalAlignment="Center"/>
+                                                <TextBlock Text="{Binding BSalesman.Name}" VerticalAlignment="Center"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -217,6 +222,29 @@
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <TextBlock Text="{Binding Date}" VerticalAlignment="Center"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn
+                        Header="Trạng thái">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Status,Converter={StaticResource StatusIntToStringConverter}}" VerticalAlignment="Center"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn>
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button Background="#c0392b" BorderBrush="#c0392b" Width="40"
+                                                    Command="{Binding Path=DataContext.VerifyBillCommand,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}} }"
+                                                    CommandParameter="{Binding}"
+                                                        Visibility="{Binding Status,Converter={StaticResource StatusIntToVisibilityConverter}}"
+                                                    ToolTip="Hoàn tất">
+                                                    <materialDesign:PackIcon Kind="CheckCircleOutline" Foreground="White" Height="10" Width="10"/>
+                                                </Button>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -299,7 +327,7 @@
                         Header="Giá gốc">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBlock Text="{Binding OutPrice,StringFormat='0,0.0'}" VerticalAlignment="Center"/>
+                                            <TextBlock Text="{Binding Price,StringFormat='0,0.0'}" VerticalAlignment="Center"/>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
@@ -317,7 +345,7 @@
                         Header="Giá bán">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBlock Text="{Binding OutPricePromotion,StringFormat='0.0'}" VerticalAlignment="Center"/>
+                                            <TextBlock Text="{Binding PricePromotion,StringFormat='0.0'}" VerticalAlignment="Center"/>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>

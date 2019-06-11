@@ -72,5 +72,51 @@ namespace BookStore.BUS
 
             return bill.ListBook.Count;
         }
+
+        /// <summary>
+        /// Hàm trả về danh sách lịch sử thanh toán trong tháng và năm
+        /// </summary>
+        /// <param name="Month"></param>
+        /// <param name="Year"></param>
+        /// <param name="currentPage"></param>
+        /// <param name="NumberPage"></param>
+        /// <returns></returns>
+        public List<CBill> Bill_History(int Month, int Year, int currentPage, int NumberPage)
+        {
+            return DAO.Bill_History(Month, Year, currentPage, NumberPage);
+        }
+
+        /// <summary>
+        /// Hàm trả về lịch sử bán hàng từ ngày đến ngày
+        /// </summary>
+        /// <param name="DateBegin"></param>
+        /// <param name="DateEnd"></param>
+        /// <param name="currentPage"></param>
+        /// <param name="NumberPage"></param>
+        /// <returns></returns>
+        public List<CBill> Bill_History(DateTime DateBegin, DateTime DateEnd, int currentPage, int NumberPage)
+        {
+            return DAO.Bill_History(DateBegin, DateEnd, currentPage, NumberPage);
+        }
+
+        /// <summary>
+        /// Hàm trả về chi tiết của lịch sử bán hàng theo ID
+        /// </summary>
+        /// <param name="BillID"></param>
+        /// <returns></returns>
+        public List<CBookTransaction> DetailOfBill(int BillID)
+        {
+            return DAO.DetailOfBill(BillID);
+        }
+
+        /// <summary>
+        /// Cập nhật trạng thái đơn hàng thành đã thanh toán trả về 1 nếu thành công, -1 nếu thất bại
+        /// </summary>
+        /// <param name="billID"></param>
+        /// <returns></returns>
+        public int VerifyBill(int billID)
+        {
+            return DAO.VerifyBill(billID);
+        }
     }
 }
