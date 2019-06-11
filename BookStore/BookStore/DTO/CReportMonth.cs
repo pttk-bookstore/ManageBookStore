@@ -68,5 +68,16 @@ namespace BookStore.DTO
             set { _totalProfit = value; }
         }
 
+        private float _toltalSalary;
+        /// <summary>
+        /// Tổng tiền lương thanh toán cho nhân viên
+        /// </summary>
+        public float ToltalSalary
+        {
+            get { return _toltalSalary; }
+            set { _toltalSalary = value; }
+        }
+
+
     }
 }

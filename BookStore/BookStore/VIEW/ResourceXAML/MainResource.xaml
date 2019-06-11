@@ -16,5 +16,10 @@
     <viewmodel:StructureBookPageVM x:Key="StructureBookPageVM"></viewmodel:StructureBookPageVM>
     <viewmodel:MakeBillWindowVM x:Key="MakeBillWindowVM"></viewmodel:MakeBillWindowVM>
     <viewmodel:HistoryBillPageVM x:Key="HistoryBillPageVM"></viewmodel:HistoryBillPageVM>
+    <viewmodel:ReportMonthPageVM x:Key="ReportMonthPageVM"></viewmodel:ReportMonthPageVM>
+    <viewmodel:ReportMenuPageVM x:Key="ReportMenuPageVM"></viewmodel:ReportMenuPageVM>
+    <viewmodel:ReportDatePageVM x:Key="ReportDatePageVM"></viewmodel:ReportDatePageVM>
+    <viewmodel:CharReportMonthPageVM x:Key="CharReportMonthPageVM"></viewmodel:CharReportMonthPageVM>
+    <viewmodel:ChartReportDatePageVM x:Key="ChartReportDatePageVM"></viewmodel:ChartReportDatePageVM>
 
 </ResourceDictionary>

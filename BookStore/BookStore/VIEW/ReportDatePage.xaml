@@ -15,9 +15,12 @@
       FontFamily="{DynamicResource MaterialDesignFont}"
       Background="{DynamicResource MaterialDesignPaper}"     
       DataContext="{StaticResource ReportDatePageVM}"
-      
+      xmlns:converter="clr-namespace:BookStore.VIEW.Converter"
       d:DesignHeight="700" d:DesignWidth="1175"
       Title="ReportDatePage">
+    <Page.Resources>
+        <converter:ProgessBarToVisibilityConverter x:Key="ProgessBarToVisibilityConverter"></converter:ProgessBarToVisibilityConverter>
+    </Page.Resources>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadCommand}"/>
@@ -29,6 +32,12 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        
+        <ProgressBar Grid.Row="1" Panel.ZIndex="1" Height="40" Width="40" HorizontalAlignment="Center"
+                     VerticalAlignment="Center"
+                     Style="{StaticResource MaterialDesignCircularProgressBar}" 
+                     Value="0" 
+                     IsIndeterminate="{Binding IsIndeterminate}" />
 
         <TextBlock Grid.Row="0" Style="{DynamicResource MaterialDesignTitleTextBlock}" FontSize="18"
                        VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,5,0,5">
@@ -162,16 +171,28 @@
 
                                 <GridViewColumn>
                                     <GridViewColumn.Header>
+                                        <GridViewColumnHeader Content="Số khách hàng" HorizontalContentAlignment="Center"/>
+                                    </GridViewColumn.Header>
+
+                                    <GridViewColumn.CellTemplate >
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding TotalCustomers,StringFormat='0,0'}" HorizontalAlignment="Center"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn>
+                                    <GridViewColumn.Header>
                                         <GridViewColumnHeader Content="Số sách bán ra" HorizontalContentAlignment="Center"/>
                                     </GridViewColumn.Header>
 
                                     <GridViewColumn.CellTemplate >
                                         <DataTemplate>
-                                            <TextBlock Text="{Binding BookCount,StringFormat='0,0'}" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="{Binding ToltalBooksSold,StringFormat='0,0'}" HorizontalAlignment="Center"/>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-
+                                                               
                                 <GridViewColumn>
                                     <GridViewColumn.Header>
                                         <GridViewColumnHeader Content="Tổng tiền" HorizontalContentAlignment="Center"/>
@@ -179,7 +200,7 @@
 
                                     <GridViewColumn.CellTemplate >
                                         <DataTemplate>
-                                            <TextBlock Text="{Binding SumMoney,StringFormat='0,0.00'}" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="{Binding ToltalMoneyBookSell,StringFormat='0,0.00'}" HorizontalAlignment="Center"/>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
@@ -191,7 +212,7 @@
 
                                     <GridViewColumn.CellTemplate >
                                         <DataTemplate>
-                                            <TextBlock Text="{Binding BookInPrice,StringFormat='0,0.00'}" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="{Binding ToltalMoneyBookIn,StringFormat='0,0.00'}" HorizontalAlignment="Center"/>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
@@ -203,7 +224,7 @@
 
                                     <GridViewColumn.CellTemplate >
                                         <DataTemplate>
-                                            <TextBlock Text="{Binding Profit,StringFormat='0,0.00'}" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="{Binding TotalProfit,StringFormat='0,0.00'}" HorizontalAlignment="Center"/>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>

@@ -110,6 +110,7 @@
     <Compile Include="BUS\DiscountCodeBUS.cs" />
     <Compile Include="BUS\EmployeeBUS.cs" />
     <Compile Include="BUS\RegulationBUS.cs" />
+    <Compile Include="BUS\ReportBUS.cs" />
     <Compile Include="BUS\SubCategoryBUS.cs" />
     <Compile Include="BUS\WareHouseBUS.cs" />
     <Compile Include="DAO\AccountDAO.cs" />
@@ -178,6 +179,7 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DAO\RegulationDAO.cs" />
+    <Compile Include="DAO\ReportDAO.cs" />
     <Compile Include="DAO\Role.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -231,10 +233,14 @@
     <Compile Include="VIEW\ChartReportDatePage.xaml.cs">
       <DependentUpon>ChartReportDatePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VIEW\ChartReportMonthPage.xaml.cs">
+      <DependentUpon>ChartReportMonthPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VIEW\CodePromotionPage.xaml.cs">
       <DependentUpon>CodePromotionPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="VIEW\Converter\BoolToVisibilityConverter.cs" />
+    <Compile Include="VIEW\Converter\ProgessBarToVisibilityConverter.cs" />
     <Compile Include="VIEW\Converter\PromotionToVisibilityConverter.cs" />
     <Compile Include="VIEW\Converter\RestoreBoolToVisibilityConverter.cs" />
     <Compile Include="VIEW\Converter\StatusIntToStringConverter.cs" />
@@ -304,6 +310,8 @@
     <Compile Include="VIEW\ViewModels\BaseViewModel.cs" />
     <Compile Include="VIEW\ViewModels\BookInfoPageVM.cs" />
     <Compile Include="VIEW\ViewModels\BookMenuPageVM.cs" />
+    <Compile Include="VIEW\ViewModels\CharReportMonthPageVM.cs" />
+    <Compile Include="VIEW\ViewModels\ChartReportDatePageVM.cs" />
     <Compile Include="VIEW\ViewModels\ControlBarVM.cs" />
     <Compile Include="VIEW\ViewModels\DashboardWindowVM.cs" />
     <Compile Include="VIEW\ViewModels\DataTransfer.cs" />
@@ -313,6 +321,9 @@
     <Compile Include="VIEW\ViewModels\LoginWindowVM.cs" />
     <Compile Include="VIEW\ViewModels\MakeBillWindowVM.cs" />
     <Compile Include="VIEW\ViewModels\ProductPageVM.cs" />
+    <Compile Include="VIEW\ViewModels\ReportDatePageVM.cs" />
+    <Compile Include="VIEW\ViewModels\ReportMenuPageVM.cs" />
+    <Compile Include="VIEW\ViewModels\ReportMonthPageVM.cs" />
     <Compile Include="VIEW\ViewModels\SellMenuPageVM.cs" />
     <Compile Include="VIEW\ViewModels\StructureBookPageVM.cs" />
     <Compile Include="VIEW\ViewModels\TypeAndThemePageVM.cs" />
@@ -334,6 +345,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="VIEW\ChartReportDatePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VIEW\ChartReportMonthPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

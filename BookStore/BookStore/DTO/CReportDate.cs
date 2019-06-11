@@ -48,5 +48,23 @@ namespace BookStore.DTO
             set { _totalMoneyBookSell = value; }
         }
 
+        private float _totalProfit;
+        /// <summary>
+        /// Ước lượng lợi nhuận
+        /// </summary>
+        public float TotalProfit
+        {
+            get { return _totalProfit; }
+            set { _totalProfit = value; }
+        }
+
+        private float _toltalMoneyBookIn;
+
+        public float ToltalMoneyBookIn
+        {
+            get { return _toltalMoneyBookIn; }
+            set { _toltalMoneyBookIn = value; }
+        }
+
     }
 }
