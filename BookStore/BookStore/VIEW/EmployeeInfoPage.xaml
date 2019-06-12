@@ -14,7 +14,7 @@
       TextOptions.TextRenderingMode="Auto"       
       FontFamily="{DynamicResource MaterialDesignFont}"
       Background="{DynamicResource MaterialDesignPaper}"     
-      
+      DataContext="{StaticResource EmployeeInfoPageVM}"
       d:DesignHeight="758" d:DesignWidth="1175"
       
       Title="EmployeeInfoPage">
@@ -106,23 +106,11 @@
                                         <TextBlock Text="Ngày sinh: " FontSize="15" FontWeight="Medium"/>
                                         <TextBlock Text="{Binding Employee.DOB,StringFormat=dd-MM-yyyy}" FontSize="15"/>
                                     </StackPanel>
-
-                                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                                        <materialDesign:PackIcon Kind="CheckboxMultipleMarkedCircle" Margin="0,0,5,0"/>
-                                        <TextBlock Text="CMND: " FontSize="15" FontWeight="Medium"/>
-                                        <TextBlock Text="{Binding Employee.Identity}" FontSize="15"/>
-                                    </StackPanel>
-
+                            
                                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                                         <materialDesign:PackIcon Kind="Phone" Margin="0,0,5,0"/>
                                         <TextBlock Text="Số điện thoại: " FontSize="15" FontWeight="Medium"/>
                                         <TextBlock Text="{Binding Employee.Phone}" FontSize="15"/>
-                                    </StackPanel>
-
-                                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                                        <materialDesign:PackIcon Kind="Email" Margin="0,0,5,0"/>
-                                        <TextBlock Text="Email: " FontSize="15" FontWeight="Medium"/>
-                                        <TextBlock Text="{Binding Employee.Email}" FontSize="15"/>
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
@@ -202,12 +190,6 @@
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                                        <materialDesign:PackIcon Kind="Contacts" Margin="0,0,5,0" VerticalAlignment="Center"/>
-                                        <TextBlock Text="Quyền hạn: " FontSize="15" FontWeight="Medium" VerticalAlignment="Center"/>
-                                        <TextBlock Text="{Binding Employee.Role.Decentralization}" FontSize="15" Margin="0,0,0,0"/>
-                                    </StackPanel>
-
-                                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                                         <materialDesign:PackIcon Kind="Coin" Margin="0,0,5,0" VerticalAlignment="Center"/>
                                         <TextBlock Text="Mức lương: " FontSize="15" FontWeight="Medium" VerticalAlignment="Center"/>
                                         <TextBlock Text="{Binding Employee.Role.Salary,StringFormat='0,0.0'}" FontSize="15" Margin="0,0,0,0"/>
@@ -250,7 +232,7 @@
                                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                                         <materialDesign:PackIcon Kind="CoffeeOutline" Margin="0,0,5,0" VerticalAlignment="Center"/>
                                         <TextBlock Text="Tổng ngày làm trong tháng này: " FontSize="15" FontWeight="Medium" VerticalAlignment="Center"/>
-                                        <TextBlock Text="{Binding Employee.DateWork,StringFormat='0,0'}" FontSize="15" Margin="0,0,0,0"/>
+                                        <TextBlock Text="{Binding Employee.SumDate,StringFormat='0,0'}" FontSize="15" Margin="0,0,0,0"/>
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">

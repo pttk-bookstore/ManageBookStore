@@ -61,5 +61,29 @@ namespace BookStore.BUS
         {
             return DAO.ListCustomerPhone(phone);
         }
+
+        /// <summary>
+        /// Hàm lọc khách hàng theo số điện thoại
+        /// </summary>
+        /// <param name="phone"></param>
+        /// <param name="currentPage"></param>
+        /// <param name="NumberPage"></param>
+        /// <returns></returns>
+        public List<CCustomer> ListCustomerPhone(string phone, int currentPage, int NumberPage)
+        {
+            return DAO.ListCustomerPhone(phone, currentPage, NumberPage);
+        }
+
+        /// <summary>
+        /// Hàm lọc khách hàng theo tên
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="currentPage"></param>
+        /// <param name="NumberPage"></param>
+        /// <returns></returns>
+        public List<CCustomer> ListCustomerName(string name, int currentPage, int NumberPage)
+        {
+            return DAO.ListCustomerName(name, currentPage, NumberPage);
+        }
     }
 }

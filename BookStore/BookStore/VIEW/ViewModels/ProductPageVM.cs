@@ -83,6 +83,14 @@ namespace BookStore.VIEW.ViewModels
         private Visibility _messTextVisibility;
         public Visibility MessTextVisibility { get => _messTextVisibility; set { if (value == _messTextVisibility) return; _messTextVisibility = value; OnPropertyChanged(); } }
 
+        private bool _isIndeterminate;
+
+        public bool IsIndeterminate
+        {
+            get { return _isIndeterminate; }
+            set { _isIndeterminate = value; OnPropertyChanged(); }
+        }
+
         #endregion
 
         #region command binding
@@ -283,7 +291,7 @@ namespace BookStore.VIEW.ViewModels
         {
             if (isAllSelected())
             {
-                if(SelectedItemPrice=="Tất cả")
+                if (SelectedItemPrice == "Tất cả")
                 {
                     isSale = false;
                 }
@@ -291,9 +299,11 @@ namespace BookStore.VIEW.ViewModels
                 {
                     isSale = true;
                 }
-
+                
                 ListBook = new ObservableCollection<CBook>(bookBUS.ListBook(FilterString, SelectedItemAuthor, _selectedItemCategory.ID,
                     SelectedItemSubCategory.ID, SelectedItemCompany.ID, isSale, CurrentPage, NumberPage));
+
+                
 
                 if (ListBook.Count() == 0)
                 {

@@ -15,8 +15,15 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         
         DataContext="{StaticResource LoginWindowVM}"
-        
+        x:Name="Login"
         Title="MainWindow" Height="457.729" Width="800" WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent" AllowsTransparency="True">
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+               x:Key="close">
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Height" Value="20"/>
+        </Style>
+    </Window.Resources>
     <Grid Margin="0,0,0,19">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="303*"/>
@@ -29,6 +36,7 @@
                              UniformCornerRadius="15" Grid.ColumnSpan="3"
                              >
             <Grid>
+                    
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="320"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
@@ -36,6 +44,17 @@
                 <Grid.Background>
                     <ImageBrush ImageSource="../Images/epi_x.png" />
                 </Grid.Background>
+                <Button Grid.Column="1" Background="White" BorderBrush="White" Panel.ZIndex="1"
+                        VerticalAlignment="Top" HorizontalAlignment="Right"
+                        Margin="0,7,7,0" Style="{StaticResource close}"
+                            Height="22" Width="22" Command="{Binding CloseWindowCommand}"
+                            CommandParameter="{Binding ElementName=Login}"                        
+                            ToolTip="Thoát">
+                    <materialDesign:PackIcon
+                                Kind="WindowClose"
+                                Height="19"
+                                Width="19" Foreground="Black"/>
+                </Button>
                 <Grid Grid.Column="0">
                     <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center"  Margin="0,100,0,0" Orientation="Vertical" Width="220">
                         <TextBlock Text="Bookstore" FontSize="22" FontWeight="Bold" FontFamily="Roboto" Foreground="#FFDEAD"></TextBlock>

@@ -168,6 +168,58 @@ namespace BookStore.DAO
         }
 
         /// <summary>
+        /// Hàm trả về lịch sử giao dịch của khách hàng
+        /// </summary>
+        /// <param name="CustomerID"></param>
+        /// <param name="Month"></param>
+        /// <param name="Year"></param>
+        /// <param name="currentPage"></param>
+        /// <param name="NumberPage"></param>
+        /// <returns></returns>
+        public List<CBill> Bill_History(int CustomerID,int Month, int Year, int currentPage, int NumberPage)
+        {
+            List<CBill> List = new List<CBill>();
+            try
+            {
+                using (var DB = new MiniBookStoreEntities())
+                {
+                    var data = DB.Bills.Where(x => SqlFunctions.DatePart("year",
+                        x.Bill_Date) == Year && SqlFunctions.DatePart("month", x.Bill_Date) == Month && x.Customer_ID==CustomerID).OrderByDescending(x => x.Bill_Date).ToList().
+                        Skip((currentPage - 1) * NumberPage).Take(NumberPage);
+
+                    if (data.Count() > 0)
+                    {
+                        foreach (var item in data)
+                        {
+                            //Tạo mới hóa đơn
+                            CBill myBill = new CBill
+                            {
+                                ID = item.Bill_ID,
+                                Date = item.Bill_Date,
+                                TotalMoney = (float)item.Total_Money,
+                                BCustomer = new CCustomer { Name = item.Customer.Customer_Name },
+                                BSalesman = new CEmployee { Name = item.Employee.Employee_Name },
+                                Promotion = item.Discount_Code == null ? 0 : (float)item.Discount_Code.Discount_Type.DiscountType_Promotion,
+                                TotalCount = item.Bill_Detail.Sum(x => x.Book_Count),
+                                TypeBill = new CBillType { ID = item.Bill_Type, Name = item.Bill_Type1.BillType_Name },
+                                Status = item.Bill_Status
+                            };
+
+                            //Thêm
+                            List.Add(myBill);
+                        }
+                    }
+                }
+
+            }
+            catch
+            {
+
+            }
+            return List;
+        }
+
+        /// <summary>
         /// Hàm trả về danh sách hóa đơn từ ngày đến ngày
         /// </summary>
         /// <param name="DateBegin"></param>
@@ -184,6 +236,58 @@ namespace BookStore.DAO
                 {
                     var data = DB.Bills.Where(x => DbFunctions.TruncateTime(x.Bill_Date) >= DbFunctions.TruncateTime(DateBegin)
                     && DbFunctions.TruncateTime(x.Bill_Date) <= DbFunctions.TruncateTime(DateEnd)).OrderByDescending(x => x.Bill_Date).ToList().
+                        Skip((currentPage - 1) * NumberPage).Take(NumberPage);
+
+                    if (data.Count() > 0)
+                    {
+                        foreach (var item in data)
+                        {
+                            //Tạo mới hóa đơn
+                            CBill myBill = new CBill
+                            {
+                                ID = item.Bill_ID,
+                                Date = item.Bill_Date,
+                                TotalMoney = (float)item.Total_Money,
+                                BCustomer = new CCustomer { Name = item.Customer.Customer_Name },
+                                BSalesman = new CEmployee { Name = item.Employee.Employee_Name },
+                                Promotion = item.Discount_Code == null ? 0 : (float)item.Discount_Code.Discount_Type.DiscountType_Promotion,
+                                TotalCount = item.Bill_Detail.Sum(x => x.Book_Count),
+                                TypeBill = new CBillType { ID = item.Bill_Type, Name = item.Bill_Type1.BillType_Name },
+                                Status = item.Bill_Status
+                            };
+
+                            //Thêm
+                            List.Add(myBill);
+                        }
+                    }
+                }
+
+            }
+            catch
+            {
+
+            }
+            return List;
+        }
+
+        /// <summary>
+        /// Hàm trả về lịch sử giao dịch của khách hàng
+        /// </summary>
+        /// <param name="CustomerID"></param>
+        /// <param name="DateBegin"></param>
+        /// <param name="DateEnd"></param>
+        /// <param name="currentPage"></param>
+        /// <param name="NumberPage"></param>
+        /// <returns></returns>
+        public List<CBill> Bill_History(int CustomerID,DateTime DateBegin, DateTime DateEnd, int currentPage, int NumberPage)
+        {
+            List<CBill> List = new List<CBill>();
+            try
+            {
+                using (var DB = new MiniBookStoreEntities())
+                {
+                    var data = DB.Bills.Where(x => DbFunctions.TruncateTime(x.Bill_Date) >= DbFunctions.TruncateTime(DateBegin)
+                    && DbFunctions.TruncateTime(x.Bill_Date) <= DbFunctions.TruncateTime(DateEnd) &&x.Customer_ID == CustomerID).OrderByDescending(x => x.Bill_Date).ToList().
                         Skip((currentPage - 1) * NumberPage).Take(NumberPage);
 
                     if (data.Count() > 0)

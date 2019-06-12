@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookStore.VIEW.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookStore.DTO
 {
-    public class CDiscountType
+    public class CDiscountType:BaseViewModel
     {
         private int _iD;
         /// <summary>
@@ -48,8 +49,22 @@ namespace BookStore.DTO
             set { _promotion = value; }
         }
 
+        private bool _isTrueValue;
 
+        public bool IsTrueValue
+        {
+            get { return _isTrueValue; }
+            set { _isTrueValue = value;OnPropertyChanged(); }
+        }
 
-
+        private int _count;
+        /// <summary>
+        /// Số lượng mã áp dụng
+        /// </summary>
+        public int Count
+        {
+            get { return _count; }
+            set { _count = value; }
+        }
     }
 }

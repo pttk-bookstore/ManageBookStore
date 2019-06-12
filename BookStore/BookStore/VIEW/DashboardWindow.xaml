@@ -15,7 +15,9 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         Background="{DynamicResource MaterialDesignPaper}"
         DataContext="{StaticResource DashboardWindowVM}"
+        xmlns:converter="clr-namespace:BookStore.VIEW.Converter"
         x:Name="Window"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         Title="DashboardWindow" Height="780" Width="1250"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None">
@@ -34,6 +36,7 @@
                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="70"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
+        <converter:RoleToEnableConverter x:Key="RoleToEnableConverter"></converter:RoleToEnableConverter>
     </Window.Resources>
 
     <!--trigger -->
@@ -45,6 +48,11 @@
             <BeginStoryboard Storyboard="{StaticResource CloseMenu}"/>
         </EventTrigger>
     </Window.Triggers>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <!--content-->
     <Grid>
         <Grid.RowDefinitions>
@@ -60,7 +68,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Grid x:Name="GridMenu" Width="75" HorizontalAlignment="Left" Grid.Column="0" Panel.ZIndex="0" Background="#C71585">
+            <Grid x:Name="GridMenu" Width="75" HorizontalAlignment="Left" Grid.Column="0" Panel.ZIndex="0" Background="Black">
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="5"/>
@@ -128,28 +136,33 @@
                             </StackPanel>
                         </Button>
 
-                        <Button ToolTip="Khuyến mãi" Command="{Binding PromotionCommand}">
+                        <Button ToolTip="Khuyến mãi"
+                                IsEnabled="{Binding RoleID,Converter={StaticResource RoleToEnableConverter}}"
+                                Command="{Binding PromotionCommand}">
                             <StackPanel Orientation="Horizontal" Margin="19,0,0,0">
                                 <materialDesign:PackIcon Kind="Sale" Height="25" Width="25" Margin="-62,10,0,10"/>
                                 <TextBlock Text="Khuyến mãi" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="-5,10,0,10"/>
                             </StackPanel>
                         </Button>
 
-                        <Button ToolTip="Thống kê" Command="{Binding ChartCommand}">
+                        <Button ToolTip="Thống kê" Command="{Binding ChartCommand}"
+                                IsEnabled="{Binding RoleID,Converter={StaticResource RoleToEnableConverter}}">
                             <StackPanel Orientation="Horizontal" Margin="5,0,0,0">
                                 <materialDesign:PackIcon Kind="ChartPie" Height="25" Width="25" Margin="-62,10,0,10"/>
                                 <TextBlock Text="Thống kê" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="-5,10,0,10"/>
                             </StackPanel>
                         </Button>
 
-                        <Button ToolTip="Nhân sự" Command="{Binding EmployeeCommand}">
+                        <Button ToolTip="Nhân sự" Command="{Binding EmployeeCommand}"
+                                IsEnabled="{Binding RoleID,Converter={StaticResource RoleToEnableConverter}}">
                             <StackPanel Orientation="Horizontal" Margin="-2,0,0,0">
                                 <materialDesign:PackIcon Kind="Worker" Height="25" Width="25" Margin="-62,10,0,10"/>
                                 <TextBlock Text="Nhân sự" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="-5,10,0,10"/>
                             </StackPanel>
                         </Button>
 
-                        <Button ToolTip="Khách hàng" Command="{Binding CustomerCommand}">
+                        <Button ToolTip="Khách hàng" Command="{Binding CustomerCommand}"
+                                IsEnabled="{Binding RoleID,Converter={StaticResource RoleToEnableConverter}}">
                             <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
                                 <materialDesign:PackIcon Kind="HumanMaleFemale" Height="25" Width="25" Margin="-62,10,0,10"/>
                                 <TextBlock Text="Khách hàng" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="-5,10,0,10"/>

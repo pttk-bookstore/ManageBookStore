@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BookStore.VIEW"
       mc:Ignorable="d" 
+      xmlns:converter="clr-namespace:BookStore.VIEW.Converter"
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -14,7 +15,7 @@
       TextOptions.TextRenderingMode="Auto"       
       FontFamily="{DynamicResource MaterialDesignFont}"
       Background="{DynamicResource MaterialDesignPaper}"     
-      
+      DataContext="{StaticResource CodePromotionPageVM}"
       d:DesignHeight="700" d:DesignWidth="1175"
       
       Title="CodePromotionPage">
@@ -37,6 +38,8 @@
             <Setter Property="MinWidth" Value="330"/>
             <Setter Property="Margin" Value="0,0,10,0"/>
         </Style>
+
+        <converter:StatusExistToVisibility x:Key="StatusExistToVisibility"/>
     </Page.Resources>
 
     <i:Interaction.Triggers>
@@ -107,9 +110,12 @@
                         materialDesign:DataGridAssist.CellPadding="13 8 8 8"
                         materialDesign:DataGridAssist.ColumnHeaderPadding="8"
                         SelectedItem="{Binding SelectedItem}">
+                                <DataGrid.Resources>
+                                    <local:BindingProxy x:Key="proxy" Data="{Binding}"/>
+                                </DataGrid.Resources>
                                 <DataGrid.Columns>
                                     <DataGridTextColumn
-                                Binding="{Binding ID,UpdateSourceTrigger=PropertyChanged}"
+                                Binding="{Binding Code,UpdateSourceTrigger=PropertyChanged}"
                                 Header="Mã"
                                 IsReadOnly="True"
                                 Width="80" MinWidth="80">
@@ -131,13 +137,19 @@
 
                                     <materialDesign:MaterialDataGridComboBoxColumn                                      
                                         Header="Loại"
+                                        
+                                        DisplayMemberPath="Name"
                                         SelectedValueBinding="{Binding Type,UpdateSourceTrigger=PropertyChanged}"
-                                        ItemsSourceBinding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.ListType}" />
+                                        ItemsSourceBinding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.ListType}">
+                                        
+                                    </materialDesign:MaterialDataGridComboBoxColumn>
+
+                                    
 
                                     <DataGridTemplateColumn Header="Ngày bắt đầu">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <DatePicker SelectedDate="{Binding DateBegin,UpdateSourceTrigger=PropertyChanged}"                                              
+                                                <DatePicker SelectedDate="{Binding DateStart,UpdateSourceTrigger=PropertyChanged}"                                              
                                                      Name="LocaleDatePicker"
                                                      Width="120"
                                                      materialDesign:HintAssist.Hint="Locale Date" />
@@ -184,10 +196,10 @@
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
 
-                                    <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Visibility="{Binding Data.EditColumnVisibility,Source={StaticResource proxy}}">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Button x:Name="ButtonRestore"
+                                                <Button x:Name="ButtonRestore" Visibility="{Binding Status,Converter={StaticResource StatusExistToVisibility}}"
                                                         Background="#c0392b" BorderBrush="#c0392b" Width="45"
                                                         ToolTip="Khôi phục"
                                             Command="{Binding Path=DataContext.restoreCommand,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"
@@ -197,6 +209,7 @@
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
+
                                 </DataGrid.Columns>
                             </DataGrid>
 
@@ -272,8 +285,12 @@
                                        Style="{StaticResource nameBoldStyle}" VerticalAlignment="Bottom" Margin="0,2,0,0" FontWeight="Medium" FontSize="14"/>
                             <ComboBox SelectedItem="{Binding Type}"
                                 materialDesign:HintAssist.Hint="Loại khuyến mãi"
-                                IsEditable="True"
                                 materialDesign:HintAssist.HintOpacity=".26" ItemsSource="{Binding ListType}" Margin="5,0,0,0">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
                             </ComboBox>
                         </StackPanel>
 

@@ -124,6 +124,14 @@ namespace BookStore.VIEW.ViewModels
 
         #endregion
 
+        private bool _isIndeterminate;
+
+        public bool IsIndeterminate
+        {
+            get { return _isIndeterminate; }
+            set { _isIndeterminate = value; OnPropertyChanged(); }
+        }
+
         public BookInfoPageVM()
         {
             searchCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
@@ -247,7 +255,8 @@ namespace BookStore.VIEW.ViewModels
             if (isAllSelected())
             {
                 ListBook = new ObservableCollection<CBook>(bookBUS.ListBook(FilterString, SelectedItemAuthor, SelectedItemCategory.ID,
-                    SelectedItemSubCategory.ID, SelectedItemCompany.ID, SelectedItemSortBy, CurrentPage, NumberPage));
+                   SelectedItemSubCategory.ID, SelectedItemCompany.ID, SelectedItemSortBy, CurrentPage, NumberPage));
+
             }   
         }
 
@@ -268,16 +277,23 @@ namespace BookStore.VIEW.ViewModels
         /// <summary>
         /// Khởi tạo màn hình trong lần đầu tiên chạy
         /// </summary>
-        private void firtLoad()
+        private async void firtLoad()
         {
             CurrentPage = 1;
             FilterString = "";
-            
-            ListCategory = new ObservableCollection<CCategory>(categoryBUS.ListCategory());
-            ListSubCategory = new ObservableCollection<CSubCategory>();
-            ListCompany = new ObservableCollection<CCompany>(companyBUS.ListCompany());
-            ListAuthor = new ObservableCollection<string>(bookBUS.ListAuthor());
+
+            IsIndeterminate = true;
+            await Task.Run(() =>
+            {
+                ListCategory = new ObservableCollection<CCategory>(categoryBUS.ListCategory());
+                ListSubCategory = new ObservableCollection<CSubCategory>();
+                ListCompany = new ObservableCollection<CCompany>(companyBUS.ListCompany());
+                ListAuthor = new ObservableCollection<string>(bookBUS.ListAuthor());
+            });
+            IsIndeterminate = false;
+
             ListSortBy = new ObservableCollection<string>();
+
             ListSortBy.Add("Tên");
             ListSortBy.Add("Mã");
             ListSortBy.Add("Tồn kho giảm dần");

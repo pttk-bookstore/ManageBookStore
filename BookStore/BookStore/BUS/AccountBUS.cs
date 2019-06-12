@@ -21,5 +21,25 @@ namespace BookStore.BUS
         {
             return DAO.IDEmployee(account);
         }
+
+
+        /// <summary>
+        /// Cập nhật mật khẩu trả về 1 nếu thành công, 0 nếu mật khẩu xác nhận sai, -1 nếu thất bại
+        /// </summary>
+        /// <param name="EmployeeID"></param>
+        /// <param name="pass"></param>
+        /// <returns></returns>
+        public int changePass(int EmployeeID, string oldpass,string newpass)
+        {
+            int result = DAO.isTruePass(EmployeeID, oldpass);
+            if(result == 1)
+            {
+                return DAO.changePass(EmployeeID, newpass);
+            }
+            else
+            {
+                return 0;
+            }
+        }
     }
 }

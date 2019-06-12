@@ -57,7 +57,8 @@ namespace BookStore.VIEW.ViewModels
         public ICommand PasswordChangedCommand { get; set; }
         public ICommand LoadedCommand { get; set; }
         public ICommand UserTextChanged { get; set; }
-        
+        public ICommand CloseWindowCommand { get; set; }
+
         #endregion
 
         public LoginWindowVM()
@@ -83,6 +84,12 @@ namespace BookStore.VIEW.ViewModels
                     wd.ShowDialog();
                     (p as Window)?.Show();
                 }    
+            }
+               );
+
+            CloseWindowCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                (p as Window)?.Close();
             }
                );
 

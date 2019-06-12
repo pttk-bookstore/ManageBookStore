@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookStore.VIEW.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookStore.DTO
 {
-    public class CEmployeeRole
+    public class CEmployeeRole:BaseViewModel
     {
         private int _iD;
         /// <summary>
@@ -25,7 +26,7 @@ namespace BookStore.DTO
         public string Name
         {
             get { return _name; }
-            set { _name = value; }
+            set { _name = value;OnPropertyChanged(); }
         }
 
         private float _salary;
@@ -35,7 +36,7 @@ namespace BookStore.DTO
         public float Salary
         {
             get { return _salary; }
-            set { _salary = value; }
+            set { _salary = value; OnPropertyChanged(); }
         }
 
         private int _count;

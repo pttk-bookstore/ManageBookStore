@@ -39,5 +39,62 @@ namespace BookStore.DAO
             }
             return 0;
         }
+
+        /// <summary>
+        /// Kiểm tra mật khẩu đúng hay không đúng trả về 1 sai trả về -1
+        /// </summary>
+        /// <param name="EmployeeID"></param>
+        /// <param name="pass"></param>
+        /// <returns></returns>
+        public int isTruePass(int EmployeeID,string pass)
+        {
+            try
+            {
+                using(var DB = new MiniBookStoreEntities())
+                {
+                    var find = DB.Employee_Account.Find(EmployeeID);
+                    if (find != null)
+                    {
+                        if(find.Account_Passwork == pass)
+                        {
+                            return 1;
+                        }
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+            return -1;
+        }
+
+        /// <summary>
+        /// Thay đổi mật khẩu của nhân viên thành công trả về 1 thất bại trả về -1
+        /// </summary>
+        /// <param name="EmployeeID"></param>
+        /// <param name="pass"></param>
+        /// <returns></returns>
+        public int changePass(int EmployeeID,string pass)
+        {
+            try
+            {
+                using (var DB = new MiniBookStoreEntities())
+                {
+                    var find = DB.Employee_Account.Find(EmployeeID);
+                    if (find != null)
+                    {
+                        find.Account_Passwork = pass;
+                        DB.SaveChanges();
+                        return 1;
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+            return -1;
+        }
     }
 }

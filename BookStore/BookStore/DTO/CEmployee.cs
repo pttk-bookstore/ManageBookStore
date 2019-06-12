@@ -9,6 +9,15 @@ namespace BookStore.DTO
 {
     public class CEmployee:CPeople
     {
+        private CAccount _account;
+
+        public CAccount Account
+        {
+            get { return _account; }
+            set { _account = value; OnPropertyChanged(); }
+        }
+
+
         private BitmapImage _avatar;
         /// <summary>
         /// Ảnh đại diện nhân viên
@@ -26,7 +35,7 @@ namespace BookStore.DTO
         public DateTime DOB
         {
             get { return _doB; }
-            set { _doB = value; }
+            set { _doB = value; OnPropertyChanged(); }
         }
 
 
@@ -37,7 +46,7 @@ namespace BookStore.DTO
         public DateTime FirstDate
         {
             get { return _firstDate; }
-            set { _firstDate = value; }
+            set { _firstDate = value; OnPropertyChanged(); }
         }
 
         private CEmployeeRole _role;
@@ -47,7 +56,7 @@ namespace BookStore.DTO
         public CEmployeeRole Role
         {
             get { return _role; }
-            set { _role = value; }
+            set { _role = value; OnPropertyChanged(); }
         }
 
 
@@ -58,7 +67,17 @@ namespace BookStore.DTO
         public int SumDate
         {
             get { return _sumDate; }
-            set { _sumDate = value; }
+            set { _sumDate = value; OnPropertyChanged(); }
+        }
+
+        private float _monthSalary;
+        /// <summary>
+        /// Số lương trong tháng này
+        /// </summary>
+        public float MonthSalary
+        {
+            get { return _monthSalary; }
+            set { _monthSalary = value;OnPropertyChanged(); }
         }
 
 

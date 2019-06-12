@@ -14,7 +14,7 @@
       TextOptions.TextRenderingMode="Auto"       
       FontFamily="{DynamicResource MaterialDesignFont}"
       Background="{DynamicResource MaterialDesignPaper}"     
-      
+      DataContext="{StaticResource CustomerInfoPageVM}"
       d:DesignHeight="700" d:DesignWidth="1175"
       
       Title="CustomerInfoPage">
@@ -62,12 +62,7 @@
                             <Setter Property="Width" Value="120"/>
                         </Style>
                     </ListView.Resources>
-
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="SelectionChanged">
-                            <i:InvokeCommandAction Command="{Binding ListCustomerSelectionChanged}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
+                   
                     <ListView.View>
                         <GridView>
                             <GridViewColumn                                      
@@ -88,15 +83,7 @@
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
-                            <GridViewColumn                                      
-                                                         Header="Giới tính">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Gender}"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-
+                   
                             <GridViewColumn                                      
                                                          Header="Số điện thoại">
                                 <GridViewColumn.CellTemplate>
@@ -128,7 +115,7 @@
                                                          Header="Tổng sách đã mua">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding TotalBook,StringFormat='0,0'}"/>
+                                        <TextBlock Text="{Binding NumberBook,StringFormat='0,0'}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -137,7 +124,7 @@
                                                          Header="Tổng tiền đã trả">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding TotalMoney,StringFormat='0,0.00'}"/>
+                                        <TextBlock Text="{Binding MoneyPaid,StringFormat='0,0.00'}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -147,6 +134,19 @@
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding LastTransaction}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Background="#3498db" BorderBrush="#3498db" Width="45"
+                                                    Command="{Binding Path=DataContext.detailCustomer,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}} }"
+                                                    CommandParameter="{Binding}"
+                                                    ToolTip="Chi tiết">
+                                            <materialDesign:PackIcon Kind="AlertCircleOutline" Foreground="White" Height="15" Width="15"/>
+                                        </Button>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>

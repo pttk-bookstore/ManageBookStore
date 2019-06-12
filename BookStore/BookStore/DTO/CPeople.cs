@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookStore.VIEW.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookStore.DTO
 {
-    public class CPeople
+    public class CPeople:BaseViewModel
     {
         private int _iD;
         /// <summary>
@@ -15,7 +16,7 @@ namespace BookStore.DTO
         public int ID
         {
             get { return _iD; }
-            set { _iD = value; }
+            set { _iD = value; OnPropertyChanged(); }
         }
 
         private string _name;
@@ -25,7 +26,7 @@ namespace BookStore.DTO
         public string Name
         {
             get { return _name; }
-            set { _name = value; }
+            set { _name = value;OnPropertyChanged(); }
         }
 
         private string _address;
@@ -35,7 +36,7 @@ namespace BookStore.DTO
         public string Address
         {
             get { return _address; }
-            set { _address = value; }
+            set { _address = value; OnPropertyChanged(); }
         }
 
         private string _email;
@@ -45,7 +46,7 @@ namespace BookStore.DTO
         public string Email
         {
             get { return _email; }
-            set { _email = value; }
+            set { _email = value; OnPropertyChanged(); }
         }
 
         private string _phone;
@@ -55,7 +56,7 @@ namespace BookStore.DTO
         public string Phone
         {
             get { return _phone; }
-            set { _phone = value; }
+            set { _phone = value; OnPropertyChanged(); }
         }
 
         private string _gender;
@@ -65,7 +66,7 @@ namespace BookStore.DTO
         public string Gender
         {
             get { return _gender; }
-            set { _gender = value; }
+            set { _gender = value; OnPropertyChanged(); }
         }
 
     }

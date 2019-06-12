@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookStore.VIEW.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookStore.DTO
 {
-    public class CDiscountCode
+    public class CDiscountCode:BaseViewModel
     {
         private string _code;
         /// <summary>
@@ -57,5 +58,23 @@ namespace BookStore.DTO
             get { return _type; }
             set { _type = value; }
         }
+
+        private bool _istrueValue;
+
+        public bool IstrueValue
+        {
+            get { return _istrueValue; }
+            set { _istrueValue = value; OnPropertyChanged(); }
+        }
+
+        private int _status;
+
+        public int Status
+        {
+            get { return _status; }
+            set { _status = value;OnPropertyChanged(); }
+        }
+
+
     }
 }

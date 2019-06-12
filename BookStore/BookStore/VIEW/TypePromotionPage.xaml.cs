@@ -24,5 +24,7 @@ namespace BookStore.VIEW
         {
             InitializeComponent();
         }
+
+        
     }
 }

@@ -118,5 +118,33 @@ namespace BookStore.BUS
         {
             return DAO.VerifyBill(billID);
         }
+
+        /// <summary>
+        /// Hàm trả về lịch sử giao dịch của khách hàng
+        /// </summary>
+        /// <param name="CustomerID"></param>
+        /// <param name="Month"></param>
+        /// <param name="Year"></param>
+        /// <param name="currentPage"></param>
+        /// <param name="NumberPage"></param>
+        /// <returns></returns>
+        public List<CBill> Bill_History(int CustomerID, int Month, int Year, int currentPage, int NumberPage)
+        {
+            return DAO.Bill_History(CustomerID, Month, Year, currentPage, NumberPage);
+        }
+
+        /// <summary>
+        /// Hàm trả về lịch sử giao dịch của khách hàng
+        /// </summary>
+        /// <param name="CustomerID"></param>
+        /// <param name="DateBegin"></param>
+        /// <param name="DateEnd"></param>
+        /// <param name="currentPage"></param>
+        /// <param name="NumberPage"></param>
+        /// <returns></returns>
+        public List<CBill> Bill_History(int CustomerID, DateTime DateBegin, DateTime DateEnd, int currentPage, int NumberPage)
+        {
+            return DAO.Bill_History(CustomerID, DateBegin, DateEnd, currentPage, NumberPage);
+        }
     }
 }

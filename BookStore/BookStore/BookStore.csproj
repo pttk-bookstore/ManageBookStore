@@ -243,6 +243,8 @@
     <Compile Include="VIEW\Converter\ProgessBarToVisibilityConverter.cs" />
     <Compile Include="VIEW\Converter\PromotionToVisibilityConverter.cs" />
     <Compile Include="VIEW\Converter\RestoreBoolToVisibilityConverter.cs" />
+    <Compile Include="VIEW\Converter\RoleToEnableConverter.cs" />
+    <Compile Include="VIEW\Converter\StatusExistToVisibility.cs" />
     <Compile Include="VIEW\Converter\StatusIntToStringConverter.cs" />
     <Compile Include="VIEW\Converter\StatusIntToVisibilityConverter.cs" />
     <Compile Include="VIEW\CustomerInfoPage.xaml.cs">
@@ -256,6 +258,9 @@
     </Compile>
     <Compile Include="VIEW\DetailBookWindow.xaml.cs">
       <DependentUpon>DetailBookWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VIEW\DetailCustomerWindow.xaml.cs">
+      <DependentUpon>DetailCustomerWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="VIEW\EmployeeInfoPage.xaml.cs">
       <DependentUpon>EmployeeInfoPage.xaml</DependentUpon>
@@ -310,17 +315,24 @@
     <Compile Include="VIEW\ViewModels\BaseViewModel.cs" />
     <Compile Include="VIEW\ViewModels\BookInfoPageVM.cs" />
     <Compile Include="VIEW\ViewModels\BookMenuPageVM.cs" />
+    <Compile Include="VIEW\ViewModels\ChangePassWordWindowVM.cs" />
     <Compile Include="VIEW\ViewModels\CharReportMonthPageVM.cs" />
     <Compile Include="VIEW\ViewModels\ChartReportDatePageVM.cs" />
+    <Compile Include="VIEW\ViewModels\CodePromotionPageVM.cs" />
     <Compile Include="VIEW\ViewModels\ControlBarVM.cs" />
+    <Compile Include="VIEW\ViewModels\CustomerInfoPageVM.cs" />
+    <Compile Include="VIEW\ViewModels\CustomerMenuPageVM.cs" />
     <Compile Include="VIEW\ViewModels\DashboardWindowVM.cs" />
     <Compile Include="VIEW\ViewModels\DataTransfer.cs" />
+    <Compile Include="VIEW\ViewModels\DetailCustomerWindowVM.cs" />
     <Compile Include="VIEW\ViewModels\DetailsBookWindowVM.cs" />
+    <Compile Include="VIEW\ViewModels\EmployeeInfoPageVM.cs" />
     <Compile Include="VIEW\ViewModels\HistoryBillPageVM.cs" />
     <Compile Include="VIEW\ViewModels\HistoryWareHousePageVM.cs" />
     <Compile Include="VIEW\ViewModels\LoginWindowVM.cs" />
     <Compile Include="VIEW\ViewModels\MakeBillWindowVM.cs" />
     <Compile Include="VIEW\ViewModels\ProductPageVM.cs" />
+    <Compile Include="VIEW\ViewModels\PromotionMenuPageVM.cs" />
     <Compile Include="VIEW\ViewModels\ReportDatePageVM.cs" />
     <Compile Include="VIEW\ViewModels\ReportMenuPageVM.cs" />
     <Compile Include="VIEW\ViewModels\ReportMonthPageVM.cs" />
@@ -328,6 +340,7 @@
     <Compile Include="VIEW\ViewModels\StructureBookPageVM.cs" />
     <Compile Include="VIEW\ViewModels\TypeAndThemePageVM.cs" />
     <Compile Include="VIEW\ViewModels\TypeAndThemsePageVM.cs" />
+    <Compile Include="VIEW\ViewModels\TypePromotionPageVM.cs" />
     <Page Include="VIEW\AddNewBookWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -369,6 +382,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="VIEW\DetailBookWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VIEW\DetailCustomerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

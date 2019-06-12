@@ -21,5 +21,12 @@
     <viewmodel:ReportDatePageVM x:Key="ReportDatePageVM"></viewmodel:ReportDatePageVM>
     <viewmodel:CharReportMonthPageVM x:Key="CharReportMonthPageVM"></viewmodel:CharReportMonthPageVM>
     <viewmodel:ChartReportDatePageVM x:Key="ChartReportDatePageVM"></viewmodel:ChartReportDatePageVM>
+    <viewmodel:CodePromotionPageVM x:Key="CodePromotionPageVM"></viewmodel:CodePromotionPageVM>
+    <viewmodel:PromotionMenuPageVM x:Key="PromotionMenuPageVM"></viewmodel:PromotionMenuPageVM>
+    <viewmodel:TypePromotionPageVM x:Key="TypePromotionPageVM"></viewmodel:TypePromotionPageVM>
+    <viewmodel:CustomerMenuPageVM x:Key="CustomerMenuPageVM"></viewmodel:CustomerMenuPageVM>
+    <viewmodel:CustomerInfoPageVM x:Key="CustomerInfoPageVM"></viewmodel:CustomerInfoPageVM>
+    <viewmodel:EmployeeInfoPageVM x:Key="EmployeeInfoPageVM"></viewmodel:EmployeeInfoPageVM>
+    <viewmodel:ChangePassWordWindowVM x:Key="ChangePassWordWindowVM"></viewmodel:ChangePassWordWindowVM>
 
 </ResourceDictionary>

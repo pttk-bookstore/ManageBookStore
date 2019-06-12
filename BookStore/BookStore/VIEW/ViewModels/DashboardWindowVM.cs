@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookStore.BUS;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,11 @@ namespace BookStore.VIEW.ViewModels
 {
     class DashboardWindowVM : BaseViewModel
     {
+        #region global
+
+        EmployeeBUS employeeBUS = new EmployeeBUS();
+
+        #endregion
         #region properties binding
 
         private Visibility _closeMenuVisibility;
@@ -36,6 +42,15 @@ namespace BookStore.VIEW.ViewModels
         /// Thuộc tính content của Frame ở đây lưu page cần chuyển qua
         /// </summary>
         public Page FramePage { get => _framePage; set { if (value == _framePage) return; _framePage = value; OnPropertyChanged(); } }
+
+        private int _roleID;
+
+        public int RoleID
+        {
+            get { return _roleID; }
+            set { _roleID = value;OnPropertyChanged(); }
+        }
+
 
         #endregion
 
@@ -65,6 +80,8 @@ namespace BookStore.VIEW.ViewModels
 
                 GridCursorMargin = new Thickness(0, 70 + 1 * 60, 0, 0);
                 FramePage = new BookMenuPage();
+
+                RoleID = employeeBUS.RoleIdOfEmployee(DataTransfer.EmployeeID);
             }
                );
 

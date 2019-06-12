@@ -178,5 +178,104 @@ namespace BookStore.DAO
 
             return List;
         }
+
+        /// <summary>
+        /// Trả về thông tin của khách hàng lọc theo số điện thoại
+        /// </summary>
+        /// <param name="phone"></param>
+        /// <param name="currentPage"></param>
+        /// <param name="NumberPage"></param>
+        /// <returns></returns>
+        public List<CCustomer> ListCustomerPhone(string phone,int currentPage,int NumberPage)
+        {
+            List<CCustomer> List = new List<CCustomer>();
+            try
+            {
+                using (var DB = new MiniBookStoreEntities())
+                {
+                    var data = DB.Customers.Where(x => x.Customer_Phone.ToLower().Contains(phone.ToLower()))
+                        .ToList().Skip((currentPage - 1) * NumberPage).Take(NumberPage);
+                    if (data.Count() > 0)
+                    {
+                        foreach (var item in data)
+                        {
+                            int sumBook = DB.Bill_Detail.Where(x => x.Bill.Customer_ID == item.Customer_ID).Sum(x => x.Book_Count);
+                            DateTime lastdate = DB.Bills.Where(x => x.Customer_ID == item.Customer_ID).OrderByDescending(x => x.Bill_Date)
+                                .Select(x => x.Bill_Date).FirstOrDefault();
+
+                            CCustomer customer = new CCustomer
+                            {
+                                ID = item.Customer_ID,
+                                Name = item.Customer_Name,
+                                Phone = item.Customer_Phone,
+                                Address = item.Customer_Address,
+                                Email = item.Customer_Email,
+                                NumberBook = sumBook,
+                                LastTransaction = lastdate,
+                                MoneyPaid = (float)item.Bills.Sum(x => x.Total_Money)
+                            };
+
+                            List.Add(customer);
+                        }
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+
+            return List;
+        }
+
+        /// <summary>
+        /// Trả về thông tin của khách hàng lọc theo tên
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="currentPage"></param>
+        /// <param name="NumberPage"></param>
+        /// <returns></returns>
+        public List<CCustomer> ListCustomerName(string name, int currentPage, int NumberPage)
+        {
+            
+            List<CCustomer> List = new List<CCustomer>();
+            try
+            {
+                using (var DB = new MiniBookStoreEntities())
+                {
+                    var data = DB.Customers.Where(x => x.Customer_Name.ToLower().Contains(name))
+                        .ToList().Skip((currentPage - 1) * NumberPage).Take(NumberPage);
+                    if (data.Count() > 0)
+                    {
+                        foreach (var item in data)
+                        {
+                            int sumBook = DB.Bill_Detail.Where(x => x.Bill.Customer_ID == item.Customer_ID).Sum(x => x.Book_Count);
+                            DateTime lastdate = DB.Bills.Where(x => x.Customer_ID == item.Customer_ID).OrderByDescending(x => x.Bill_Date)
+                                .Select(x => x.Bill_Date).FirstOrDefault();
+
+                            CCustomer customer = new CCustomer
+                            {
+                                ID = item.Customer_ID,
+                                Name = item.Customer_Name,
+                                Phone = item.Customer_Phone,
+                                Address = item.Customer_Address,
+                                Email = item.Customer_Email,
+                                NumberBook = sumBook,
+                                LastTransaction = lastdate,
+                                MoneyPaid = (float)item.Bills.Sum(x => x.Total_Money)
+                            };
+
+                            List.Add(customer);
+                        }
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+
+            return List;
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookStore.VIEW.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookStore.DTO
 {
-    public class CAccount
+    public class CAccount:BaseViewModel
     {
         private int _iD;
         /// <summary>
@@ -25,7 +26,7 @@ namespace BookStore.DTO
         public string UserName
         {
             get { return _userName; }
-            set { _userName = value; }
+            set { _userName = value;OnPropertyChanged(); }
         }
 
         private string  _passWord;
