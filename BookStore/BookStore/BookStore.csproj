@@ -244,6 +244,7 @@
     <Compile Include="VIEW\Converter\PromotionToVisibilityConverter.cs" />
     <Compile Include="VIEW\Converter\RestoreBoolToVisibilityConverter.cs" />
     <Compile Include="VIEW\Converter\RoleToEnableConverter.cs" />
+    <Compile Include="VIEW\Converter\RoleToVisibility.cs" />
     <Compile Include="VIEW\Converter\StatusExistToVisibility.cs" />
     <Compile Include="VIEW\Converter\StatusIntToStringConverter.cs" />
     <Compile Include="VIEW\Converter\StatusIntToVisibilityConverter.cs" />
@@ -265,6 +266,8 @@
     <Compile Include="VIEW\EmployeeInfoPage.xaml.cs">
       <DependentUpon>EmployeeInfoPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VIEW\GridViewBehaviours.cs" />
+    <Compile Include="VIEW\GridViewColumnVisibilityManager.cs" />
     <Compile Include="VIEW\HistoryBillPage.xaml.cs">
       <DependentUpon>HistoryBillPage.xaml</DependentUpon>
     </Compile>

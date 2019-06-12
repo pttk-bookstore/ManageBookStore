@@ -20,11 +20,22 @@ namespace BookStore.VIEW.ViewModels
         SubCategoryBUS subcategoryBUS = new SubCategoryBUS();
         CompanyBUS companyBUS = new CompanyBUS();
         WareHouseBUS wareHouseBUS = new WareHouseBUS();
+        EmployeeBUS employeeBUS = new EmployeeBUS();
 
         private int _currentPage;
         public int CurrentPage { get => _currentPage; set { if (value == _currentPage) return; _currentPage = value; OnPropertyChanged(); } }
 
         int NumberPage = 12;
+
+        private int _roleID;
+
+        public int RoleID
+        {
+            get { return _roleID; }
+            set { _roleID = value; OnPropertyChanged(); }
+        }
+
+        
 
         #endregion
 
@@ -279,6 +290,8 @@ namespace BookStore.VIEW.ViewModels
         /// </summary>
         private async void firtLoad()
         {
+            RoleID = employeeBUS.RoleIdOfEmployee(DataTransfer.EmployeeID);
+
             CurrentPage = 1;
             FilterString = "";
 

@@ -16,8 +16,11 @@
       Background="{DynamicResource MaterialDesignPaper}"  
       DataContext="{StaticResource BookInfoPageVM}"
       d:DesignHeight="700" d:DesignWidth="1175"
+      xmlns:converter="clr-namespace:BookStore.VIEW.Converter"
       Title="BookInfoPage">
     <Page.Resources>
+        <converter:RoleToEnableConverter x:Key="RoleToEnableConverter"></converter:RoleToEnableConverter>
+        <converter:RoleToVisibility x:Key="RoleToVisibility"></converter:RoleToVisibility>
         <Style TargetType="{x:Type TextBlock}" x:Key="ReportStyle">
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="Foreground" Value="White"/>
@@ -219,8 +222,11 @@
                 <!--List hiển thị danh sách-->
                 <materialDesign:Card Height="auto" Width="auto">
                     <ListView Height="560" Width="840" Background="Blue"
+                              local:GridViewColumnVisibilityManager.Enabled="True"
                               ItemsSource="{Binding ListBook}" SelectedItem="{Binding ListSelectedItem}">
+                        
                         <ListView.Resources>
+                            <local:BindingProxy x:Key="proxy" Data="{Binding}"/>
                             <Style TargetType="{x:Type TextBlock}" x:Key="WrapStyle">
                                 <Setter Property="TextWrapping" Value="Wrap"/>
                                 <Setter Property="Width" Value="120"/>
@@ -281,7 +287,7 @@
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
 
-                                <GridViewColumn                                      
+                                <GridViewColumn                                     
                                         Header="Tồn kho">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
@@ -299,7 +305,8 @@
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
 
-                                <GridViewColumn                                      
+                                <GridViewColumn   
+                                   
                                         Header="Đã bán">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
@@ -308,10 +315,12 @@
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
 
-                                <GridViewColumn>
+                                <GridViewColumn
+                                    local:GridViewColumnVisibilityManager.IsVisible="{Binding Data.RoleID,Converter={StaticResource RoleToEnableConverter},Source={StaticResource proxy}}">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Button Background="#3498db" BorderBrush="#3498db" Width="45"
+                                            <Button                                              
+                                                Background="#3498db" BorderBrush="#3498db" Width="45"
                                                     Command="{Binding Path=DataContext.editBookCommand,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}} }"
                                                     CommandParameter="{Binding}"
                                                     ToolTip="Chi tiết">
@@ -321,10 +330,13 @@
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
 
-                                <GridViewColumn>
+                                <GridViewColumn
+                                    local:GridViewColumnVisibilityManager.IsVisible="{Binding Data.RoleID,Converter={StaticResource RoleToEnableConverter},Source={StaticResource proxy}}"
+                                    >
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Button Background="#c0392b" BorderBrush="#c0392b" Width="45"
+                                            <Button                                    
+                                                Background="#c0392b" BorderBrush="#c0392b" Width="45"
                                                     Command="{Binding Path=DataContext.deleteBookCommand,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}} }"
                                                     CommandParameter="{Binding}"
                                                     ToolTip="Xóa">
@@ -397,7 +409,8 @@
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 
-                            <Button Margin="0,0,3,0" Background="#0984e3" BorderBrush="{x:Null}"
+                            <Button IsEnabled="{Binding RoleID,Converter={StaticResource RoleToEnableConverter}}"
+                                Margin="0,0,3,0" Background="#0984e3" BorderBrush="{x:Null}"
                                     Command="{Binding addNewBookCommand}">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="PlusBoxOutline" />
@@ -405,7 +418,8 @@
                                 </StackPanel>
                             </Button>
                             <Separator Background="DarkBlue"/>
-                            <Button Margin="3,0,0,0" Background="#FF6347" BorderBrush="{x:Null}"
+                            <Button IsEnabled="{Binding RoleID,Converter={StaticResource RoleToEnableConverter}}"
+                                Margin="3,0,0,0" Background="#FF6347" BorderBrush="{x:Null}"
                                     Command="{Binding increaseBookCommand}">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="PlusBox" />
