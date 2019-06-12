@@ -136,5 +136,16 @@ namespace BookStore.DTO
             get { return _sole; }
             set { _sole = value; }
         }
+
+        private bool _isChecked;
+        /// <summary>
+        /// Thuộc tính để thêm vào trong sách thêm mới
+        /// </summary>
+        public bool IsChecked
+        {
+            get { return _isChecked; }
+            set { _isChecked = value;OnPropertyChanged(); }
+        }
+
     }
 }

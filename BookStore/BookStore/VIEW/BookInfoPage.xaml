@@ -231,6 +231,13 @@
                                 <Setter Property="TextWrapping" Value="Wrap"/>
                                 <Setter Property="Width" Value="120"/>
                             </Style>
+                            <Style TargetType="ListViewItem" BasedOn="{StaticResource {x:Type ListViewItem}}">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            </Style>
+                            <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                            </Style>
                         </ListView.Resources>
 
                         <ListView.ItemContainerStyle>
@@ -342,6 +349,31 @@
                                                     ToolTip="Xóa">
                                                 <materialDesign:PackIcon Kind="DeleteForever" Foreground="White" Height="15" Width="15"/>
                                             </Button>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn
+                                    local:GridViewColumnVisibilityManager.IsVisible="{Binding Data.RoleID,Converter={StaticResource RoleToEnableConverter},Source={StaticResource proxy}}"
+                                    >
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <DockPanel HorizontalAlignment="Center">
+                                                <CheckBox IsChecked="{Binding IsChecked}">
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="Checked">
+                                                            <i:InvokeCommandAction 
+                                                                Command="{Binding Path=DataContext.checkedBook,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}} }"
+                                                    CommandParameter="{Binding}"/>
+                                                        </i:EventTrigger>
+                                                        <i:EventTrigger EventName="Unchecked">
+                                                            <i:InvokeCommandAction 
+                                                                Command="{Binding Path=DataContext.uncheckedBook,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}} }"
+                                                    CommandParameter="{Binding}"/>
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </CheckBox>
+                                            </DockPanel>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>

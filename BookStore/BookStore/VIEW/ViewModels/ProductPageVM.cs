@@ -190,6 +190,7 @@ namespace BookStore.VIEW.ViewModels
             {
                 firtLoad();
                 LoadBook();
+                updateNumberBook();
             }
                );
         }

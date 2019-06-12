@@ -28,5 +28,6 @@
     <viewmodel:CustomerInfoPageVM x:Key="CustomerInfoPageVM"></viewmodel:CustomerInfoPageVM>
     <viewmodel:EmployeeInfoPageVM x:Key="EmployeeInfoPageVM"></viewmodel:EmployeeInfoPageVM>
     <viewmodel:ChangePassWordWindowVM x:Key="ChangePassWordWindowVM"></viewmodel:ChangePassWordWindowVM>
+    <viewmodel:IncreaseBookWindowVM x:Key="IncreaseBookWindowVM"></viewmodel:IncreaseBookWindowVM>
 
 </ResourceDictionary>

@@ -331,7 +331,8 @@ namespace BookStore.DAO
                                     Promotion = (float)item.Book_Promotion,
                                     PricePromotion = item.Book_Promotion == 0 ? (float)item.Book_Price : (float)(item.Book_Price - item.Book_Price * item.Book_Promotion),
                                     Image = item.Book_Image == null ? Help.LoadImage("../Images/harry.jpg") : Help.ByteToImage(item.Book_Image),
-                                    Sole = totalNumber
+                                    Sole = totalNumber,
+                                    IsChecked = false
                                 };
 
                                 //Thêm vào danh sách
@@ -529,6 +530,36 @@ namespace BookStore.DAO
                         find.Book_Inventory = find.Book_Inventory - bookCount;
                         DB.SaveChanges();
                         
+                        return find.Book_Inventory;
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+
+            return 0;
+        }
+
+        /// <summary>
+        /// Thêm vào số lượng sách
+        /// </summary>
+        /// <param name="BookID"></param>
+        /// <param name="bookCount"></param>
+        /// <returns></returns>
+        public int increaseBook(int BookID,int bookCount)
+        {
+            try
+            {
+                using (var DB = new MiniBookStoreEntities())
+                {
+                    var find = DB.Books.Find(BookID);
+                    if (find != null)
+                    {
+                        find.Book_Inventory = find.Book_Inventory + bookCount;
+                        DB.SaveChanges();
+
                         return find.Book_Inventory;
                     }
                 }

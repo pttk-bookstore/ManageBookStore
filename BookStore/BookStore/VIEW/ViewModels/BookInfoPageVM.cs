@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
@@ -133,6 +134,9 @@ namespace BookStore.VIEW.ViewModels
 
         public ICommand searchCommand { get; set; }
 
+        public ICommand checkedBook { get; set; }
+        public ICommand uncheckedBook { get; set; }
+
         #endregion
 
         private bool _isIndeterminate;
@@ -145,6 +149,18 @@ namespace BookStore.VIEW.ViewModels
 
         public BookInfoPageVM()
         {
+            checkedBook = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                addBookToTransaction();
+            }
+               );
+
+            uncheckedBook = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                removeBookFromTransaction();
+            }
+               );
+
             searchCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 LoadBook();
@@ -206,12 +222,18 @@ namespace BookStore.VIEW.ViewModels
 
             increaseBookCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                //Khởi tạo
-                IncreaseBookWindow wd = new IncreaseBookWindow();
-                wd.ShowDialog();
-                //Load lại List
-                LoadBook();
-
+                if (CWareHouseCart.Instance.NumberBook() > 0)
+                {
+                    ////Khởi tạo
+                    IncreaseBookWindow wd = new IncreaseBookWindow();
+                    wd.ShowDialog();
+                    //Load lại List
+                    LoadBook();
+                }
+                else
+                {
+                    MessageBox.Show("Vui lòng chọn sách cần thêm", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                }
             }
                );
 
@@ -258,6 +280,64 @@ namespace BookStore.VIEW.ViewModels
                );
         }
 
+        private void updateCheckedBook()
+        {
+            if (ListBook.Count > 0)
+            {
+                foreach(var item in ListBook)
+                {
+                    item.IsChecked = CWareHouseCart.Instance.isChoosed(item.ID);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Thêm sách vào để thêm vào đợt nhập kho mới
+        /// </summary>
+        private void addBookToTransaction()
+        {
+            if (ListSelectedItem != null)
+            {
+                //Tạo mới một book
+                CBookTransaction book = new CBookTransaction
+                {
+                    ID = ListSelectedItem.ID,
+                    Name = ListSelectedItem.Name,
+                    Inventory = ListSelectedItem.Inventory,
+                    Count = 1,
+                    TotalMoney = 20000,
+                    Price = 20000,
+                    Image = ListSelectedItem.Image,
+                    IsTrueValue = true
+                };
+
+                CWareHouseCart.Instance.Add(book);
+            }
+        }
+
+        /// <summary>
+        /// Xóa sách khỏi đợt nhập kho
+        /// </summary>
+        private void removeBookFromTransaction()
+        {
+            if (ListSelectedItem != null)
+            {
+                //Tạo mới một book
+                CBookTransaction book = new CBookTransaction
+                {
+                    ID = ListSelectedItem.ID,
+                    Name = ListSelectedItem.Name,
+                    Inventory = ListSelectedItem.Inventory,
+                    Count = 1,
+                    TotalMoney = 20000,
+                    Price = 20000,
+                    Image = ListSelectedItem.Image,
+                    IsTrueValue = true
+                };
+                CWareHouseCart.Instance.Remove(book);
+            }
+        }
+
         /// <summary>
         /// Load danh sách sách theo tiêu chí
         /// </summary>
@@ -267,6 +347,8 @@ namespace BookStore.VIEW.ViewModels
             {
                 ListBook = new ObservableCollection<CBook>(bookBUS.ListBook(FilterString, SelectedItemAuthor, SelectedItemCategory.ID,
                    SelectedItemSubCategory.ID, SelectedItemCompany.ID, SelectedItemSortBy, CurrentPage, NumberPage));
+
+                updateCheckedBook();
 
             }   
         }

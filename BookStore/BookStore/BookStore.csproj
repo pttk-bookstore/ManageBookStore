@@ -216,6 +216,7 @@
     <Compile Include="DTO\CReportDate.cs" />
     <Compile Include="DTO\CReportMonth.cs" />
     <Compile Include="DTO\CSubCategory.cs" />
+    <Compile Include="DTO\CWareHouseCart.cs" />
     <Compile Include="DTO\Help.cs" />
     <Compile Include="VIEW\AddNewBookWindow.xaml.cs">
       <DependentUpon>AddNewBookWindow.xaml</DependentUpon>
@@ -332,6 +333,7 @@
     <Compile Include="VIEW\ViewModels\EmployeeInfoPageVM.cs" />
     <Compile Include="VIEW\ViewModels\HistoryBillPageVM.cs" />
     <Compile Include="VIEW\ViewModels\HistoryWareHousePageVM.cs" />
+    <Compile Include="VIEW\ViewModels\IncreaseBookWindowVM.cs" />
     <Compile Include="VIEW\ViewModels\LoginWindowVM.cs" />
     <Compile Include="VIEW\ViewModels\MakeBillWindowVM.cs" />
     <Compile Include="VIEW\ViewModels\ProductPageVM.cs" />

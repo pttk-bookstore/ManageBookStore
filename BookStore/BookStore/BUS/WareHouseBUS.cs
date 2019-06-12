@@ -57,6 +57,29 @@ namespace BookStore.BUS
         }
 
         /// <summary>
+        /// Hàm thêm sách vào kho và lịch sử nhập kho
+        /// </summary>
+        /// <param name="bookReipt"></param>
+        /// <returns></returns>
+        public int addTransactionIncreaseBook(CBookReipt bookReipt)
+        {
+            //Tạo mới lịch sử nhập kho
+            int wareHouseID = DAO.addWareHouseTransaction(bookReipt.BManager.ID, bookReipt.Date, bookReipt.TypeID, bookReipt.TotalMoney);
+
+            foreach (var book in bookReipt.ListBook)
+            {
+                //Thêm vào bảng chi tiết nhập kho
+                DAO.addWareHouseDetail(book, wareHouseID);
+                //Thêm vào bảng tồn kho
+                DAO.addBookInventory(book, wareHouseID);
+                //Thêm vào số lượng sách
+                bookDAO.increaseBook(book.ID, book.Count);
+            }
+
+            return bookReipt.ListBook.Count;
+        }
+
+        /// <summary>
         /// Hàm trả về lịch sử nhập kho trong tháng
         /// </summary>
         /// <param name="Month"></param>
