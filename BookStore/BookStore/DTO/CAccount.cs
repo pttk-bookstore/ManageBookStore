@@ -48,9 +48,5 @@ namespace BookStore.DTO
             get { return _lastLogin; }
             set { _lastLogin = value; }
         }
-
-
-
-
     }
 }
