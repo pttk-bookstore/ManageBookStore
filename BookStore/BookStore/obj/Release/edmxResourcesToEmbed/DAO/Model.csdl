@@ -1,0 +1,561 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MiniBookStoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="MiniBookStoreEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Bills" EntityType="MiniBookStoreModel.Bill" />
+    <EntitySet Name="Bill_Detail" EntityType="MiniBookStoreModel.Bill_Detail" />
+    <EntitySet Name="Bill_Type" EntityType="MiniBookStoreModel.Bill_Type" />
+    <EntitySet Name="Books" EntityType="MiniBookStoreModel.Book" />
+    <EntitySet Name="Book_Inventory" EntityType="MiniBookStoreModel.Book_Inventory" />
+    <EntitySet Name="Categories" EntityType="MiniBookStoreModel.Category" />
+    <EntitySet Name="Companies" EntityType="MiniBookStoreModel.Company" />
+    <EntitySet Name="Customers" EntityType="MiniBookStoreModel.Customer" />
+    <EntitySet Name="Discount_Code" EntityType="MiniBookStoreModel.Discount_Code" />
+    <EntitySet Name="Discount_Type" EntityType="MiniBookStoreModel.Discount_Type" />
+    <EntitySet Name="Employees" EntityType="MiniBookStoreModel.Employee" />
+    <EntitySet Name="Employee_Account" EntityType="MiniBookStoreModel.Employee_Account" />
+    <EntitySet Name="Page_Wage" EntityType="MiniBookStoreModel.Page_Wage" />
+    <EntitySet Name="Regulations" EntityType="MiniBookStoreModel.Regulation" />
+    <EntitySet Name="Roles" EntityType="MiniBookStoreModel.Role" />
+    <EntitySet Name="SubCategories" EntityType="MiniBookStoreModel.SubCategory" />
+    <EntitySet Name="sysdiagrams" EntityType="MiniBookStoreModel.sysdiagram" />
+    <EntitySet Name="WareHouses" EntityType="MiniBookStoreModel.WareHouse" />
+    <EntitySet Name="WareHouse_Detail" EntityType="MiniBookStoreModel.WareHouse_Detail" />
+    <AssociationSet Name="FK_Bill_Bill_Type" Association="MiniBookStoreModel.FK_Bill_Bill_Type">
+      <End Role="Bill_Type" EntitySet="Bill_Type" />
+      <End Role="Bill" EntitySet="Bills" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bill_Customer" Association="MiniBookStoreModel.FK_Bill_Customer">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Bill" EntitySet="Bills" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bill_Detail_Bill" Association="MiniBookStoreModel.FK_Bill_Detail_Bill">
+      <End Role="Bill" EntitySet="Bills" />
+      <End Role="Bill_Detail" EntitySet="Bill_Detail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bill_DiscountCode" Association="MiniBookStoreModel.FK_Bill_DiscountCode">
+      <End Role="Discount_Code" EntitySet="Discount_Code" />
+      <End Role="Bill" EntitySet="Bills" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bill_Employee" Association="MiniBookStoreModel.FK_Bill_Employee">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Bill" EntitySet="Bills" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bill_Detail_Book" Association="MiniBookStoreModel.FK_Bill_Detail_Book">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="Bill_Detail" EntitySet="Bill_Detail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Book_Category" Association="MiniBookStoreModel.FK_Book_Category">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Book_Company" Association="MiniBookStoreModel.FK_Book_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Book_Invetory_Book" Association="MiniBookStoreModel.FK_Book_Invetory_Book">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="Book_Inventory" EntitySet="Book_Inventory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Book_SubCategory" Association="MiniBookStoreModel.FK_Book_SubCategory">
+      <End Role="SubCategory" EntitySet="SubCategories" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WareHouse_Detail_Book" Association="MiniBookStoreModel.FK_WareHouse_Detail_Book">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="WareHouse_Detail" EntitySet="WareHouse_Detail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Book_Invetory_WareHouse" Association="MiniBookStoreModel.FK_Book_Invetory_WareHouse">
+      <End Role="WareHouse" EntitySet="WareHouses" />
+      <End Role="Book_Inventory" EntitySet="Book_Inventory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SubCategory_Category" Association="MiniBookStoreModel.FK_SubCategory_Category">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="SubCategory" EntitySet="SubCategories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Discount_Code_Type" Association="MiniBookStoreModel.FK_Discount_Code_Type">
+      <End Role="Discount_Type" EntitySet="Discount_Type" />
+      <End Role="Discount_Code" EntitySet="Discount_Code" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Account_Employee" Association="MiniBookStoreModel.FK_Account_Employee">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Employee_Account" EntitySet="Employee_Account" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employee_Role" Association="MiniBookStoreModel.FK_Employee_Role">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Page_Wage_Employee" Association="MiniBookStoreModel.FK_Page_Wage_Employee">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Page_Wage" EntitySet="Page_Wage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WareHouse_Employee" Association="MiniBookStoreModel.FK_WareHouse_Employee">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="WareHouse" EntitySet="WareHouses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WareHouse_Detail_WareHouse" Association="MiniBookStoreModel.FK_WareHouse_Detail_WareHouse">
+      <End Role="WareHouse" EntitySet="WareHouses" />
+      <End Role="WareHouse_Detail" EntitySet="WareHouse_Detail" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Bill">
+    <Key>
+      <PropertyRef Name="Bill_ID" />
+    </Key>
+    <Property Name="Bill_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Bill_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Customer_ID" Type="Int32" Nullable="false" />
+    <Property Name="Employee_ID" Type="Int32" Nullable="false" />
+    <Property Name="Total_Money" Type="Double" Nullable="false" />
+    <Property Name="Excess_Cash" Type="Double" Nullable="false" />
+    <Property Name="Sum_Money" Type="Double" Nullable="false" />
+    <Property Name="Bill_Type" Type="Int32" Nullable="false" />
+    <Property Name="DiscountCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Bill_Status" Type="Int32" Nullable="false" />
+    <Property Name="Customer_Cash" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Bill_Type1" Relationship="MiniBookStoreModel.FK_Bill_Bill_Type" FromRole="Bill" ToRole="Bill_Type" />
+    <NavigationProperty Name="Customer" Relationship="MiniBookStoreModel.FK_Bill_Customer" FromRole="Bill" ToRole="Customer" />
+    <NavigationProperty Name="Bill_Detail" Relationship="MiniBookStoreModel.FK_Bill_Detail_Bill" FromRole="Bill" ToRole="Bill_Detail" />
+    <NavigationProperty Name="Discount_Code" Relationship="MiniBookStoreModel.FK_Bill_DiscountCode" FromRole="Bill" ToRole="Discount_Code" />
+    <NavigationProperty Name="Employee" Relationship="MiniBookStoreModel.FK_Bill_Employee" FromRole="Bill" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="Bill_Detail">
+    <Key>
+      <PropertyRef Name="Detail_ID" />
+    </Key>
+    <Property Name="Detail_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Bill_ID" Type="Int32" Nullable="false" />
+    <Property Name="Book_ID" Type="Int32" Nullable="false" />
+    <Property Name="Book_Count" Type="Int32" Nullable="false" />
+    <Property Name="Book_Price" Type="Double" Nullable="false" />
+    <Property Name="Book_Promotion" Type="Double" Nullable="false" />
+    <Property Name="Book_InPrice" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Bill" Relationship="MiniBookStoreModel.FK_Bill_Detail_Bill" FromRole="Bill_Detail" ToRole="Bill" />
+    <NavigationProperty Name="Book" Relationship="MiniBookStoreModel.FK_Bill_Detail_Book" FromRole="Bill_Detail" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="Bill_Type">
+    <Key>
+      <PropertyRef Name="BillType_ID" />
+    </Key>
+    <Property Name="BillType_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BillType_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Bills" Relationship="MiniBookStoreModel.FK_Bill_Bill_Type" FromRole="Bill_Type" ToRole="Bill" />
+  </EntityType>
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="Book_ID" />
+    </Key>
+    <Property Name="Book_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Book_Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Book_Author" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Book_SubCategory" Type="Int32" Nullable="false" />
+    <Property Name="Book_Category" Type="Int32" Nullable="false" />
+    <Property Name="Book_Company" Type="Int32" Nullable="false" />
+    <Property Name="Book_Price" Type="Double" Nullable="false" />
+    <Property Name="Book_Promotion" Type="Double" Nullable="false" />
+    <Property Name="Book_Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Book_Inventory" Type="Int32" Nullable="false" />
+    <Property Name="Book_Status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Bill_Detail" Relationship="MiniBookStoreModel.FK_Bill_Detail_Book" FromRole="Book" ToRole="Bill_Detail" />
+    <NavigationProperty Name="Category" Relationship="MiniBookStoreModel.FK_Book_Category" FromRole="Book" ToRole="Category" />
+    <NavigationProperty Name="Company" Relationship="MiniBookStoreModel.FK_Book_Company" FromRole="Book" ToRole="Company" />
+    <NavigationProperty Name="Book_Inventory1" Relationship="MiniBookStoreModel.FK_Book_Invetory_Book" FromRole="Book" ToRole="Book_Inventory" />
+    <NavigationProperty Name="SubCategory" Relationship="MiniBookStoreModel.FK_Book_SubCategory" FromRole="Book" ToRole="SubCategory" />
+    <NavigationProperty Name="WareHouse_Detail" Relationship="MiniBookStoreModel.FK_WareHouse_Detail_Book" FromRole="Book" ToRole="WareHouse_Detail" />
+  </EntityType>
+  <EntityType Name="Book_Inventory">
+    <Key>
+      <PropertyRef Name="WareHouse_ID" />
+      <PropertyRef Name="Book_ID" />
+    </Key>
+    <Property Name="WareHouse_ID" Type="Int32" Nullable="false" />
+    <Property Name="Book_ID" Type="Int32" Nullable="false" />
+    <Property Name="Book_Count" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Book" Relationship="MiniBookStoreModel.FK_Book_Invetory_Book" FromRole="Book_Inventory" ToRole="Book" />
+    <NavigationProperty Name="WareHouse" Relationship="MiniBookStoreModel.FK_Book_Invetory_WareHouse" FromRole="Book_Inventory" ToRole="WareHouse" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Category_ID" />
+    </Key>
+    <Property Name="Category_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Category_Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Books" Relationship="MiniBookStoreModel.FK_Book_Category" FromRole="Category" ToRole="Book" />
+    <NavigationProperty Name="SubCategories" Relationship="MiniBookStoreModel.FK_SubCategory_Category" FromRole="Category" ToRole="SubCategory" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="Company_ID" />
+    </Key>
+    <Property Name="Company_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Company_Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Books" Relationship="MiniBookStoreModel.FK_Book_Company" FromRole="Company" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="Customer_ID" />
+    </Key>
+    <Property Name="Customer_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Customer_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Customer_Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Customer_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Customer_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Bills" Relationship="MiniBookStoreModel.FK_Bill_Customer" FromRole="Customer" ToRole="Bill" />
+  </EntityType>
+  <EntityType Name="Discount_Code">
+    <Key>
+      <PropertyRef Name="Code_ID" />
+    </Key>
+    <Property Name="Code_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Code_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Code_Type" Type="Int32" Nullable="false" />
+    <Property Name="Date_Start" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Date_End" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Code_Status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Bills" Relationship="MiniBookStoreModel.FK_Bill_DiscountCode" FromRole="Discount_Code" ToRole="Bill" />
+    <NavigationProperty Name="Discount_Type" Relationship="MiniBookStoreModel.FK_Discount_Code_Type" FromRole="Discount_Code" ToRole="Discount_Type" />
+  </EntityType>
+  <EntityType Name="Discount_Type">
+    <Key>
+      <PropertyRef Name="DiscountType_ID" />
+    </Key>
+    <Property Name="DiscountType_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DiscountType_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Book_Count" Type="Int32" Nullable="false" />
+    <Property Name="DiscountType_Promotion" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Discount_Code" Relationship="MiniBookStoreModel.FK_Discount_Code_Type" FromRole="Discount_Type" ToRole="Discount_Code" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="Employee_ID" />
+    </Key>
+    <Property Name="Employee_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Employee_Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Employee_Address" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Employee_Gender" Type="Int32" Nullable="false" />
+    <Property Name="Employee_DOB" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Employee_CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Employee_Avatar" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Employee_Phone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Employee_Status" Type="Int32" Nullable="false" />
+    <Property Name="Employee_Role" Type="Int32" Nullable="false" />
+    <Property Name="Sum_Date" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Bills" Relationship="MiniBookStoreModel.FK_Bill_Employee" FromRole="Employee" ToRole="Bill" />
+    <NavigationProperty Name="Employee_Account" Relationship="MiniBookStoreModel.FK_Account_Employee" FromRole="Employee" ToRole="Employee_Account" />
+    <NavigationProperty Name="Role" Relationship="MiniBookStoreModel.FK_Employee_Role" FromRole="Employee" ToRole="Role" />
+    <NavigationProperty Name="Page_Wage" Relationship="MiniBookStoreModel.FK_Page_Wage_Employee" FromRole="Employee" ToRole="Page_Wage" />
+    <NavigationProperty Name="WareHouses" Relationship="MiniBookStoreModel.FK_WareHouse_Employee" FromRole="Employee" ToRole="WareHouse" />
+  </EntityType>
+  <EntityType Name="Employee_Account">
+    <Key>
+      <PropertyRef Name="Employee_ID" />
+    </Key>
+    <Property Name="Employee_ID" Type="Int32" Nullable="false" />
+    <Property Name="Account_UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Account_Passwork" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Account_LastLogin" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Employee" Relationship="MiniBookStoreModel.FK_Account_Employee" FromRole="Employee_Account" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="Page_Wage">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Employee_ID" Type="Int32" Nullable="false" />
+    <Property Name="Salary" Type="Double" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="SumDate" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Employee" Relationship="MiniBookStoreModel.FK_Page_Wage_Employee" FromRole="Page_Wage" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="Regulation">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="Value" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Value_Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="Role_ID" />
+    </Key>
+    <Property Name="Role_Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Role_Salary" Type="Double" Nullable="false" />
+    <Property Name="Role_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Employees" Relationship="MiniBookStoreModel.FK_Employee_Role" FromRole="Role" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="SubCategory">
+    <Key>
+      <PropertyRef Name="SubCategory_ID" />
+    </Key>
+    <Property Name="SubCategory_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SubCategory_Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Category_ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Books" Relationship="MiniBookStoreModel.FK_Book_SubCategory" FromRole="SubCategory" ToRole="Book" />
+    <NavigationProperty Name="Category" Relationship="MiniBookStoreModel.FK_SubCategory_Category" FromRole="SubCategory" ToRole="Category" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="WareHouse">
+    <Key>
+      <PropertyRef Name="WareHouse_ID" />
+    </Key>
+    <Property Name="WareHouse_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="WareHouse_Type" Type="Int32" Nullable="false" />
+    <Property Name="WareHouse_Total_Money" Type="Double" Nullable="false" />
+    <Property Name="WareHouse_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Employee_ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Book_Inventory" Relationship="MiniBookStoreModel.FK_Book_Invetory_WareHouse" FromRole="WareHouse" ToRole="Book_Inventory" />
+    <NavigationProperty Name="Employee" Relationship="MiniBookStoreModel.FK_WareHouse_Employee" FromRole="WareHouse" ToRole="Employee" />
+    <NavigationProperty Name="WareHouse_Detail" Relationship="MiniBookStoreModel.FK_WareHouse_Detail_WareHouse" FromRole="WareHouse" ToRole="WareHouse_Detail" />
+  </EntityType>
+  <EntityType Name="WareHouse_Detail">
+    <Key>
+      <PropertyRef Name="WareHouseDetail_ID" />
+    </Key>
+    <Property Name="WareHouseDetail_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="WareHouse_ID" Type="Int32" Nullable="false" />
+    <Property Name="Book_ID" Type="Int32" Nullable="false" />
+    <Property Name="Book_Count" Type="Int32" Nullable="false" />
+    <Property Name="Book_Price" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Book" Relationship="MiniBookStoreModel.FK_WareHouse_Detail_Book" FromRole="WareHouse_Detail" ToRole="Book" />
+    <NavigationProperty Name="WareHouse" Relationship="MiniBookStoreModel.FK_WareHouse_Detail_WareHouse" FromRole="WareHouse_Detail" ToRole="WareHouse" />
+  </EntityType>
+  <Association Name="FK_Bill_Bill_Type">
+    <End Type="MiniBookStoreModel.Bill_Type" Role="Bill_Type" Multiplicity="1" />
+    <End Type="MiniBookStoreModel.Bill" Role="Bill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bill_Type">
+        <PropertyRef Name="BillType_ID" />
+      </Principal>
+      <Dependent Role="Bill">
+        <PropertyRef Name="Bill_Type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bill_Customer">
+    <End Type="MiniBookStoreModel.Customer" Role="Customer" Multiplicity="1" />
+    <End Type="MiniBookStoreModel.Bill" Role="Bill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Customer_ID" />
+      </Principal>
+      <Dependent Role="Bill">
+        <PropertyRef Name="Customer_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bill_Detail_Bill">
+    <End Type="MiniBookStoreModel.Bill" Role="Bill" Multiplicity="1" />
+    <End Type="MiniBookStoreModel.Bill_Detail" Role="Bill_Detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bill">
+        <PropertyRef Name="Bill_ID" />
+      </Principal>
+      <Dependent Role="Bill_Detail">
+        <PropertyRef Name="Bill_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bill_DiscountCode">
+    <End Type="MiniBookStoreModel.Discount_Code" Role="Discount_Code" Multiplicity="0..1" />
+    <End Type="MiniBookStoreModel.Bill" Role="Bill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Discount_Code">
+        <PropertyRef Name="Code_ID" />
+      </Principal>
+      <Dependent Role="Bill">
+        <PropertyRef Name="DiscountCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bill_Employee">
+    <End Type="MiniBookStoreModel.Employee" Role="Employee" Multiplicity="1" />
+    <End Type="MiniBookStoreModel.Bill" Role="Bill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Employee_ID" />
+      </Principal>
+      <Dependent Role="Bill">
+        <PropertyRef Name="Employee_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bill_Detail_Book">
+    <End Type="MiniBookStoreModel.Book" Role="Book" Multiplicity="1" />
+    <End Type="MiniBookStoreModel.Bill_Detail" Role="Bill_Detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="Book_ID" />
+      </Principal>
+      <Dependent Role="Bill_Detail">
+        <PropertyRef Name="Book_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Book_Category">
+    <End Type="MiniBookStoreModel.Category" Role="Category" Multiplicity="1" />
+    <End Type="MiniBookStoreModel.Book" Role="Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Category_ID" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="Book_Category" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Book_Company">
+    <End Type="MiniBookStoreModel.Company" Role="Company" Multiplicity="1" />
+    <End Type="MiniBookStoreModel.Book" Role="Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Company_ID" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="Book_Company" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Book_Invetory_Book">
+    <End Type="MiniBookStoreModel.Book" Role="Book" Multiplicity="1" />
+    <End Type="MiniBookStoreModel.Book_Inventory" Role="Book_Inventory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="Book_ID" />
+      </Principal>
+      <Dependent Role="Book_Inventory">
+        <PropertyRef Name="Book_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Book_SubCategory">
+    <End Type="MiniBookStoreModel.SubCategory" Role="SubCategory" Multiplicity="1" />
+    <End Type="MiniBookStoreModel.Book" Role="Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubCategory">
+        <PropertyRef Name="SubCategory_ID" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="Book_SubCategory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WareHouse_Detail_Book">
+    <End Type="MiniBookStoreModel.Book" Role="Book" Multiplicity="1" />
+    <End Type="MiniBookStoreModel.WareHouse_Detail" Role="WareHouse_Detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="Book_ID" />
+      </Principal>
+      <Dependent Role="WareHouse_Detail">
+        <PropertyRef Name="Book_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Book_Invetory_WareHouse">
+    <End Type="MiniBookStoreModel.WareHouse" Role="WareHouse" Multiplicity="1" />
+    <End Type="MiniBookStoreModel.Book_Inventory" Role="Book_Inventory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WareHouse">
+        <PropertyRef Name="WareHouse_ID" />
+      </Principal>
+      <Dependent Role="Book_Inventory">
+        <PropertyRef Name="WareHouse_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SubCategory_Category">
+    <End Type="MiniBookStoreModel.Category" Role="Category" Multiplicity="1" />
+    <End Type="MiniBookStoreModel.SubCategory" Role="SubCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Category_ID" />
+      </Principal>
+      <Dependent Role="SubCategory">
+        <PropertyRef Name="Category_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Discount_Code_Type">
+    <End Type="MiniBookStoreModel.Discount_Type" Role="Discount_Type" Multiplicity="1" />
+    <End Type="MiniBookStoreModel.Discount_Code" Role="Discount_Code" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Discount_Type">
+        <PropertyRef Name="DiscountType_ID" />
+      </Principal>
+      <Dependent Role="Discount_Code">
+        <PropertyRef Name="Code_Type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Account_Employee">
+    <End Type="MiniBookStoreModel.Employee" Role="Employee" Multiplicity="1" />
+    <End Type="MiniBookStoreModel.Employee_Account" Role="Employee_Account" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Employee_ID" />
+      </Principal>
+      <Dependent Role="Employee_Account">
+        <PropertyRef Name="Employee_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Employee_Role">
+    <End Type="MiniBookStoreModel.Role" Role="Role" Multiplicity="1" />
+    <End Type="MiniBookStoreModel.Employee" Role="Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Role_ID" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="Employee_Role" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Page_Wage_Employee">
+    <End Type="MiniBookStoreModel.Employee" Role="Employee" Multiplicity="1" />
+    <End Type="MiniBookStoreModel.Page_Wage" Role="Page_Wage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Employee_ID" />
+      </Principal>
+      <Dependent Role="Page_Wage">
+        <PropertyRef Name="Employee_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WareHouse_Employee">
+    <End Type="MiniBookStoreModel.Employee" Role="Employee" Multiplicity="1" />
+    <End Type="MiniBookStoreModel.WareHouse" Role="WareHouse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Employee_ID" />
+      </Principal>
+      <Dependent Role="WareHouse">
+        <PropertyRef Name="Employee_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WareHouse_Detail_WareHouse">
+    <End Type="MiniBookStoreModel.WareHouse" Role="WareHouse" Multiplicity="1" />
+    <End Type="MiniBookStoreModel.WareHouse_Detail" Role="WareHouse_Detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WareHouse">
+        <PropertyRef Name="WareHouse_ID" />
+      </Principal>
+      <Dependent Role="WareHouse_Detail">
+        <PropertyRef Name="WareHouse_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

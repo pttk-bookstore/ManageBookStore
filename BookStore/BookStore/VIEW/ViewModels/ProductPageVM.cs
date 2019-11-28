@@ -236,6 +236,7 @@ namespace BookStore.VIEW.ViewModels
         public void updateNumberBook()
         {
             NumberProduct = CCart.Instance.NumberBook();
+            //NumberProduct = 1;
         }
 
         /// <summary>
